@@ -31,7 +31,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Search(),
     Component.Darkmode(),
     Component.Explorer(),
-    Component.RecentNotes({ title: "최근 업데이트", limit: 5 }), // 이 줄을 추가하세요!
+    Component.RecentNotes({ title: "Recent updates", limit: 5 }), // 이 줄을 추가하세요!
   ],
   right: [
     Component.Graph(),
