@@ -28,15 +28,11 @@ export const defaultContentPageLayout: PageLayout = {
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
-    Component.Flex({
-      components: [
-        {
-          Component: Component.Search(),
-          grow: true,
-        },
-        { Component: Component.Darkmode() },
-        { Component: Component.ReaderMode() },
-      ],
+    Component.Search(),
+    Component.Darkmode(),
+    Component.Explorer(),
+    Component.RecentNotes({ title: "최근 업데이트", limit: 5 }), // 이 줄을 추가하세요!
+  ],
     }),
     Component.Explorer(),
   ],
