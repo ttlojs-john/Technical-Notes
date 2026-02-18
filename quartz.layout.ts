@@ -33,9 +33,6 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Explorer(),
     Component.RecentNotes({ title: "최근 업데이트", limit: 5 }), // 이 줄을 추가하세요!
   ],
-    }),
-    Component.Explorer(),
-  ],
   right: [
     Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
