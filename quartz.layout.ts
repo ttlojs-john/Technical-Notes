@@ -30,10 +30,8 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.Explorer(),
-    Component.RecentNotes({ title: "Recent updates", limit: 5 }), // 이 줄을 추가하세요!
-    Component.DesktopOnly(Component.Explorer()),
-    Component.DesktopOnly(Component.RecentNotes({ title: "Recent updates", limit: 3 })),
+    Component.Explorer(), // 햄버거 메뉴(≡)를 위해 이건 그대로 둡니다.
+    Component.DesktopOnly(Component.RecentNotes({ title: "Recent updates", limit: 3 })), // 🚀 핵심: 여기에 DesktopOnly를 씌워줍니다!
   ],
   right: [
     Component.Graph(),
