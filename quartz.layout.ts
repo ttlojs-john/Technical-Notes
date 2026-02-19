@@ -32,6 +32,8 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Darkmode(),
     Component.Explorer(),
     Component.RecentNotes({ title: "Recent updates", limit: 5 }), // 이 줄을 추가하세요!
+    Component.DesktopOnly(Component.Explorer()),
+    Component.DesktopOnly(Component.RecentNotes({ title: "Recent updates", limit: 3 })),
   ],
   right: [
     Component.Graph(),
