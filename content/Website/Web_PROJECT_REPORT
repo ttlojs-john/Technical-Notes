@@ -210,5 +210,4 @@ web_project/
 - **내부 DB 연결**: Host `db`, Port `5432`, DB `photodb`, User `xxxuser`
 
 ---
-
 **[chaeyul.xxx 프로젝트 구축 및 장애 조치 보고 완료]**
