@@ -15,3 +15,5 @@ By combining physical server management expertise with cutting-edge AI technolog
 * [[PDF_APPS/Project_Completion_Report_EN|PDF_APPS]]
 * [[Personal Website/PROJECT_REPORT_EN|Personal Website]]
 * [[Self-study German/Project_Completion_Report_EN|Self-study German]]
+
+[![Views](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fdoc.chaeyul.uk&count_bg=%23005A9C&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Views&edge_flat=true)](https://doc.chaeyul.uk)
