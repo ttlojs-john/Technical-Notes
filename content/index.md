@@ -6,6 +6,8 @@ We interpret AI through the lens of a veteran infrastructure engineer who has be
 By combining physical server management expertise with cutting-edge AI technology, we create robust yet innovative services.
 
 <img src="https://komarev.com/ghpvc/?username=doc.chaeyul.uk&label=Views&color=005A9C&style=flat" alt="Views" />
+
+<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fdoc.chaeyul.uk&count_bg=%23005A9C&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Views&edge_flat=true" alt="Views" />
 <br>
 ---
 
