@@ -30,24 +30,33 @@ The objective of this project is to build a dedicated web server for premium med
 - **CMS-Driven Lesson Management [NEW]**: Successfully uploaded and managed 20+ German lesson pages via the dashboard, with immediate site reflection.
 - **Auto-Translation for Study [NEW]**: Logic to automatically translate transcripts (DE/EN -> KO) when native Korean subtitles are unavailable.
 - **Premium Masonry Gallery [NEW - 02.24]**: Implemented a sophisticated Masonry layout and year-based filtering system using photo metadata (EXIF).
-- **Asset Optimization [NEW - 02.24]**: Developed a local Python preprocessing tool (`preprocess_images.py`) and enforced 1-year cache headers for Cloudflare and browser performance.
+- **Asset Optimization [NEW - 02.24]**: Developed a local Python preprocessing tool (`preprocess_images.py`) and enforced 1-year cache headers for improved Cloudflare and edge-node performance.
 
-<img src="premium_gallery_masonry.png" width="300" alt="Premium Masonry Gallery Layout">
+    <div align="center">
+      <img src="premium_gallery_masonry.png" width="320" alt="Premium Masonry Gallery Layout">
+      <p><i>[Figure 3: High-end Masonry gallery layout with smart filtering]</i></p>
+    </div>
 - **Learning UX & Theme Customization [NEW - 02.25]**:
     - **A-B Repeat Persistence**: Automated saving/restoration of loop points using `localStorage`.
     - **Focus Mode & Hidden Timestamps**: Optimized the transcript UI to highlight only the current active sentence while stripping time markers for better focus.
     - **Sticky Study UI**: Fixed the player and transcript to the top of the viewport for continuous access while scrolling.
     - **Global Theme Switcher**: Implemented a site-wide Dark/Light mode toggle with persistent user settings.
     - **Real-time Home Translation**: Added live DE-to-KO translation overlays on promotional homepage videos.
-    - **Wordbook Pagination**: Enhanced vocabulary management with 10-item pagination and improved light mode visibility.
+    - **Wordbook Pagination**: Enhanced vocabulary management with 10-item pagination and refined visibility for various theme contexts.
 
-<img src="theme_switcher_ui.png" width="300" alt="Global Theme Switcher System">
+    <div align="center">
+      <img src="theme_switcher_ui.png" width="300" alt="Global Theme Switcher System">
+      <p><i>[Figure 4: Global Dark/Light mode theme switching interface]</i></p>
+    </div>
 - **Mobile Learning Optimization & Background Playback [NEW - 02.26]**:
     - **Mobile-Responsive Layout**: Dynamically adjusted transcript heights and optimized sticky positioning for smaller screens to ensure visibility of the video selection list.
     - **Background Playback & MediaSession**: Integrated `MediaSession` API and a silent heartbeat mechanism to prevent video pausing when the screen is locked or the browser is backgrounded.
     - **Lock Screen Controls**: Enabled play/pause and seeking capabilities directly from the mobile lock screen and notification center.
 
-<img src="mobile_optimized_study.png" width="200" alt="Mobile Study & Background Playback">
+    <div align="center">
+      <img src="mobile_optimized_study.png" width="220" alt="Mobile Study & Background Playback">
+      <p><i>[Figure 5: Mobile-optimized study UI with lock screen background controls]</i></p>
+    </div>
 
 ---
 
