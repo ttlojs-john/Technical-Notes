@@ -9,10 +9,9 @@ By combining physical server management expertise with cutting-edge AI technolog
 ---
 
 ## 📂 Key Projects and Technical Notes
-* [[Excel_Analyzer/project_completion_report.md]]
-* [[LangCain/PROJECT_REPORT_EN.md]]
-* [[openclaw]]
-* [[PDF_APPS]]
-* [[Personal Website]]
-* [[Self-study German]]
-
+* [[Excel_Analyzer/project_completion_report|Excel_Analyzer]]
+* [[LangCain/PROJECT_REPORT_EN|LangChain AI Agent]]
+* [[openclaw/openclaw_Test|openclaw]]
+* [[PDF_APPS/Project_Completion_Report_EN|PDF_APPS]]
+* [[Personal Website/PROJECT_REPORT_EN|Personal Website]]
+* [[Self-study German/Project_Completion_Report_EN|Self-study German]]
