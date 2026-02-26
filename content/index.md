@@ -5,7 +5,7 @@
 We interpret AI through the lens of a veteran infrastructure engineer who has been responsible for stability at the deepest levels of the system.
 By combining physical server management expertise with cutting-edge AI technology, we create robust yet innovative services.
 
-<img src="https://komarev.com/ghpvc/?username=doc-chaeyul-uk&label=Views&color=005A9C&style=flat" alt="Views" />
+
 <br>
 ---
 
@@ -17,3 +17,4 @@ By combining physical server management expertise with cutting-edge AI technolog
 * [[Personal Website/PROJECT_REPORT_EN|Personal Website]]
 * [[Self-study German/Project_Completion_Report_EN|Self-study German]]
 
+<img src="https://komarev.com/ghpvc/?username=doc-chaeyul-uk&label=Views&color=005A9C&style=flat" alt="Views" />
