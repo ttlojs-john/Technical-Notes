@@ -8,7 +8,11 @@ By combining physical server management expertise with cutting-edge AI technolog
 <br>
 ---
 
-## 📂 주요 프로젝트 및 기술 노트
-* [[Web_PROJECT_REPORT_EN]]
+## 📂 Key Projects and Technical Notes
 * [[LangChain AI Agent]]
-* [[Claw_Test]]
+* [[openclaw_Test]]
+* [[Project_Completion_Report_EN]]
+* [[project_completion_report]]
+* [[Project_Completion_Report_EN]]
+* [[Web_PROJECT_REPORT_EN]]
+* [[Website]]
