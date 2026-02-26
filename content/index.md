@@ -9,8 +9,8 @@ By combining physical server management expertise with cutting-edge AI technolog
 ---
 
 ## 📂 Key Projects and Technical Notes
-* [[Excel_Analyzer]]
-* [[LangCain]]
+* [[/Excel_Analyzer/project_completion_report.md]]
+* [[/LangCain/PROJECT_REPORT_EN.md]]
 * [[openclaw]]
 * [[PDF_APPS]]
 * [[Personal Website]]
