@@ -1,6 +1,6 @@
 # [Integrated Report] chaeyul.uk Web Server Project Construction & Troubleshooting Results
 
-**Last Updated**: February 25, 2026 (Learning UX Infrastructure, Global Theme Switcher & Real-time Translation Completed)
+**Last Updated**: February 26, 2026 (Mobile Layout Optimization & Background Playback Implementation Completed)
 **Target Domain**: `chaeyul.uk`
 **System Environment**: Docker Compose-based Container Environment
 - **Frontend**: Node.js (Express)
@@ -31,6 +31,8 @@ The objective of this project is to build a dedicated web server for premium med
 - **Auto-Translation for Study [NEW]**: Logic to automatically translate transcripts (DE/EN -> KO) when native Korean subtitles are unavailable.
 - **Premium Masonry Gallery [NEW - 02.24]**: Implemented a sophisticated Masonry layout and year-based filtering system using photo metadata (EXIF).
 - **Asset Optimization [NEW - 02.24]**: Developed a local Python preprocessing tool (`preprocess_images.py`) and enforced 1-year cache headers for Cloudflare and browser performance.
+
+<img src="premium_gallery_masonry.png" width="300" alt="Premium Masonry Gallery Layout">
 - **Learning UX & Theme Customization [NEW - 02.25]**:
     - **A-B Repeat Persistence**: Automated saving/restoration of loop points using `localStorage`.
     - **Focus Mode & Hidden Timestamps**: Optimized the transcript UI to highlight only the current active sentence while stripping time markers for better focus.
@@ -38,6 +40,14 @@ The objective of this project is to build a dedicated web server for premium med
     - **Global Theme Switcher**: Implemented a site-wide Dark/Light mode toggle with persistent user settings.
     - **Real-time Home Translation**: Added live DE-to-KO translation overlays on promotional homepage videos.
     - **Wordbook Pagination**: Enhanced vocabulary management with 10-item pagination and improved light mode visibility.
+
+<img src="theme_switcher_ui.png" width="300" alt="Global Theme Switcher System">
+- **Mobile Learning Optimization & Background Playback [NEW - 02.26]**:
+    - **Mobile-Responsive Layout**: Dynamically adjusted transcript heights and optimized sticky positioning for smaller screens to ensure visibility of the video selection list.
+    - **Background Playback & MediaSession**: Integrated `MediaSession` API and a silent heartbeat mechanism to prevent video pausing when the screen is locked or the browser is backgrounded.
+    - **Lock Screen Controls**: Enabled play/pause and seeking capabilities directly from the mobile lock screen and notification center.
+
+<img src="mobile_optimized_study.png" width="200" alt="Mobile Study & Background Playback">
 
 ---
 
@@ -190,31 +200,32 @@ web_project/
 ## 7. Build Walkthrough
 
 ### Phase 1: Planning & Setup
-- [x] Establishment of project directory structure and Docker environment.
+- [O] Establishment of project directory structure and Docker environment.
 
 ### Phase 2: Backend Development
-- [x] API development, JWT Auth, and security (IP blocking) implementation.
-- [x] [NEW] Integration of CMS and site settings management APIs.
-- [x] [NEW] Completion of YouTube Study Center API, transcript extraction, and vocabulary DB design.
+- [O] API development, JWT Auth, and security (IP blocking) implementation.
+- [O] [NEW] Integration of CMS and site settings management APIs.
+- [O] [NEW] Completion of YouTube Study Center API, transcript extraction, and vocabulary DB design.
 
 ### Phase 3: Frontend Development
-- [x] Implementation of main gallery and slideshow.
-- [x] [NEW] Integration of dashboard inline editor and settings menu.
-- [x] [NEW] Real-time transcript-dictionary interface for German learning.
-- [x] [NEW] (2026-02-23) Real-time security stats dashboard and file explorer-based CMS enhancement completed.
-- [x] [NEW] (2026-02-23) Drag-and-drop dashboard layout management and smart learning selection logic applied.
-- [x] [NEW] (2026-02-23) Automated YouTube transcript translation and integration of 20+ German lesson pages.
-- [x] [NEW] (2026-02-24) Premium Masonry gallery, year-based filtering, and Cloudflare performance optimization completed.
-- [x] [NEW] (2026-02-25) Study Center A-B persistence, focus mode, and sticky layout implemented.
-- [x] [NEW] (2026-02-25) Global Light/Dark theme switcher and real-time translation system established.
-- [x] [NEW] (2026-02-25) Vocabulary pagination and light mode UX optimization completed.
+- [O] Implementation of main gallery and slideshow.
+- [O] [NEW] Integration of dashboard inline editor and settings menu.
+- [O] [NEW] Real-time transcript-dictionary interface for German learning.
+- [O] [NEW] (2026-02-23) Real-time security stats dashboard and file explorer-based CMS enhancement completed.
+- [O] [NEW] (2026-02-23) Drag-and-drop dashboard layout management and smart learning selection logic applied.
+- [O] [NEW] (2026-02-23) Automated YouTube transcript translation and integration of 20+ German lesson pages.
+- [O] [NEW] (2026-02-24) Premium Masonry gallery, year-based filtering, and Cloudflare performance optimization completed.
+- [O] [NEW] (2026-02-25) Study Center A-B persistence, focus mode, and sticky layout implemented.
+- [O] [NEW] (2026-02-25) Global Light/Dark theme switcher and real-time translation system established.
+- [O] [NEW] (2026-02-25) Vocabulary pagination and light mode UX optimization completed.
+- [O] [NEW] (2026-02-26) Mobile learning layout optimization and background/lock screen playback control functionality completed.
 
 ---
 
 ## 8. Appendix: DB Management Guide (pgAdmin)
 - **Path**: `https://chaeyul.uk/pgadmin/`
-- **Initial Account**: `admin@admin.com` / `admin`
-- **Internal Connection**: Host `db`, Port `5432`, DB `photodb`, User `user`
+- **Initial Account**: `adm**@********` / `********`
+- **Internal Connection**: Host `db`, Port `5432`, DB `********`, User `********`
 
 ---
 
