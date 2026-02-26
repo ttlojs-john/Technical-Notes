@@ -1,4 +1,4 @@
-![Intro Image](./ai_infra_bridge.png)
+![Intro Image](./ai_infra_bridge.jpg)
 
 # Building on the solid foundation of 17 years of infrastructure, we are building a new structure called AI.
 
