@@ -2,8 +2,8 @@
 
 # 🚀 Infra Veteran ➔ AI Innovator
 
-> **"안정적인 인프라의 단단한 기반 위에, AI라는 새로운 혁신을 세웁니다."**
-> 17년 차 글로벌 데이터센터/인프라 운영 전문가(CDCP)의 시선으로 바라본, 실용적인 AI 도입과 시스템 자동화 여정을 기록하는 디지털 가든입니다.
+> **"Building the new frontier of AI innovation upon the solid foundation of enterprise infrastructure."**
+> This digital garden documents my journey in practical AI integration and system automation, viewed through the lens of a CDCP-certified global data center and infrastructure operations expert with over 17 years of experience.
 
 <br>
 
@@ -17,16 +17,16 @@
 ## 📂 Technical Notes & Projects
 
 ### 🤖 AI & LLM Engineering
-* [[LangChain/PROJECT_REPORT_EN|LangChain AI Agent Project]] : AI 에이전트 도입 및 활용 테스트
-* [[openclaw/openclaw_Test|OpenClaw Testing Logs]] : 오픈소스 AI 모델 활용 연구
+* [[LangChain/PROJECT_REPORT_EN|LangChain AI Agent Project]] : AI agent integration and practical application testing.
+* [[openclaw/openclaw_Test|OpenClaw Testing Logs]] : Open-source AI model utilization and research logs.
 
 ### ⚙️ Automation & Tools
-* [[Excel_Analyzer/project_completion_report|Excel Data Analyzer]] : 업무 효율화를 위한 엑셀 데이터 분석 자동화
-* [[PDF_APPS/Project_Completion_Report_EN|PDF Utility Apps]] : PDF 문서 처리 유틸리티 개발
+* [[Excel_Analyzer/project_completion_report|Excel Data Analyzer]] : Excel data analysis automation to maximize operational efficiency.
+* [[PDF_APPS/Project_Completion_Report_EN|PDF Utility Apps]] : Development of PDF document processing utilities.
 
 ### 🌐 Web & DevOps
-* [[Personal Website/PROJECT_REPORT_EN|Digital Garden Build Log]] : 현재 이 블로그(Quartz)의 구축 및 배포 기록
-* [[Self-study German/Project_Completion_Report_EN|German Learning Web App]] : Netlify 배포 및 TTS 기능 통합
+* [[Personal Website/PROJECT_REPORT_EN|Digital Garden Build Log]] : Build and deployment logs for this Quartz-based technical blog.
+* [[Self-study German/Project_Completion_Report_EN|German Learning Web App]] : Netlify deployment and TTS (Text-to-Speech) feature integration.
 
 <br>
 <br>
