@@ -17,3 +17,4 @@ By combining physical server management expertise with cutting-edge AI technolog
 * [[Personal Website/PROJECT_REPORT_EN|Personal Website]]
 * [[Self-study German/Project_Completion_Report_EN|Self-study German]]
 
+![Views](https://komarev.com/ghpvc/?username=doc.chaeyul.uk&label=Views&color=005A9C&style=flat)
