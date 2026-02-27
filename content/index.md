@@ -23,6 +23,7 @@
 ### ⚙️ Automation & Tools
 * [[Excel_Analyzer/project_completion_report|Excel Data Analyzer]] : Excel data analysis automation to maximize operational efficiency.
 * [[PDF_APPS/Project_Completion_Report_EN|PDF Utility Apps]] : Development of PDF document processing utilities.
+* [[Account Management/Account Management|Account Management Tool]] : AD External Account Management Tool Enhancement & Security Hardening.
 
 ### 🌐 Web & DevOps
 * [[Personal Website/PROJECT_REPORT_EN|Digital Garden Build Log]] : Build and deployment logs for this Quartz-based technical blog.
