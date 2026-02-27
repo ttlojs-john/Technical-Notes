@@ -5,13 +5,8 @@
 **Status:** **Completed / Security Hardened ✅**
 
 ---
-
 ## 1. Project Overview 📋
 
-   <div align="center">
-      <img src="Account Management.jpg" width="320" alt="Account Management Layout">
-      <p><i>[Figure 1: Automation of Active Directory Account Management]</i></p>
-   </div>
 - **Project Name:** Automation of Active Directory External/Partner Account Management
 - **Background & Core Objectives:** 
   - **Error Elimination:** To completely eliminate human errors during repetitive AD management tasks.
@@ -19,6 +14,10 @@
   - **Audit & Compliance:** To ensure full transparency and accountability of administrative actions.
 - **Tech Stack:** `PowerShell`, `Active Directory Module`, `.NET Security Libraries` 💻
 ---
+   <div align="center">
+      <img src="Account Management.jpg" width="320" alt="Account Management Layout">
+      <p><i>[Figure 1: Automation of Active Directory Account Management]</i></p>
+   </div>
 
 ## 2. Evolutionary Roadmap & Key Milestones (V1.0 ~ V6.9) 🛣️
 
