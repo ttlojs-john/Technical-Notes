@@ -35,9 +35,6 @@
 - **Step 8. Bulk Operations:** Added support for adding/removing **multiple members simultaneously** using comma-separated IDs. 👥
 
 ### [Phase 3] Security Hardening & Audit Readiness (V6.8 - V6.9) 🛡️
-
-![Security Enhancement](Security Hardening.png)
-
 - **Vulnerability Assessment:** Proactively identified risks of hardcoded sensitive information (Domain/OU paths). ⚠️
 - **Security Implementation:**
   - **Information Hiding:** Removed all hardcoded strings; domain and OU paths are now requested at runtime to **prevent infrastructure exposure**. 🔐
