@@ -45,7 +45,7 @@ The objective of this project is to build a dedicated web server for premium med
     - **Wordbook Pagination**: Enhanced vocabulary management with 10-item pagination and refined visibility for various theme contexts.
 
     <div align="center">
-      <img src="theme_switcher_ui.png" width="300" alt="Global Theme Switcher System">
+      <img src="theme_switcher_ui.png" width="320" alt="Global Theme Switcher System">
       <p><i>[Figure 4: Global Dark/Light mode theme switching interface]</i></p>
     </div>
 - **Mobile Learning Optimization & Background Playback [NEW - 02.26]**:
@@ -54,7 +54,7 @@ The objective of this project is to build a dedicated web server for premium med
     - **Lock Screen Controls**: Enabled play/pause and seeking capabilities directly from the mobile lock screen and notification center.
 
     <div align="center">
-      <img src="mobile_optimized_study.png" width="220" alt="Mobile Study & Background Playback">
+      <img src="mobile_optimized_study.png" width="320" alt="Mobile Study & Background Playback">
       <p><i>[Figure 5: Mobile-optimized study UI with lock screen background controls]</i></p>
     </div>
 
@@ -135,8 +135,10 @@ The objective of this project is to build a dedicated web server for premium med
     - **File Explorer & Folder Management [NEW]**: Supports creating folders directly in the dashboard and intuitive navigation via Breadcrumbs.
     - **Direct CSS & Source Editing [NEW]**: Instant editing and application of all dedicated resources, including CSS files, through the built-in editor.
 - **Feature Demo [Admin Layout]**:
-![Admin Dashboard](admin_layout.png)
-*(Figure 1: Admin Dashboard with integrated File Explorer and Security Stats)*
+<div align="center">
+      <img src="admin_layout.png" width="320" alt="Mobile Study & Background Playback">
+      <p><i>[Figure 6: Admin Dashboard with integrated File Explorer and Security Stats]</i></p>
+    </div>
 
 ### ④ German Study Center [NEW]
 - **Smart Learning Environment**:
