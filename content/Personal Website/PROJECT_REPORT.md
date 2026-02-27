@@ -49,7 +49,7 @@
 
     <div align="center">
       <img src="premium_gallery_masonry.png" width="320" alt="프리미엄 갤러리 메이슨리 레이아웃">
-      <p><i>[그림 5: Masonry 기법이 적용된 프리미엄 사진 갤러리]</i></p>
+      <p><i>[그림 1: Masonry 기법이 적용된 프리미엄 사진 갤러리]</i></p>
     </div>
 
 ### ⑦ 갤러리 UX 고도화 및 편의 기능 [NEW - 02.24]
@@ -78,8 +78,8 @@
 - **단어장 페이지네이션 및 UI 개선**: 저장된 단어가 많아질 경우를 대비해 10개씩 끊어보는 기능을 추가하고, 라이트 모드에서의 가독성 문제를 완벽히 해결.
 
     <div align="center">
-      <img src="theme_switcher_ui.png" width="300" alt="다크/라이트 테마 스위처 시스템">
-      <p><i>[그림 3: 시스템 테마에 맞춘 다크/라이트 전환 인터페이스]</i></p>
+      <img src="theme_switcher_ui.png" width="320" alt="다크/라이트 테마 스위처 시스템">
+      <p><i>[그림 2: 시스템 테마에 맞춘 다크/라이트 전환 인터페이스]</i></p>
     </div>
 
 ### ⑪ 모바일 학습 환경 최적화 및 백그라운드 재생 [NEW - 02.26]
@@ -88,8 +88,8 @@
 - **잠금 화면 제어**: 잠금 화면 및 알림창에서 재생/일시정지 및 구간 이동이 가능한 미디어 컨트롤 센터 기능 통합.
 
     <div align="center">
-      <img src="mobile_optimized_study.png" width="220" alt="모바일 학습 및 백그라운드 재생">
-      <p><i>[그림 4: 모바일 최적화 레이아웃 및 잠금 화면 제어 UI]</i></p>
+      <img src="mobile_optimized_study.png" width="320" alt="모바일 학습 및 백그라운드 재생">
+      <p><i>[그림 3: 모바일 최적화 레이아웃 및 잠금 화면 제어 UI]</i></p>
     </div>
 
 ---
@@ -168,8 +168,11 @@
     - **파일 탐색기 및 폴더 관리 [NEW]**: 대시보드 내에서 직접 폴더를 생성하고, 브레드크럼(Breadcrumbs)을 통한 직관적인 파일 구조 탐색 지원.
     - **CSS 및 소스 코드 직접 수정 [NEW]**: HTML뿐만 아니라 CSS 파일 등 모든 전용 리소스를 내장 에디터로 즉시 편집 및 적용 가능.
 - **기능 시연 [Admin Layout]**:
-![관리자 대시보드 인터페이스](admin_layout.png)
-*(그림 1: CMS 파일 탐색기 및 보안 통계가 통합된 관리자 대시보드 화면)*
+    <div align="center">
+      <img src="mobile_optimized_study.png" width="320" alt="관리자 대시보드 인터페이스">
+      <p><i>[그림 3: CMS 파일 탐색기 및 보안 통계가 통합된 관리자 대시보드 화면 UI]</i></p>
+    </div>
+
 ### ④ 유튜브 독어 학습관 (German Study Center) [NEW]
 - **스마트 학습 환경**:
     - **구간 반복 및 속도 제어**: 사용자 지정 A-B 구간 반복 재생 및 0.5x~1.5x 속도 조절 기능을 통해 정밀한 어학 학습 지원.

@@ -34,7 +34,7 @@ The objective of this project is to build a dedicated web server for premium med
 
     <div align="center">
       <img src="premium_gallery_masonry.png" width="320" alt="Premium Masonry Gallery Layout">
-      <p><i>[Figure 3: High-end Masonry gallery layout with smart filtering]</i></p>
+      <p><i>[Figure 1: High-end Masonry gallery layout with smart filtering]</i></p>
     </div>
 - **Learning UX & Theme Customization [NEW - 02.25]**:
     - **A-B Repeat Persistence**: Automated saving/restoration of loop points using `localStorage`.
@@ -46,7 +46,7 @@ The objective of this project is to build a dedicated web server for premium med
 
     <div align="center">
       <img src="theme_switcher_ui.png" width="320" alt="Global Theme Switcher System">
-      <p><i>[Figure 4: Global Dark/Light mode theme switching interface]</i></p>
+      <p><i>[Figure 2: Global Dark/Light mode theme switching interface]</i></p>
     </div>
 - **Mobile Learning Optimization & Background Playback [NEW - 02.26]**:
     - **Mobile-Responsive Layout**: Dynamically adjusted transcript heights and optimized sticky positioning for smaller screens to ensure visibility of the video selection list.
@@ -55,7 +55,7 @@ The objective of this project is to build a dedicated web server for premium med
 
     <div align="center">
       <img src="mobile_optimized_study.png" width="320" alt="Mobile Study & Background Playback">
-      <p><i>[Figure 5: Mobile-optimized study UI with lock screen background controls]</i></p>
+      <p><i>[Figure 3: Mobile-optimized study UI with lock screen background controls]</i></p>
     </div>
 
 ---
@@ -137,7 +137,7 @@ The objective of this project is to build a dedicated web server for premium med
 - **Feature Demo [Admin Layout]**:
 <div align="center">
       <img src="admin_layout.png" width="320" alt="Mobile Study & Background Playback">
-      <p><i>[Figure 6: Admin Dashboard with integrated File Explorer and Security Stats]</i></p>
+      <p><i>[Figure 4: Admin Dashboard with integrated File Explorer and Security Stats]</i></p>
     </div>
 
 ### ④ German Study Center [NEW]
