@@ -1,6 +1,6 @@
 [Final Report] AD External Account Management Tool Enhancement & Security Hardening 🛠️
 1. Project Overview 📋
-![Account Management Enhancement & Security Hardening](Account Management.jpg)
+![Account Management](Account Management.jpg)
 
 Project Name: Automation of Active Directory External/Partner Account Management
 
@@ -38,7 +38,7 @@ Step 7. Smart OU Provisioning: Recursive OU creation logic that automatically bu
 Step 8. Bulk Operations: Added support for adding/removing multiple members simultaneously using comma-separated IDs. 👥
 
 [Phase 3] Security Hardening & Audit Readiness (V6.8 - V6.9) 🛡️
-![Security Enhancement](Security Hardening.jpg)
+![Account Managemt](Security Hardening.jpg)
 
 Vulnerability Assessment: Identified risks of hardcoded sensitive information (Domain/OU paths). ⚠️
 
