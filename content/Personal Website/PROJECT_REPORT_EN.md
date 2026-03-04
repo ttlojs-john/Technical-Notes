@@ -1,6 +1,6 @@
 # [Integrated Report] chaeyul.uk Web Server Project Construction & Troubleshooting Results
 
-**Last Updated**: February 26, 2026 (Mobile Layout Optimization & Background Playback Implementation Completed)
+**Last Updated**: March 4, 2026 (Mobile Learning UX Overhaul - Video Search/Pagination, Saved Loop Manager, Subtitle Sync Enhancement)
 **Target Domain**: `chaeyul.uk`
 **System Environment**: Docker Compose-based Container Environment
 - **Frontend**: Node.js (Express)
@@ -33,7 +33,7 @@ The objective of this project is to build a dedicated web server for premium med
 - **Asset Optimization [NEW - 02.24]**: Developed a local Python preprocessing tool (`preprocess_images.py`) and enforced 1-year cache headers for improved Cloudflare and edge-node performance.
 
     <div align="center">
-      <img src="premium_gallery_masonry.png" width="320" alt="Premium Masonry Gallery Layout">
+      <img src="premium_gallery_masonry.png" width="300" alt="Premium Masonry Gallery Layout">
       <p><i>[Figure 1: High-end Masonry gallery layout with smart filtering]</i></p>
     </div>
 - **Learning UX & Theme Customization [NEW - 02.25]**:
@@ -45,7 +45,7 @@ The objective of this project is to build a dedicated web server for premium med
     - **Wordbook Pagination**: Enhanced vocabulary management with 10-item pagination and refined visibility for various theme contexts.
 
     <div align="center">
-      <img src="theme_switcher_ui.png" width="320" alt="Global Theme Switcher System">
+      <img src="theme_switcher_ui.png" width="300" alt="Global Theme Switcher System">
       <p><i>[Figure 2: Global Dark/Light mode theme switching interface]</i></p>
     </div>
 - **Mobile Learning Optimization & Background Playback [NEW - 02.26]**:
@@ -54,9 +54,22 @@ The objective of this project is to build a dedicated web server for premium med
     - **Lock Screen Controls**: Enabled play/pause and seeking capabilities directly from the mobile lock screen and notification center.
 
     <div align="center">
-      <img src="mobile_optimized_study.png" width="320" alt="Mobile Study & Background Playback">
+      <img src="mobile_optimized_study.png" width="300" alt="Mobile Study & Background Playback">
       <p><i>[Figure 3: Mobile-optimized study UI with lock screen background controls]</i></p>
     </div>
+- **AI-Powered Smart Learning Tools [NEW - 03.03]**:
+    - **Context-Aware Sentence Generation**: Leverages **OpenAI gpt-4o-mini** to automatically generate practice sentences using words saved in the user's Wordbook. Sentences are provided in German with English and Korean translations, with adjustable CEFR difficulty levels (A1–B2) and sentence count (3/5/8).
+    - **STT Pronunciation Checker**: Utilizes the browser's built-in **Web Speech API** (`SpeechRecognition`, `de-DE`) to capture user's spoken German and compare it against the original transcript using a **Levenshtein similarity algorithm**. Provides word-by-word accuracy feedback with color-coded highlights (✅ correct / ❌ incorrect) and an overall accuracy percentage score.
+    - **Zero Server Cost for STT**: The pronunciation feature operates entirely within the browser (Chrome/Edge recommended), requiring no additional server resources or API fees.
+    - **New Backend Endpoint**: `POST /api/ai/generate-sentences` added to handle AI-powered sentence generation requests.
+- **Mobile Learning UX Overhaul & Subtitle Sync Enhancement [NEW - 03.04]**:
+    - **Video Search & Pagination**: Added a real-time search filter bar for quickly finding videos among 66+ entries by title. Introduced 12-per-page pagination to eliminate endless scrolling on mobile devices.
+    - **Compact Mobile Thumbnails**: Reduced thumbnail sizes (`minmax(140px)`) and limited titles to 2 lines on mobile for higher density display, showing more videos per screen.
+    - **Saved Loop Manager**: Added a dedicated 「📋 Saved Loops」 button and modal to display all previously saved A-B repeat segments across all videos. Clicking an item auto-loads the video and applies the saved loop. Each video card displays a 「🔁 Saved」 badge if a loop exists.
+    - **Persistent Loop Storage**: Turning off A-B repeat no longer deletes the saved segment from `localStorage`, enabling users to reload saved loops on subsequent visits.
+    - **Subtitle Sync Offset Control**: Added ±0.5s offset adjustment buttons (−/+) next to the transcript header, allowing users to fine-tune subtitle timing. Settings persist across sessions via `localStorage`.
+    - **Optimized Highlight Engine**: Replaced `requestAnimationFrame` with a **100ms `setInterval`** for more consistent subtitle synchronization. Added DOM change detection to only update when the active line changes, reducing unnecessary renders.
+    - **Lazy Loading**: Applied `loading="lazy"` to video thumbnails for improved initial page load performance.
 
 ---
 
@@ -135,10 +148,12 @@ The objective of this project is to build a dedicated web server for premium med
     - **File Explorer & Folder Management [NEW]**: Supports creating folders directly in the dashboard and intuitive navigation via Breadcrumbs.
     - **Direct CSS & Source Editing [NEW]**: Instant editing and application of all dedicated resources, including CSS files, through the built-in editor.
 - **Feature Demo [Admin Layout]**:
-<div align="center">
-      <img src="admin_layout.png" width="320" alt="Mobile Study & Background Playback">
+
+    <div align="center">
+      <img src="admin_layout.png" width="300" alt="Admin Dashboard Interface">
       <p><i>[Figure 4: Admin Dashboard with integrated File Explorer and Security Stats]</i></p>
     </div>
+
 
 ### ④ German Study Center [NEW]
 - **Smart Learning Environment**:
@@ -149,8 +164,12 @@ The objective of this project is to build a dedicated web server for premium med
     - **DB-Linked Vocab**: Save and manage encountered words in a personal vocabulary list with one click.
     - **Admin Control**: Easy addition/deletion of study videos via URL in the dashboard.
 - **Feature Demo [Study Interface]**:
-![Study Interface](study_lookup.png)
-*(Figure 2: German Study Center with word selection and real-time translation popup)*
+
+    <div align="center">
+      <img src="study_lookup.png" width="300" alt="Study Interface Demo">
+      <p><i>[Figure 5: German Study Center with word selection and real-time translation popup]</i></p>
+    </div>
+
 - **Homepage Promo & Loop Player [NEW]**:
     - **Randomized Loop Playback**: Infuses life into the site by randomly selecting and continuously looping YouTube videos registered for the homepage.
     - **Custom Controls**: Offers playback speed control (0.5x ~ 2.0x) and free zoom in/out for screen size.
@@ -205,6 +224,8 @@ web_project/
 ### Future Roadmap
 - **Security**: Implement Cloudflare Full SSL and evaluate 2FA.
 - **Performance**: Add thumbnail generation and caching logic for high-volume media.
+- **AI Expansion**: Explore conversational AI simulations for sentence generation and detailed phoneme-level analysis for pronunciation feedback.
+- **Learning Analytics**: Evaluate a per-user learning analytics dashboard tracking study time, loop frequency, and vocabulary progress.
 
 ---
 
@@ -230,6 +251,8 @@ web_project/
 - [O] [NEW] (2026-02-25) Global Light/Dark theme switcher and real-time translation system established.
 - [O] [NEW] (2026-02-25) Vocabulary pagination and light mode UX optimization completed.
 - [O] [NEW] (2026-02-26) Mobile learning layout optimization and background/lock screen playback control functionality completed.
+- [O] [NEW] (2026-03-03) AI-powered Smart Learning: OpenAI gpt-4o-mini sentence generation API integration and Web Speech API STT pronunciation correction system implemented.
+- [O] [NEW] (2026-03-04) Mobile learning UX overhaul: video search/pagination, saved loop management modal, subtitle sync offset controls, and rendering performance optimization completed.
 
 ---
 
