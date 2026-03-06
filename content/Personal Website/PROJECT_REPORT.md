@@ -1,6 +1,6 @@
 # [통합 보고서] chaeyul.uk 웹 서버 프로젝트 구축 및 장애 조치 결과
 
-**최종 수정일**: 2026년 3월 4일 (모바일 학습 UX 고도화 - 영상 검색/페이지네이션, 저장 구간 관리, 자막 싱크 개선)
+**최종 수정일**: 2026년 3월 6일 (서버 인프라 모니터링 시스템 구축)
 **대상 도메인**: `chaeyul.uk`
 **시스템 환경**: Docker Compose 기반 컨테이너 환경
 - **Frontend**: Node.js (Express)
@@ -122,6 +122,21 @@
     - 자막 업데이트 방식을 `requestAnimationFrame` → **100ms 간격 `setInterval`**로 변경하여 더 정확하고 일관된 동기화.
     - **DOM 업데이트 최적화**: 활성 라인 변경 시에만 DOM을 갱신하여 불필요한 렌더링 방지.
 - **이미지 지연 로딩**: 동영상 썸네일에 `loading="lazy"` 속성 적용으로 초기 페이지 로딩 성능 개선.
+
+### ⑭ 인프라 및 시스템 모니터링 연동 [NEW - 03.06]
+- **Prometheus & cAdvisor 도입**: Docker Compose 환경에 Prometheus와 cAdvisor 컨테이너를 추가하여 서버 인프라 및 컨테이너별 자원(CPU, Memory, Network) 사용량 수집 체계 구축.
+- **관리자 대시보드 통합**: 관리자 페이지(Admin Dashboard) 상단에 시스템 모니터링 섹션을 신설하고, cAdvisor와 Prometheus 웹 UI로 바로 접근할 수 있는 단축 버튼 추가 (시각적 대비를 고려한 텍스트 컬러 스타일 적용).
+- **안전한 외부 접근 (Reverse Proxy)**: 외부 포트를 직접 개방하지 않고, 프론트엔드 Node.js 서버(`server.js`)에 `/cadvisor`, `/prometheus` 프록시 라우팅을 설정하여 메인 도메인을 통한 안전한 접근 보장.
+
+    <div align="center">
+      <img src="admin_monitoring.png" width="300" alt="시스템 모니터링 접근 버튼이 추가된 관리자 화면">
+      <p><i>[그림 6: 시스템 모니터링(cAdvisor, Prometheus) 접근 버튼이 추가된 관리자 대시보드]</i></p>
+    </div>
+
+### ⑮ 안정성 강화를 위한 점진적 TypeScript(JSDoc) 도입 [NEW - 03.06]
+- **JSDoc 기반 타입 추론 적용**: 빌드 단계를 추가하여 아키텍처를 복잡하게 만드는 순수 TypeScript 전환 대신, JSDoc 주석(`/** @type {...} */`)을 활용하여 기존 순수 JavaScript 코드(`app.js`, `study.html`)에 타입 안정성 수립.
+- **데이터 규격 정의 (`types.ts`)**: 백엔드 API 응답 데이터(`User`, `Photo`, `Vocabulary` 등)와 프론트엔드 환경 설정(`SiteSettings` 등)에 대한 표준 인터페이스 규격을 `types.ts`에 선언하여 구조화.
+- **IDE 코드 어시스턴트(IntelliSense) 최적화**: 프로젝트 루트에 `jsconfig.json`을 추가(`"checkJs": true`)하여, VS Code 등 개발 도구에서 타입 오류를 사전에 감지하고 DOM 요소 캐스팅 안정성을 대폭 향상.
 
 ---
 
@@ -302,6 +317,8 @@ web_project/
 - [O] [NEW] (2026-02-26) 모바일 학습 레이아웃 최적화 및 백그라운드/잠금화면 재생 제어 기능 구축 완료.
 - [O] [NEW] (2026-03-03) AI 기반 Smart Learning 기능 도입: OpenAI gpt-4o-mini 예문 생성 API 연동 및 Web Speech API STT 발음 교정 시스템 구축 완료.
 - [O] [NEW] (2026-03-04) 모바일 학습 UX 고도화: 영상 검색/페이지네이션, 저장 구간 반복 관리 모달, 자막 싱크 오프셋 조절 및 성능 최적화 완료.
+- [O] [NEW] (2026-03-06) 서버 인프라 모니터링을 위한 Prometheus 및 cAdvisor 연동 및 관리자 모니터링 대시보드 구축 완료.
+- [O] [NEW] (2026-03-06) 프론트엔드 아키텍처 안정성을 위한 JSDoc 기반 점진적 TypeScript 타입 추론 시스템 도입 구축 완료.
 
 ---
 

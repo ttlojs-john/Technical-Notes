@@ -1,6 +1,6 @@
 # [Integrated Report] chaeyul.uk Web Server Project Construction & Troubleshooting Results
 
-**Last Updated**: March 4, 2026 (Mobile Learning UX Overhaul - Video Search/Pagination, Saved Loop Manager, Subtitle Sync Enhancement)
+**Last Updated**: March 6, 2026 (Server Infrastructure Monitoring Integration)
 **Target Domain**: `chaeyul.uk`
 **System Environment**: Docker Compose-based Container Environment
 - **Frontend**: Node.js (Express)
@@ -70,6 +70,21 @@ The objective of this project is to build a dedicated web server for premium med
     - **Subtitle Sync Offset Control**: Added ±0.5s offset adjustment buttons (−/+) next to the transcript header, allowing users to fine-tune subtitle timing. Settings persist across sessions via `localStorage`.
     - **Optimized Highlight Engine**: Replaced `requestAnimationFrame` with a **100ms `setInterval`** for more consistent subtitle synchronization. Added DOM change detection to only update when the active line changes, reducing unnecessary renders.
     - **Lazy Loading**: Applied `loading="lazy"` to video thumbnails for improved initial page load performance.
+
+- **Infrastructure & System Monitoring Integration [NEW - 03.06]**:
+    - **Prometheus & cAdvisor Integration**: Added Prometheus and cAdvisor containers to the Docker Compose topology to establish a robust collection system for server infrastructure and per-container resource (CPU, Memory, Network) usage.
+    - **Admin Dashboard Integration**: Unified the system monitoring section at the top of the Admin Dashboard with direct access buttons to the cAdvisor and Prometheus web UIs. Applied text color styling for accessible visual contrast.
+    - **Secure External Access (Reverse Proxy)**: Instead of exposing raw ports, configured `/cadvisor` and `/prometheus` proxy routes in the frontend Node.js server (`server.js`) to ensure secure administration through the main domain.
+
+    <div align="center">
+      <img src="admin_monitoring.png" width="300" alt="Admin Dashboard with System Monitoring Buttons">
+      <p><i>[Figure 6: Admin Dashboard augmented with dedicated cAdvisor and Prometheus System Monitoring buttons]</i></p>
+    </div>
+
+- **Progressive TypeScript (JSDoc) Integration for Architecture Stability [NEW - 03.06]**:
+    - **JSDoc-based Type Inference**: Rather than introducing a complex build step with a full TypeScript conversion, utilized JSDoc syntax (`/** @type {...} */`) to establish type safety directly within existing vanilla JavaScript files (`app.js`, `study.html`).
+    - **Data Interface Definition (`types.ts`)**: Declared standard interface models for backend API responses (e.g., `User`, `Photo`, `Vocabulary`) and frontend configuration data (`SiteSettings`) in `types.ts` to ensure structural consistency.
+    - **IDE IntelliSense Optimization**: Added `jsconfig.json` (`"checkJs": true`) to the project root, enabling proactive detection of type errors in VS Code and substantially improving DOM element casting stability.
 
 ---
 
@@ -253,6 +268,8 @@ web_project/
 - [O] [NEW] (2026-02-26) Mobile learning layout optimization and background/lock screen playback control functionality completed.
 - [O] [NEW] (2026-03-03) AI-powered Smart Learning: OpenAI gpt-4o-mini sentence generation API integration and Web Speech API STT pronunciation correction system implemented.
 - [O] [NEW] (2026-03-04) Mobile learning UX overhaul: video search/pagination, saved loop management modal, subtitle sync offset controls, and rendering performance optimization completed.
+- [O] [NEW] (2026-03-06) Server infrastructure monitoring established with Prometheus and cAdvisor container integration, along with admin domain reverse proxy routing.
+- [O] [NEW] (2026-03-06) Implemented progressive TypeScript type inference using JSDoc to enforce structural stability in the frontend architecture.
 
 ---
 
