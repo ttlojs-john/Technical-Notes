@@ -88,8 +88,8 @@
     </div>
 
     <div align="center">
-      <img src="telegram_repeating_scheduler_20260308.png" width="600" alt="텔레그램 알림 및 스케줄 관리 UI">
-      <p><i>[그림 3: 메시지 예약 및 개별 사용자 알림 발송이 통합된 관리 시스템]</i></p>
+      <img src="cadvisor_monitoring_dashboard_20260308.png" width="600" alt="cAdvisor 컨테이너 모니터링 대시보드">
+      <p><i>[그림 3: 각 개별 컨테이너의 자원 사용량을 실시간 추적하는 cAdvisor 시각화 화면]</i></p>
     </div>
 
     <div align="center">

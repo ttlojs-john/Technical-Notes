@@ -73,8 +73,8 @@ The objective of this project is to build a dedicated web server for premium med
     </div>
 
     <div align="center">
-      <img src="telegram_repeating_scheduler_20260308.png" width="600" alt="Telegram Notification & Scheduling UI">
-      <p><i>[Figure 3: Integrated management system for message scheduling and multi-recipient broadcasting]</i></p>
+      <img src="cadvisor_monitoring_dashboard_20260308.png" width="600" alt="cAdvisor Container Monitoring Dashboard">
+      <p><i>[Figure 3: Real-time resource usage tracking for individual containers via cAdvisor]</i></p>
     </div>
 
     <div align="center">
