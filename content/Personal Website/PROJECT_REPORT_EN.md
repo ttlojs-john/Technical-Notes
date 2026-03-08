@@ -1,6 +1,6 @@
 # [Integrated Report] chaeyul.uk Web Server Project Construction & Troubleshooting Results
 
-**Last Updated**: March 6, 2026 (Server Infrastructure Monitoring Integration)
+**Last Updated**: March 8, 2026 (Admin 2FA Google OTP & Dashboard UI Overhaul)
 **Target Domain**: `chaeyul.uk`
 **System Environment**: Docker Compose-based Container Environment
 - **Frontend**: Node.js (Express)
@@ -36,6 +36,51 @@ The objective of this project is to build a dedicated web server for premium med
       <img src="premium_gallery_masonry.png" width="300" alt="Premium Masonry Gallery Layout">
       <p><i>[Figure 1: High-end Masonry gallery layout with smart filtering]</i></p>
     </div>
+
+### ⑦ Full System Monitoring Infrastructure (Grafana & Full Stack) [NEW - 03.07]
+- **Unified Visualization (Grafana)**: Established a central monitoring hub (`/grafana/`) to visualize metrics from Prometheus, Loki, and cAdvisor.
+- **Hardware & OS Monitoring (Node Exporter)**: Real-time tracking of server-wide CPU, Memory, Disk, Network I/O, and Uptime (Dashboard ID: 1860).
+- **Granular Container Analytics (cAdvisor)**: Real-time monitoring of individual resource consumption for each Docker container (Database, Backend, Frontend, etc.) (Dashboard ID: 14282).
+- **Log Aggregation (Loki & Promtail)**: Implemented system and service log collection, enabling keyword searches (e.g., `Failed password`) for real-time security auditing.
+- **Security-First Reverse Proxy**: Secured all monitoring tools behind a reverse proxy (subpaths like `/grafana/`, `/prometheus/`) with SSL, eliminating the need for open external ports.
+
+### ⑧ Telegram-Based Multi-User Notification & Scheduling System [NEW - 03.07]
+- **Individual Chat ID Registration**: Personality-based setting enabling each user to register and store their own Telegram Chat ID after logging in.
+- **Multi-Recipient Scheduler**: Intelligent scheduler (`apscheduler`) that automatically broadcasts scheduled messages to all registered users sequentially.
+- **Self-Service ID Guide**: Built-in instructions using `@userinfobot` to help users easily find and register their Chat Id.
+- **Unified Admin Control**: Enables administrators to view, delete scheduled notifications, and send instant test messages via the dashboard.
+
+### ⑭ Admin Dashboard UI/UX Overhaul (Sidebar Layout) [NEW - 03.08]
+- **Sidebar-Based Tabbed Interface**: Consistently improved navigation by consolidating all admin modules into a fixed left-hand sidebar.
+- **Integrated Summary Dashboard**:
+    - **Asset Overview**: Real-time counters for media items and active user accounts.
+    - **Traffic Analytics**: Visual cards for Today's Visitors (Unique IP), Today's Traffic (Hits), and Cumulative Total Visitors.
+- **Intelligent Data Prefetching**: Automatic data synchronization when switching tabs, ensuring fresh lists (Users, CMS files) without manual refreshes.
+
+### ⑮ Telegram Recurring Alarms & UI Refinement [NEW - 03.08]
+- **Weekly/Monthly Recurring Tasks**: Expanded scheduling capabilities to support automated interval-based notifications (Weekly/Monthly) with auto-rescheduling.
+- **Enhanced List Readability**: Upgraded the scheduler UI with a dark Glassmorphism table and refined typography for better legibility in all lighting conditions.
+- **Granular Testing**: Added a recipient selector to target specific users for immediate Telegram testing/debugging.
+
+    <div align="center">
+      <img src="admin_dashboard_overhaul_20260308.png" width="600" alt="Admin Dashboard UI Overhaul">
+      <p><i>[Figure 4: Modern Admin Interface with Sidebar Navigation and Summary Statistics]</i></p>
+    </div>
+
+    <div align="center">
+      <img src="telegram_repeating_scheduler_20260308.png" width="600" alt="Telegram Recurring Scheduler UI">
+      <p><i>[Figure 5: Notification Management with Recurring Interval Settings and Improved Visibility]</i></p>
+    </div>
+
+    <div align="center">
+      <img src="telegram_repeating_scheduler_20260308.png" width="600" alt="Telegram Notification & Scheduling UI">
+      <p><i>[Figure 3: Integrated management system for message scheduling and multi-recipient broadcasting]</i></p>
+    </div>
+
+    <div align="center">
+      <img src="grafana_success.png" width="600" alt="Grafana Real-time Monitoring Dashboard">
+      <p><i>[Figure 2: Real-time monitoring of server-wide resource status via Node Exporter]</i></p>
+    </div>
 - **Learning UX & Theme Customization [NEW - 02.25]**:
     - **A-B Repeat Persistence**: Automated saving/restoration of loop points using `localStorage`.
     - **Focus Mode & Hidden Timestamps**: Optimized the transcript UI to highlight only the current active sentence while stripping time markers for better focus.
@@ -44,14 +89,25 @@ The objective of this project is to build a dedicated web server for premium med
     - **Real-time Home Translation**: Added live DE-to-KO translation overlays on promotional homepage videos.
     - **Wordbook Pagination**: Enhanced vocabulary management with 10-item pagination and refined visibility for various theme contexts.
 
+### ⑯ Admin Security Hardening: 2FA (Google OTP) Integration [NEW - 03.08]
+- **TOTP-Based Authentication**: Established a two-factor authentication system utilizing standard OTP apps like Google Authenticator.
+- **QR Code Workflow**: User-friendly setup involving scanning a unique QR code from the admin settings to link the account.
+- **Enhanced Login Security**: Integrated security where a valid 6-digit OTP code is required even after a successful password check, powered by the `PyOTP` backend.
+- **Administrative Override (2FA Reset)**: Admin dashboard includes tools to reset 2FA settings for individual users in case of device loss or reinstallation issues.
+
     <div align="center">
-      <img src="theme_switcher_ui.png" width="300" alt="Global Theme Switcher System">
-      <p><i>[Figure 2: Global Dark/Light mode theme switching interface]</i></p>
+      <img src="2fa_google_otp_setup_20260308.png" width="400" alt="2FA Google OTP Setup UI">
+      <p><i>[Figure 6: QR code-based Two-Factor Authentication setup for enhanced security]</i></p>
     </div>
 - **Mobile Learning Optimization & Background Playback [NEW - 02.26]**:
     - **Mobile-Responsive Layout**: Dynamically adjusted transcript heights and optimized sticky positioning for smaller screens to ensure visibility of the video selection list.
     - **Background Playback & MediaSession**: Integrated `MediaSession` API and a silent heartbeat mechanism to prevent video pausing when the screen is locked or the browser is backgrounded.
     - **Lock Screen Controls**: Enabled play/pause and seeking capabilities directly from the mobile lock screen and notification center.
+
+### ⑰ System Optimization & Security Infrastructure [NEW - 03.08]
+- **Cloudflare Full SSL & Edge Caching**: Enforced end-to-end SSL encryption via Cloudflare Proxy and implemented aggressive CDN/browser caching policies (1-year headers).
+- **Automated Media Preprocessing**: Developed an automated workflow via `preprocess_images.py` to convert assets to optimized WebP formats, saving bandwidth and storage while improving TTI (Time to Interactive).
+- **Production-Ready 2FA**: Successfully deployed 2FA (Google OTP) for all administrative accounts, elevating site security to an enterprise grade.
 
     <div align="center">
       <img src="mobile_optimized_study.png" width="300" alt="Mobile Study & Background Playback">
@@ -71,20 +127,21 @@ The objective of this project is to build a dedicated web server for premium med
     - **Optimized Highlight Engine**: Replaced `requestAnimationFrame` with a **100ms `setInterval`** for more consistent subtitle synchronization. Added DOM change detection to only update when the active line changes, reducing unnecessary renders.
     - **Lazy Loading**: Applied `loading="lazy"` to video thumbnails for improved initial page load performance.
 
-- **Infrastructure & System Monitoring Integration [NEW - 03.06]**:
-    - **Prometheus & cAdvisor Integration**: Added Prometheus and cAdvisor containers to the Docker Compose topology to establish a robust collection system for server infrastructure and per-container resource (CPU, Memory, Network) usage.
-    - **Admin Dashboard Integration**: Unified the system monitoring section at the top of the Admin Dashboard with direct access buttons to the cAdvisor and Prometheus web UIs. Applied text color styling for accessible visual contrast.
-    - **Secure External Access (Reverse Proxy)**: Instead of exposing raw ports, configured `/cadvisor` and `/prometheus` proxy routes in the frontend Node.js server (`server.js`) to ensure secure administration through the main domain.
+- **System Monitoring Infrastructure (Prometheus & cAdvisor) [NEW - 03.06]**:
+    - **Prometheus**: Established the main monitoring server container (`localhost:9090`) for real-time time-series data collection and storage.
+    - **cAdvisor**: Integrated the agent (`cadvisor:8080`) to track Docker container-level resource usage (CPU, Memory, Network, etc.).
+    - Added both services to the `docker-compose.yml` list and mounted the `prometheus_data` volume to ensure data persistence.
+- **Admin Dashboard Integration (Proxy Routing)**:
+    - To enhance security, Prometheus and cAdvisor ports are not exposed to the external network. Instead, they are routed to the internal network via a Node.js (`server.js`) reverse proxy.
+    - Access URLs: `https://chaeyul.uk/prometheus`, `https://chaeyul.uk/cadvisor`
+    - Created a new 'System Monitoring' card in the summary section at the top of the Admin Dashboard (`admin.html`) providing direct shortcut buttons.
+    - Applied intuitive theme colors (Green/Red backgrounds with white text) to improve UI visibility.
 
     <div align="center">
-      <img src="admin_monitoring.png" width="300" alt="Admin Dashboard with System Monitoring Buttons">
-      <p><i>[Figure 6: Admin Dashboard augmented with dedicated cAdvisor and Prometheus System Monitoring buttons]</i></p>
+      <img src="admin_monitoring.png" width="600" alt="Admin Dashboard Monitoring Buttons">
+      <p><i>[Figure 3: Admin Dashboard screen with Prometheus and cAdvisor monitoring elements added]</i></p>
     </div>
 
-- **Progressive TypeScript (JSDoc) Integration for Architecture Stability [NEW - 03.06]**:
-    - **JSDoc-based Type Inference**: Rather than introducing a complex build step with a full TypeScript conversion, utilized JSDoc syntax (`/** @type {...} */`) to establish type safety directly within existing vanilla JavaScript files (`app.js`, `study.html`).
-    - **Data Interface Definition (`types.ts`)**: Declared standard interface models for backend API responses (e.g., `User`, `Photo`, `Vocabulary`) and frontend configuration data (`SiteSettings`) in `types.ts` to ensure structural consistency.
-    - **IDE IntelliSense Optimization**: Added `jsconfig.json` (`"checkJs": true`) to the project root, enabling proactive detection of type errors in VS Code and substantially improving DOM element casting stability.
 
 ---
 
@@ -132,12 +189,51 @@ The objective of this project is to build a dedicated web server for premium med
     - Implemented `event.stopPropagation()` within the `lookupWord` function to prevent bubbling.
     - Clearly separated dictionary lookup (click on word) from video seeking (click on line background).
 
+### [Issue]: "Origin not allowed" error when accessing Grafana via Reverse Proxy
+- **Root Cause Analysis**:
+    - Grafana's security policy (CSRF) blocked requests with unexpected Origin headers from the proxy server.
+- **Action Taken**:
+    - Set `GF_SERVER_DOMAIN=chaeyul.uk` in `docker-compose.yml`.
+    - Configured the `server.js` proxy with `changeOrigin: true` and forced `X-Forwarded-Host`, `Host`, and `Origin` headers to `chaeyul.uk` to bypass security checks.
+
+### [Issue]: Prometheus Scrape Targets returning 404 Not Found or DOWN
+- **Root Cause Analysis**:
+    - The introduction of path prefixes (`/prometheus`, `/cadvisor`) caused Prometheus to miss the default `/metrics` endpoint.
+- **Action Taken**:
+    - Corrected `metrics_path` in `prometheus.yml` (e.g., `/cadvisor/metrics`) and ensured `node-exporter` targets were properly registered.
+
+### [Issue]: Docker container names missing in cAdvisor ('No data')
+- **Root Cause Analysis**:
+    - Modern Linux kernel (cgroup v2) policies prevented the default cAdvisor image from accessing container metadata.
+- **Action Taken**:
+    - Switched to `image: zcube/cadvisor` (cgroup v2 compatibility patch).
+    - Granted `privileged: true` and mounted `/var/run/docker.sock` to enable metadata collection.
+    - Used Prometheus `metric_relabel_configs` to map raw container labels to the standard `name` label for dashboard compatibility.
+
+### [Issue]: Server error due to missing "telegram_chat_id" column in DB
+- **Root Cause Analysis**:
+    - `models.py` was updated with the new field for individual Chat IDs, but the existing PostgreSQL table was not migrated, leading to "Column not found" errors.
+- **Action Taken**:
+    - Resolved by executing `ALTER TABLE users ADD COLUMN telegram_chat_id VARCHAR;` to dynamically update the database schema.
+
 ### [Issue]: Timestamp numbers included when dragging text for selection
 - **Root Cause Analysis**:
     - Timestamps like `[0:15]` were part of the text nodes, causing them to be copied along with sentences when manually dragged, which broke dictionary queries.
 - **Action Taken**:
     - Added a `mouseup` listener to clone the selection and strip out all nodes with the `.timestamp` class before extracting text.
     - Ensures pure text search even when selecting multiple words manually.
+
+### [Issue]: Python Datetime Timezone Conversion Error [NEW - 03.08]
+- **Root Cause Analysis**:
+    - Conflicting `tzinfo` and `timedelta` calculations in `astimezone()` caused runtime exceptions during Telegram schedule registration.
+- **Action Taken**:
+    - Refactored the conversion logic to use explicit `datetime.timezone.utc` objects and sanitized into naive objects for standardized storage.
+
+### [Issue]: CMS Editor & 2FA Status Visibility desync [NEW - 03.08]
+- **Root Cause Analysis**:
+    - After the sidebar layout overhaul, some old `id` references and `display` state logic for the CMS editor and 2FA status text became inconsistent.
+- **Action Taken**:
+    - Standardized container IDs and forced explicit visibility states in `app.js`. Added background sync for user metadata upon tab switches.
 
 ---
 
@@ -237,10 +333,12 @@ web_project/
 - All functions are operating stably on a Docker container basis.
 
 ### Future Roadmap
-- **Security**: Implement Cloudflare Full SSL and evaluate 2FA.
-- **Performance**: Add thumbnail generation and caching logic for high-volume media.
-- **AI Expansion**: Explore conversational AI simulations for sentence generation and detailed phoneme-level analysis for pronunciation feedback.
-- **Learning Analytics**: Evaluate a per-user learning analytics dashboard tracking study time, loop frequency, and vocabulary progress.
+- **Security**: Passwordless authentication via Biometrics and Hardware Security Keys (FIDO2/WebAuthn).
+- **Performance**: Dynamic on-the-fly image transformation and backend-driven thumbnail proxy system.
+- **Advanced AI Extension**: 
+    - **Interactive Voice Simulation**: AI-driven role-play for conversational practice beyond static sentence generation.
+    - **Pragmatic Phoneme Analysis**: Enhancing STT to provide feedback at the syllable and intonation level for precise accent correction.
+- **Learning Management (LMS)**: Visual learning analytics dashboards tracking user-specific study time, heatmaps for difficult sentences, and Ebbinghaus-based review cycles.
 
 ---
 
@@ -268,8 +366,12 @@ web_project/
 - [O] [NEW] (2026-02-26) Mobile learning layout optimization and background/lock screen playback control functionality completed.
 - [O] [NEW] (2026-03-03) AI-powered Smart Learning: OpenAI gpt-4o-mini sentence generation API integration and Web Speech API STT pronunciation correction system implemented.
 - [O] [NEW] (2026-03-04) Mobile learning UX overhaul: video search/pagination, saved loop management modal, subtitle sync offset controls, and rendering performance optimization completed.
-- [O] [NEW] (2026-03-06) Server infrastructure monitoring established with Prometheus and cAdvisor container integration, along with admin domain reverse proxy routing.
-- [O] [NEW] (2026-03-06) Implemented progressive TypeScript type inference using JSDoc to enforce structural stability in the frontend architecture.
+- [O] [NEW] (2026-03-07) System monitoring infrastructure finalized (Grafana/Loki/Prometheus): Reverse proxy security integration, Log aggregation (Loki/Promtail), cgroup v2 compatibility optimization, and 1860/14282 dashboards established.
+- [O] [NEW] (2026-03-07) Telegram Multi-User Notification System: Individual Chat ID registration UI, multi-recipient backend logic, and admin scheduling dashboard completed.
+- [O] [NEW] (2026-03-08) Admin UI Overhaul: Modern sidebar layout and real-time status summary card system implemented.
+- [O] [NEW] (2026-03-08) 2FA Implementation: Hardened admin security via Google OTP integration and user-level reset tools.
+- [O] [NEW] (2026-03-08) Advanced Scheduling: Telegram recurring notifications (Weekly/Monthly) and automatic rescheduling logic implemented.
+
 
 ---
 
