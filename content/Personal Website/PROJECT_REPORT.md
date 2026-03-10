@@ -1,6 +1,6 @@
 # [통합 보고서] chaeyul.uk 웹 서버 프로젝트 구축 및 장애 조치 결과
 
-**최종 수정일**: 2026년 3월 8일 (관리자 2FA 구글 OTP 인증 도입 및 대시보드 UI 개편)
+**최종 수정일**: 2026년 3월 10일 (스피드 퀴즈 게이미피케이션 및 CSV 데이터 인프라 고도화)
 **대상 도메인**: `chaeyul.uk`
 **시스템 환경**: Docker Compose 기반 컨테이너 환경
 - **Frontend**: Node.js (Express)
@@ -48,7 +48,7 @@
 - **Cloudflare 캐싱 최적화**: 미디어 파일에 대한 강력한 브라우저 및 CDN 캐시 헤더(1년) 설정을 통해 로딩 속도 극대화 및 서버 부하 감소.
 
     <div align="center">
-      <img src="premium_gallery_masonry.png" width="300" alt="프리미엄 갤러리 메이슨리 레이아웃">
+      <img src="premium_gallery_masonry.png" width="600" alt="프리미엄 갤러리 메이슨리 레이아웃">
       <p><i>[그림 1: Masonry 기법이 적용된 프리미엄 사진 갤러리]</i></p>
     </div>
 
@@ -132,7 +132,7 @@
 - **단어장 페이지네이션 및 UI 개선**: 저장된 단어가 많아질 경우를 대비해 10개씩 끊어보는 기능을 추가하고, 라이트 모드에서의 가독성 문제를 완벽히 해결.
 
     <div align="center">
-      <img src="theme_switcher_ui.png" width="300" alt="다크/라이트 테마 스위처 시스템">
+      <img src="theme_switcher_ui.png" width="600" alt="다크/라이트 테마 스위처 시스템">
       <p><i>[그림 2: 시스템 테마에 맞춘 다크/라이트 전환 인터페이스]</i></p>
     </div>
 
@@ -147,8 +147,20 @@
 - **2단계 인증(2FA) 실전 도입**: 구글 OTP 연동을 통해 관리자 접속 보안을 엔터프라이즈 수준으로 강화 완료.
 
     <div align="center">
-      <img src="mobile_optimized_study.png" width="300" alt="모바일 학습 및 백그라운드 재생">
+      <img src="mobile_optimized_study.png" width="600" alt="모바일 학습 및 백그라운드 재생">
       <p><i>[그림 3: 모바일 최적화 레이아웃 및 잠금 화면 제어 UI]</i></p>
+    </div>
+
+### ⑱ 단어장 게이미피케이션(Quiz) 및 데이터 자동화 인프라 [NEW - 03.10]
+- **스피드 퀴즈 (Gamification)**: 나만의 단어장을 활용해 60초 동안 정답을 맞추는 스피드 퀴즈 기능 구현. Glassmorphism 기반의 세련된 시각적 인터페이스 적용 및 정답/오답에 따른 시간 가감 메커니즘 구축.
+- **실시간 랭킹 리더보드**: Redis의 Sorted Set(ZSET) 자료구조를 활용해 접속 수와 관계없이 O(1) 수준의 고속으로 최고 점수 랭킹 탑(Top) 10을 집계하여 퀴즈 게임 결과창과 대기실에 실시간으로 표출.
+- **CSV 대용량 확장(Admin)**: 관리자가 엑셀(CSV) 파일을 통해 '독일어 단어장'과 '회화 문장'을 한 번에 수십~수백 개씩 대량 등록/수정 할 수 있는 고성능 파싱 및 데이터베이스 삽입 API 구축 및 프론트엔드 연동.
+- **텔레그램 랜덤 학습 메타**: 텔레그램 알람 스케줄러 기능에 `[RANDOM_WORDS_5]`, `[RANDOM_SENTENCES_5]` 내부 파싱 태그를 신규 도입하여, 예약 발송 시 데이터베이스에서 임의의 단어와 문장 5세트를 추출하여 사용자들의 스마트폰 텔레그램으로 자동 푸시 발송하는 지능형 마이크로 학습(Micro-learning) 로직 고도화.
+- **cAdvisor 호환성 패치 (cgroup v2)**: 우분투 최신 커널의 `cgroups v2` 권한 구조에 대응 가능하도록 cAdvisor 메인 볼륨 마운트(`/sys/fs/cgroup`) 설정을 갱신하고 최신 이미지 엔진으로 패치하여, 각 기능별 하위(`sub`) 도커 컨테이너들의 상세 모니터링 분석 그래픽 UI 완벽 복구.
+
+    <div align="center">
+      <img src="gamification_quiz_ui.png" width="600" alt="독일어 스피드 퀴즈 UI 및 실시간 랭킹보드">
+      <p><i>[그림 7: 나만의 단어장을 활용한 스피드 퀴즈 및 Redis 기반 실시간 랭킹 UI]</i></p>
     </div>
 
 ### ⑫ AI 기반 학습 보조 도구 (Smart Learning) [NEW - 03.03]
@@ -311,6 +323,26 @@
     - `GF_SECURITY_CSRF_TRUSTED_ORIGINS` 설정에 `www` 포함 주소를 명시적으로 추가.
     - `server.js` 프록시 로직에서 `xfwd: true` 및 `X-Forwarded-Proto: https` 헤더를 강제로 주입하여 보안 체크를 100% 통과하도록 최종 조치.
 
+### [보안 강화]: IP Spoofing 대응 및 Brute Force 방어 구조 개편 [NEW - 03.09]
+- **원인 분석 (최중요 리스크)**:
+    - 백엔드(FastAPI)에서 악성 사용자의 연속 로그인 실패 시, IP를 차단하는 과정에서 실제 접속자의 방문 IP가 아닌 **Cloudflare/Docker 프록시 내부 IP(`172.x.x.x`)가 수집**되는 치명적 논리 오류가 발견됨.
+    - 단 한 명의 해커가 로그인 공격을 수행해도 프록시 IP가 차단되어 **일반 사용자를 포함한 전체 서버 접속이 원천 차단**되는 대형 장애(Denial of Service) 발생 우려가 큼.
+    - 기존 백엔드에서만 방어할 경우 DB 연결 등의 여전한 자원 소모 발생.
+- **조치 내용**:
+    - **백엔드 리얼 IP 추적 고도화**: 단순 `request.client.host` 대신 `CF-Connecting-IP` 및 `X-Forwarded-For` HTTP 헤더를 통해 사용자의 **원래(Real) IP를 정확히 추출**하여 핀포인트로만 차단하도록 로직 수정.
+    - **프론트엔드(Node.js) Rate Limiting 1차 방어선 도입**:
+        - `express-rate-limit` 패키지를 설치하고, `app.set('trust proxy', 1)` 설정을 적용.
+        - 로그인 엔드포인트(`/api/token`)에 대해 5분 내 최대 10회까지만 요청을 허용.
+        - 무차별 대입 공격(Brute Force) 발생 시 **백엔드/DB 도달 전 가장 앞단(Node.js)에서 즉각 429 에러로 차단 및 드롭**하여 핵심 서버 자원 소모 원천 방어 완료.
+
+### [장애 현상]: 등록된 텔레그램 예약 스케줄 문자 미발송 [NEW - 03.09]
+- **원인 분석**:
+    - `apscheduler` 객체가 백엔드 서버(Uvicorn)가 구동되는 비동기 영역(Event Loop)의 바깥(Global)에서 생성됨. 이로 인해 스케줄러가 백엔드 프로세스의 정상적인 실행 흐름에 결합되지 않아 실행 자체가 누락됨.
+    - DB 내 예약 문자의 대상인 `telegram_chat_id`가 `None`이 아닌 빈 문자열(`""`)로 저장된 사용자가 있을 경우, 발송 대상 목록 오류를 일으킴.
+- **조치 내용**:
+    - 스케줄러 인스턴스 생성을 `@app.on_event("startup")` 이벤트 훅 내부로 이동하여 **올바른 비동기 이벤트 루프 캡처**.
+    - 예약 대상 수집 필터 로직에 `!= ""` 조건을 추가하여 빈 레코드를 엄격하게 무시하도록 보강.
+
 > [!IMPORTANT]
 > **대규모 서비스 통합 및 프록시 설정 시 주의사항**
 > 1. **서비스 생존 확인 우선**: 프록시 에러(404) 발생 시 코드를 수정하기 전, 실제 백엔드 서비스(Grafana 등)가 `Status: Up` 상태인지 로그를 통해 가장 먼저 확인해야 합니다.
@@ -343,7 +375,7 @@
 - **기능 시연 [Admin Layout]**:
 
     <div align="center">
-      <img src="admin_layout.png" width="300" alt="관리자 대시보드 인터페이스">
+      <img src="admin_layout.png" width="600" alt="관리자 대시보드 인터페이스">
       <p><i>[그림 4: CMS 파일 탐색기 및 보안 통계가 통합된 관리자 대시보드 화면]</i></p>
     </div>
 
@@ -358,7 +390,7 @@
 - **기능 시연 [Study Interface]**:
 
     <div align="center">
-      <img src="study_lookup.png" width="300" alt="학습관 인터페이스 시연">
+      <img src="study_lookup.png" width="600" alt="학습관 인터페이스 시연">
       <p><i>[그림 5: 독어 학습관에서 단어 선택 및 실시간 번역 팝업이 동작하는 화면]</i></p>
     </div>
 
@@ -380,26 +412,37 @@ web_project/
 ├── backend/                     # Python (FastAPI) API 서버
 │   ├── main.py                  # 메인 API 엔드포인트 및 로직
 │   ├── models.py                # SQLAlchemy 데이터베이스 모델 정의
-│   ├── auth.py                  # JWT 인증 및 보안(IP 차단) 로직
+│   ├── auth.py                  # JWT 인증 및 보안 로직 (2FA, IP 차단)
 │   ├── crud.py                  # 데이터베이스 CRUD 함수
 │   ├── database.py              # DB 연결 및 세션 설정
+│   ├── redis_client.py          # [NEW] Redis 연결 및 랭킹 관리 로직
 │   ├── migrate.py               # DB 스키마 마이그레이션 도구
 │   ├── requirements.txt         # 파이썬 의존성 패키지 목록
 │   └── uploads/                 # 사용자가 업로드한 미디어 파일 저장소
 ├── frontend/                    # Node.js (Express) 웹 서버
-│   ├── server.js                # 리버스 프록시 및 정적 파일 서버 로직
+│   ├── server.js                # 리버스 프록시, Rate Limiting 및 정적 파일 서버 로직
 │   ├── package.json             # 노드 의존성 및 스크립트 정의
 │   └── public/                  # 웹 정적 리소스 (Vanilla JS 기반)
 │       ├── index.html           # 메인 홈페이지
 │       ├── admin.html           # 관리자 대시보드 (CMS 기능 포함)
 │       ├── gallery.html         # 미디어 갤러리 및 슬라이드 쇼
 │       ├── study.html           # 유튜브 독어 학습관 (A-B 반복, 자막, 사전)
+│       ├── quiz.html            # [NEW] 단어장 기반 스피드 퀴즈 게이미피케이션
 │       ├── settings.json        # 사이트 동적 설정 데이터 (로고, 메뉴 등)
 │       ├── js/app.js            # 통합 프론트엔드 비즈니스 로직
 │       ├── css/style.css        # 통합 디자인 스타일시트
 │       └── certs/               # SSL/TLS 인증서 저장소
 ├── scripts/                     # 유지보수 및 자동화 스크립트
-│   └── preprocess_images.py     # [NEW] 로컬 이미지 최적화 및 메타데이터 추출 도구
+│   └── preprocess_images.py     # 로컬 이미지 최적화 및 메타데이터 추출 도구
+├── prometheus/                  # [NEW] 시계열 데이타 수집 서버 설정
+│   └── prometheus.yml           # Prometheus 스크래핑 타겟 설정 파일
+├── grafana/                     # [NEW] 시스템 통합 모니터링 대시보드
+│   └── provisioning/            # 대시보드 및 데이터소스 자동 구성
+├── loki/                        # [NEW] 로그 중앙 집중화 서버
+│   └── local-config.yaml        # Loki 로컬 설정 파일
+├── promtail/                    # [NEW] 로그 수집 및 전송 에이전트
+│   └── promtail-config.yml      # Promtail 로그 수집 설정
+├── backups/                     # [NEW] 자동화된 백업 아카이브 및 덤프 파일 저장소
 ├── db/
 │   └── init.sql                 # 초기 데이터베이스 테이블 생성 스크립트
 ```
@@ -451,7 +494,9 @@ web_project/
 - [O] [NEW] (2026-03-08) 관리자 대시보드 UI 전면 개편: 현대적인 사이드바 레이아웃으로 변경 및 실시간 서버 현황 요약 카드 시스템 도입 완료.
 - [O] [NEW] (2026-03-08) 2단계 인증(2FA) 도입: 구글 OTP 연동을 통한 관리자 로그인 보안 강화 및 사용자별 2FA 초기화 기능 구축 완료.
 - [O] [NEW] (2026-03-08) 스케줄링 고도화: 텔레그램 알림 주간/월간 반복 발송 기능 및 반복 스케줄 자동 갱신 로직 구현 완료.
-
+- [O] [NEW] (2026-03-09) 백엔드 스케줄러 비동기 이벤트 루프 버그 수정 및 안정화 완료.
+- [O] [NEW] (2026-03-09) 무차별 로그인 공격 방어 개편: Node.js Rate Limiting 도입 및 백엔드 프록시 리얼 IP 우회 추적 방어 구조 구현 완료.
+- [O] [NEW] (2026-03-10) 스피드 어학 퀴즈 UI 및 실시간 Redis 랭킹, 데이터 일괄 CSV 업로드 API, 텔레그램 랜덤 단어 푸시 기능 구축 및 cAdvisor 모니터링 최신 호환성 패치 완료.
 
 ---
 

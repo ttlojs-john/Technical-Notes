@@ -1,6 +1,6 @@
 # [Integrated Report] chaeyul.uk Web Server Project Construction & Troubleshooting Results
 
-**Last Updated**: March 8, 2026 (Admin 2FA Google OTP & Dashboard UI Overhaul)
+**Last Updated**: March 10, 2026 (Speed Quiz Gamification, Bulk CSV Upload & Data Infrastructure)
 **Target Domain**: `chaeyul.uk`
 **System Environment**: Docker Compose-based Container Environment
 - **Frontend**: Node.js (Express)
@@ -33,7 +33,7 @@ The objective of this project is to build a dedicated web server for premium med
 - **Asset Optimization [NEW - 02.24]**: Developed a local Python preprocessing tool (`preprocess_images.py`) and enforced 1-year cache headers for improved Cloudflare and edge-node performance.
 
     <div align="center">
-      <img src="premium_gallery_masonry.png" width="300" alt="Premium Masonry Gallery Layout">
+      <img src="premium_gallery_masonry.png" width="600" alt="Premium Masonry Gallery Layout">
       <p><i>[Figure 1: High-end Masonry gallery layout with smart filtering]</i></p>
     </div>
 
@@ -96,7 +96,7 @@ The objective of this project is to build a dedicated web server for premium med
 - **Administrative Override (2FA Reset)**: Admin dashboard includes tools to reset 2FA settings for individual users in case of device loss or reinstallation issues.
 
     <div align="center">
-      <img src="2fa_google_otp_setup_20260308.png" width="400" alt="2FA Google OTP Setup UI">
+      <img src="2fa_google_otp_setup_20260308.png" width="600" alt="2FA Google OTP Setup UI">
       <p><i>[Figure 6: QR code-based Two-Factor Authentication setup for enhanced security]</i></p>
     </div>
 - **Mobile Learning Optimization & Background Playback [NEW - 02.26]**:
@@ -110,9 +110,22 @@ The objective of this project is to build a dedicated web server for premium med
 - **Production-Ready 2FA**: Successfully deployed 2FA (Google OTP) for all administrative accounts, elevating site security to an enterprise grade.
 
     <div align="center">
-      <img src="mobile_optimized_study.png" width="300" alt="Mobile Study & Background Playback">
+      <img src="mobile_optimized_study.png" width="600" alt="Mobile Study & Background Playback">
       <p><i>[Figure 3: Mobile-optimized study UI with lock screen background controls]</i></p>
     </div>
+
+### ⑱ Vocab Gamification (Quiz) & Data Automation Infrastructure [NEW - 03.10]
+- **Speed Quiz Gamification**: Engineered a 60-second time-attack speed quiz leveraging the user's personal wordbook. The UI incorporates sleek Glassmorphism design and dynamic time-penalty mechanics (correct +2s, incorrect -3s).
+- **Real-time Leaderboard via Redis**: Utilized Redis Sorted Set (ZSET) structures to dynamically fetch and display the top-10 highest scoring players in O(1) time complexity natively on the Quiz result screen.
+- **Bulk CSV Upload Pipeline (Admin)**: Built a high-performance backend parser and endpoint enabling administrators to upload hundreds of 'Words' and 'Conversational Sentences' via standard CSV files directly into the PostgreSQL database.
+- **Randomized Telegram Study Alarms**: Introduced parsing tags `[RANDOM_WORDS_5]` and `[RANDOM_SENTENCES_5]` to the notification scheduler. Evaluates at runtime to push 5 random vocabularies and sentences to the user's smartphone, promoting continuous micro-learning.
+- **cAdvisor cgroup v2 Compatibility Patch**: Secured complete visibility of all individual sub-containers in cAdvisor by remounting the appropriate `sys/fs/cgroup` endpoints required by modern Ubuntu kernels.
+
+    <div align="center">
+      <img src="gamification_quiz_ui.png" width="600" alt="German Vocab Speed Quiz Gamification UI">
+      <p><i>[Figure 7: High-speed Gamification Quiz & Real-time Redis Leaderboard UI]</i></p>
+    </div>
+
 - **AI-Powered Smart Learning Tools [NEW - 03.03]**:
     - **Context-Aware Sentence Generation**: Leverages **OpenAI gpt-4o-mini** to automatically generate practice sentences using words saved in the user's Wordbook. Sentences are provided in German with English and Korean translations, with adjustable CEFR difficulty levels (A1–B2) and sentence count (3/5/8).
     - **STT Pronunciation Checker**: Utilizes the browser's built-in **Web Speech API** (`SpeechRecognition`, `de-DE`) to capture user's spoken German and compare it against the original transcript using a **Levenshtein similarity algorithm**. Provides word-by-word accuracy feedback with color-coded highlights (✅ correct / ❌ incorrect) and an overall accuracy percentage score.
@@ -261,7 +274,7 @@ The objective of this project is to build a dedicated web server for premium med
 - **Feature Demo [Admin Layout]**:
 
     <div align="center">
-      <img src="admin_layout.png" width="300" alt="Admin Dashboard Interface">
+      <img src="admin_layout.png" width="600" alt="Admin Dashboard Interface">
       <p><i>[Figure 4: Admin Dashboard with integrated File Explorer and Security Stats]</i></p>
     </div>
 
@@ -277,7 +290,7 @@ The objective of this project is to build a dedicated web server for premium med
 - **Feature Demo [Study Interface]**:
 
     <div align="center">
-      <img src="study_lookup.png" width="300" alt="Study Interface Demo">
+      <img src="study_lookup.png" width="600" alt="Study Interface Demo">
       <p><i>[Figure 5: German Study Center with word selection and real-time translation popup]</i></p>
     </div>
 
@@ -300,26 +313,37 @@ web_project/
 ├── backend/                     # Python (FastAPI) API Server
 │   ├── main.py                  # API endpoints and logic
 │   ├── models.py                # SQLAlchemy DB models
-│   ├── auth.py                  # JWT Auth and Security (IP blocking)
+│   ├── auth.py                  # JWT Auth and Security logic (2FA, IP blocking)
 │   ├── crud.py                  # Database CRUD functions
 │   ├── database.py              # DB connection and session
+│   ├── redis_client.py          # [NEW] Redis connection and ranking management logic
 │   ├── migrate.py               # DB schema migration tool
 │   ├── requirements.txt         # Python dependencies
 │   └── uploads/                 # User-uploaded media storage
 ├── frontend/                    # Node.js (Express) Web Server
-│   ├── server.js                # Proxy and static file server logic
+│   ├── server.js                # Reverse proxy, Rate Limiting, and static file server logic
 │   ├── package.json             # Node dependencies
 │   └── public/                  # Static resources (Vanilla JS)
 │       ├── index.html           # Main Landing Page
 │       ├── admin.html           # Admin Dashboard (CMS)
 │       ├── gallery.html         # Media Gallery & Slideshow
 │       ├── study.html           # YouTube Learning Center
+│       ├── quiz.html            # [NEW] Vocabulary-based speed quiz gamification
 │       ├── settings.json        # Dynamic site settings
 │       ├── js/app.js            # Integrated frontend business logic
 │       ├── css/style.css        # Unified design stylesheet
 │       └── certs/               # SSL/TLS certificates
 ├── scripts/                     # Utility and automation scripts
-│   └── preprocess_images.py     # [NEW] Local image optimization & metadata tool
+│   └── preprocess_images.py     # Local image optimization & metadata tool
+├── prometheus/                  # [NEW] Time-series data collection server configuration
+│   └── prometheus.yml           # Prometheus scraping target settings
+├── grafana/                     # [NEW] System integration monitoring dashboard
+│   └── provisioning/            # Auto-provisioning for dashboards and datasources
+├── loki/                        # [NEW] Centralized log aggregation server
+│   └── local-config.yaml        # Loki local configuration file
+├── promtail/                    # [NEW] Log collection and forwarding agent
+│   └── promtail-config.yml      # Promtail log collection settings
+├── backups/                     # [NEW] Automated backup archives and dump files storage
 └── db/
     └── init.sql                 # Initial database schema
 ```
@@ -371,6 +395,7 @@ web_project/
 - [O] [NEW] (2026-03-08) Admin UI Overhaul: Modern sidebar layout and real-time status summary card system implemented.
 - [O] [NEW] (2026-03-08) 2FA Implementation: Hardened admin security via Google OTP integration and user-level reset tools.
 - [O] [NEW] (2026-03-08) Advanced Scheduling: Telegram recurring notifications (Weekly/Monthly) and automatic rescheduling logic implemented.
+- [O] [NEW] (2026-03-10) Language Quiz gamification, Bulk CSV upload endpoints, Randomized Telegram schedule integrations, and cAdvisor monitoring compatibility fixes completed.
 
 
 ---
