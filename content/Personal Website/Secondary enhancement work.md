@@ -25,7 +25,7 @@
 * **성능 안정성 확보**: 데이터 요청 피크 시에도 DB 부하를 성공적으로 분산하여 시스템 전체적인 안정성 입증.
 
     <div align="center">
-      <img src="/home/aiadmin01/.gemini/antigravity/brain/0e8e5833-4907-44bf-8ee5-3fbedcbfd5ed/smart_dict_hybrid_cache_1773254591153.png" width="600" alt="Smart Dictionary and Hybrid Cache Architecture">
+      <img src="smart_dict_hybrid_cache_1773254591153.png" width="600" alt="Smart Dictionary and Hybrid Cache Architecture">
       <p><i>[그림 1: 새롭게 구축된 스마트 사전과 하이브리드 캐시 시스템 개념도]</i></p>
     </div>
 

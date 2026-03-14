@@ -25,7 +25,7 @@ This report summarizes the key implementation details and results related to the
 * **Performance Stability Assurance**: Proven overall system stability by successfully distributing DB load even during peak data request periods.
 
     <div align="center">
-      <img src="/home/aiadmin01/.gemini/antigravity/brain/0e8e5833-4907-44bf-8ee5-3fbedcbfd5ed/smart_dict_hybrid_cache_1773254591153.png" width="600" alt="Smart Dictionary and Hybrid Cache Architecture">
+      <img src="smart_dict_hybrid_cache_1773254591153.png" width="600" alt="Smart Dictionary and Hybrid Cache Architecture">
       <p><i>[Figure 1: Newly built Smart Dictionary and Hybrid Cache System Architecture]</i></p>
     </div>
 
