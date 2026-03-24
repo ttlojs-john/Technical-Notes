@@ -1,5 +1,7 @@
 # Project Completion Report: German Learning Web Application
 
+> 🇰🇷 [한국어 버전](./Project_Completion_Report_KR)
+
 ## 1. Project Overview and Architecture
 **Project Goal**: To develop a premium German language learning web application integrated with a modern Glassmorphism UI and Web Text-to-Speech (TTS) capabilities.
 **Core Components**:

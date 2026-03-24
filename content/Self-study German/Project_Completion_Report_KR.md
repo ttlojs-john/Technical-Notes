@@ -1,5 +1,7 @@
 # 프로젝트 완료 보고서: 독일어 학습 웹 애플리케이션
 
+> 🇺🇸 [English Version](./Project_Completion_Report_EN)
+
 ## 1. 프로젝트 개요 및 아키텍처
 **프로젝트 목표**: 현대적인 글래스모피즘(Glassmorphism) UI와 웹 음성 합성(TTS) 기능을 통합한 프리미엄 독일어 학습 웹 애플리케이션 개발.
 **주요 구성 요소**:

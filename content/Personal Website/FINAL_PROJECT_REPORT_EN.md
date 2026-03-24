@@ -1,5 +1,7 @@
 # 🚀 chaeyul.uk Final Project Completion Report (V3.0)
 
+> 🇰🇷 [한국어 버전](./FINAL_PROJECT_REPORT)
+
 ## 📌 1. Project Overview
 This report summarizes the final completion of the 3rd enhancement phase and V3.0 pipeline deployment for the `chaeyul.uk` web service. Through this latest update, the platform has evolved beyond a simple web service by successfully integrating an **Intelligent Infrastructure Monitoring & Secure Auto-Recovery System**, a **Global Localization (i18n) Engine**, a **Smart Learning System (Flashcards)**, and a high-capacity **V3.0 Multimodal Subtitle Pipeline**.
 

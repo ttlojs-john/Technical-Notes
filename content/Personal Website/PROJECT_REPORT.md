@@ -1,5 +1,7 @@
 # [통합 보고서] chaeyul.uk 웹 서버 프로젝트 구축 및 장애 조치 결과
 
+> 🇺🇸 [English Version](./PROJECT_REPORT_EN)
+
 **최종 수정일**: 2026년 3월 10일 (스피드 퀴즈 게이미피케이션 및 CSV 데이터 인프라 고도화)
 **대상 도메인**: `chaeyul.uk`
 **시스템 환경**: Docker Compose 기반 컨테이너 환경

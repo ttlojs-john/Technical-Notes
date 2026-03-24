@@ -1,5 +1,7 @@
 # 📄 Project Completion Report (PDF Pro Editor)
 
+> 🇰🇷 [한국어 버전](./Project_Completion_Report_KR)
+
 ### 1. Project Overview
 This project aimed to develop a **Desktop Application (PDF Pro Editor)** that empowers users to securely edit PDF documents containing sensitive information. It goes beyond simple visual overlays by providing true 'Secure Masking' (redaction) which permanently deletes text from the data structure, alongside a custom 'Text Box' tool, maximizing both privacy protection and workflow efficiency. Daily updates and task logs have been heavily focused on troubleshooting these core features.
 

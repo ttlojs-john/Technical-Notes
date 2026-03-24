@@ -1,5 +1,7 @@
 # [Integrated Report] chaeyul.uk Web Server Project Construction & Troubleshooting Results
 
+> 🇰🇷 [한국어 버전](./PROJECT_REPORT)
+
 **Last Updated**: March 10, 2026 (Speed Quiz Gamification, Bulk CSV Upload & Data Infrastructure)
 **Target Domain**: `chaeyul.uk`
 **System Environment**: Docker Compose-based Container Environment

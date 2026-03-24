@@ -1,5 +1,7 @@
 # [Integration Report] Secondary enhancement work Project Results
 
+> 🇰🇷 [한국어 버전](./Secondary enhancement work)
+
 **Last Modified**: March 12, 2026
 **Author**: Development Team
 

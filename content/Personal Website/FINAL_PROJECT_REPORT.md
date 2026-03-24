@@ -1,5 +1,7 @@
 # 🚀 chaeyul.uk 프로젝트 최종 완료 보고서 (Final V3.0 Completion Report)
 
+> 🇺🇸 [English Version](./FINAL_PROJECT_REPORT_EN)
+
 ## 📌 1. 프로젝트 개요 (Project Overview)
 본 보고서는 `chaeyul.uk` 웹 서비스 프로젝트의 3차 고도화 및 최종 V3.0 파이프라인 구축 완료 내역을 요약합니다. 이번 업데이트를 통해 단순한 웹 서비스를 넘어 **지능형 인프라 감시 및 보안 자동 복구 시스템**, **글로벌 현지화(Localization) 엔진**, **스마트 학습 시스템(플래시카드)** 및 대용량 처리가 가능한 **V3.0 멀티모달 자막 파이프라인**이 성공적으로 완성되었습니다.
 
