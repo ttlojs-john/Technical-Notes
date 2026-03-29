@@ -40,21 +40,21 @@ This phase of the chaeyul.uk project focused heavily on establishing an enterpri
 ## 3. Visual Transformations (주요 변화 갤러리)
 
 <div align="center">
-  <img src="file:///home/aiadmin01/.gemini/antigravity/brain/2a986e31-9e9c-4b0b-ab14-ffeacb3f2689/media__1774815239924.png" width="800" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);" alt="Grafana Node Graph Integration">
+  <img src="file:///media__1774815239924.png" width="800" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);" alt="Grafana Node Graph Integration">
   <p style="margin-top: 15px; color: #888;"><i>[Figure 1: Service Map Node Graph – Real-time architectural visualization detailing network connections from Frontend to DB & Exporters.<br>(프론트엔드부터 DB 인프라까지 네트워크 흐름을 시각화한 실시간 서비스 맵)]</i></p>
 </div>
 
 <br><br>
 
 <div align="center">
-  <img src="file:///home/aiadmin01/.gemini/antigravity/brain/2a986e31-9e9c-4b0b-ab14-ffeacb3f2689/media__1774815238995.png" width="800" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);" alt="Sparkline Container View">
+  <img src="file:///media__1774815238995.png" width="800" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);" alt="Sparkline Container View">
   <p style="margin-top: 15px; color: #888;"><i>[Figure 2: Modernized Container Dashboard – Featuring sparklines for CPU/Memory, real-time HEALTH checks, and instant Reboot actions.<br>(스파크라인 차트, 실시간 가동 상태 패널 및 즉석 재부팅 기능이 포함된 최신식 컨테이너 대시보드)]</i></p>
 </div>
 
 <br><br>
 
 <div align="center">
-  <img src="file:///home/aiadmin01/.gemini/antigravity/brain/2a986e31-9e9c-4b0b-ab14-ffeacb3f2689/media__1774815240250.png" width="800" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);" alt="Service Control Matrix">
+  <img src="file:///media__1774815240250.png" width="800" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);" alt="Service Control Matrix">
   <p style="margin-top: 15px; color: #888;"><i>[Figure 3: DevOps Service Monitoring Matrix – Fully decoupled control panel supporting isolated L4/L7 health checks, interval tuning, and auto-recovery toggles.<br>(컨테이너별 독립적인 L4/L7 헬스체크, 주기 조절, 자동 복구 설정이 가능한 서비스 제어 매트릭스)]</i></p>
 </div>
 
