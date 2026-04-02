@@ -19,9 +19,15 @@
 - **Two-Way Recovery Webhooks**: Upgraded passive Telegram monitoring to bidirectional control. Administrators can now authorize remote container-reboots directly from Telegram alerts through a rigidly verified, dual-auth webhook endpoint.
 - **Auto-Schema Migration**: Implemented boot-time validation scripts. If dynamic dashboard settings mandate new database columns, the system detects and automatically modifies the PostgreSQL structural layout instantly, obliterating previous crash models.
 
+![Infra Monitoring V2 Dashboard](./archive/infra_v2_status.png)
+*<Figure: Next-Gen Infrastructure Monitoring Dashboard with Glassmorphism>*
+
 ### 🌍 Universal i18n & Bulk Processing Refinements (Mar 20-21)
 - Formulated an `i18n.js` interpreter engine. Backed by `MutationObserver` protocols and Incremental DOM updating practices, users can instantly switch between English and Korean translations system-wide without incurring full page reloads.
 - Rolled out the **Bulk AI Job Queue** automating repetitive translation, narration, and transcription actions safely. Rectified OpenAI Whisper 413 HTTP limitations by actively performing intermediate audio compression down-sampling before API transmission.
+
+![Premium Admin UI](./archive/premium_admin_ui.png)
+*<Figure: Premium Admin Interface featuring Custom Scrollbars and Bulk AI Process Visualization>*
 
 ## 🛠 2. Logged Troubleshooting
 

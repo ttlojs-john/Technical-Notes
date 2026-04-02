@@ -22,14 +22,32 @@
 - 사이드바 기반 네비게이션 및 통합 대시보드 요약 시스템.
 - 2단계 구글 OTP 인증(2FA) 도입으로 관리자 로그인 보안 엔터프라이즈 수준으로 강화.
 
+![관리자 대시보드 인터페이스](./archive/admin_layout.png)
+*<그림: 파일 탐색기 및 보안 통계가 통합된 관리자 대시보드 화면>*
+
+![2FA 구글 OTP 설정 UI](./archive/2fa_google_otp_setup_20260308.png)
+*<그림: 로그인 보안 강화를 위한 QR 코드 기반 2단계 인증 설정 화면> *
+
 ### 유튜브 독어 학습관 (German Study Center)
 - 유튜브 API를 통한 실시간 독어/영어 자막 추출 및 클릭 시 사전 조회 기능 도입.
 - 개인 맞춤형 구간 반복 시스템 및 브라우저 영속화 적용.
 - TTS(Text-to-Speech) 및 자동 번역, 모바일 백그라운드 재생 지원 설계.
 
+![다크/라이트 테마 스위처 시스템](./archive/theme_switcher_ui.png)
+*<그림: 시스템 테마에 맞춘 다크/라이트 전환 인터페이스>*
+
+![학습관 인터페이스 시연](./archive/study_lookup.png)
+*<그림: 독어 학습관에서 단어 선택 및 실시간 번역 팝업이 동작하는 화면>*
+
+![모바일 학습 및 백그라운드 재생](./archive/mobile_optimized_study.png)
+*<그림: 모바일 최적화 레이아웃 및 잠금 화면 제어 UI>*
+
 ### 미디어 갤러리 (Masonry Style)
 - CSS Columns를 활용한 고품격 갤러리 레이아웃 구축.
 - 사진 EXIF 분석 후 연도별 자동 분류 필터 제공, 비디오 호버 미리보기 시스템.
+
+![프리미엄 갤러리 메이슨리 레이아웃](./archive/premium_gallery_masonry.png)
+*<그림: Masonry 기법이 적용된 프리미엄 사진 갤러리>*
 
 ## 🛠 3. 장애 조치 내역 (Troubleshooting)
 

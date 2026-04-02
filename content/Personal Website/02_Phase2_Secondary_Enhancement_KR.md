@@ -10,6 +10,9 @@
 - **스마트 사전**: AI 기반 맥락 분석을 통해 단어의 의미/예문을 동적으로 추천하고, 사용자 단어장과 연동되는 고성능 검색 파이프라인 최적화.
 - **하이브리드 다중 계층 캐시**: Redis 등 인메모리(L1)와 Disk/DB(L2)를 분리 조합하여 데이터 조회 응답 속도를 10ms 이하로 단축. `hybrid_cache_hits_total` 등 커스텀 메트릭을 통한 실시간 Prometheus 감시 연동.
 
+![Smart Dictionary & Hybrid Cache System](./archive/smart_dict_hybrid_cache_1773254591153.png)
+*<그림: 새롭게 구축된 스마트 사전과 하이브리드 캐시 시스템 개념도>*
+
 ### 퀴즈 시스템 전면 개편 (Smart Quiz Center)
 - 기존 학습 페이지를 4대 게임 모드로 다각화 확장.
   - 🧠 클래식 (단어 뜻 맞추기 - 4지선다)
@@ -18,13 +21,22 @@
   - 💬 회화 문장 전체 퀴즈
 - Glassmorphism 기반의 프리미엄 디자인 적용으로 시각적 퀄리티 상승.
 
+![Quiz UI Dark Mode](./archive/quiz_ui_dark_mode.png)
+*<그림: 퀴즈 게임 센터 — 새로운 글래스모피즘 UI와 4가지 게임 모드 선택 화면>*
+
 ### 글로벌 테마 동기화 (Unified Theme System)
 - `localStorage`의 `theme` 단일 키를 활용한 `/js/theme.js` 공통 모듈화 완성.
 - 메인, 퀴즈 페이지뿐 아니라 30개 이상의 서브 Lesson 파일 전체에 걸친 즉각적이고 깜빡임 없는 주야간(Light/Dark) 테마 동기화 스크립트 작성 완비.
 
+![Unified Theme System Architecture](./archive/unified_theme_system.png)
+*<그림: 통합 테마 시스템 — theme.js를 중심으로 모든 페이지가 하나의 스토리지 키를 공유>*
+
 ### 텔레그램 연동 및 회화 문장 관리 (CMS 2.0)
 - 텔레그램 알림 시스템을 관리자 메뉴 내에서 독립된 탭으로 분리하여 수정/이력/즉시 발송 등 개별 조작 효율화.
 - 사용자가 업로드한 CSV 파일을 통해 수십 개의 회화 문장을 일괄 다이렉트 맵핑 (동적 컬럼 헤더 매칭 알고리즘 적용).
+
+![Project Enhancement Summary](./archive/project_enhancement_summary_mar14.png)
+*<그림: 4대 퀴즈 모드 선택 및 텔레그램 알림 설정 화면>*
 
 ## 🛠 2. 주요 장애 조치 (Troubleshooting)
 

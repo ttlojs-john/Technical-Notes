@@ -32,6 +32,12 @@ Initially conceived as an enclosed repository for premium personal media, this u
 
 ## 🚀 3. Final Impact & Value Paradigm
 
+![System Architecture V2](./archive/system_architecture_v2.png)
+*<Figure: Complete System Data Flow and Security Architecture Visualized with 3D Engine>*
+
+![System Monitoring Drawing](./archive/system_monitoring_arch.png)
+*<Figure: Detailed Visualization of Infrastructure Health Checks and Automated Security Recovery Mechanisms>*
+
 * **Uncompromising Security & Stability**: Blended strictly mandated 2FA (OTP authenticators) with IP Whitelisted Rate-Limiting rules operating behind Cloudflare proxies—effectively neutralizing aggressive brute-force scanning threats natively.
 * **Flawless Content Delivery Resilience**: Achieved total visual ubiquity through instantaneous, flash-free Light/Dark modes, coupled tightly with a high-performance `MutationObserver` i18n translation engine handling multiregional translations seamlessly in the DOM.
 * **Negligible Maintenance Overheads**: Migrated static structural codebase attributes into dynamic database records utilizing auto-migrating properties; this decisively removed the necessity for complicated developer redeployments, ultimately preserving critical development hours.

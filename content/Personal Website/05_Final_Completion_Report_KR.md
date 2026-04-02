@@ -32,6 +32,12 @@
 
 ## 🚀 3. 최종 아키텍처 및 기대 효과 (Final Impact)
 
+![System Architecture V2](./archive/system_architecture_v2.png)
+*<그림: 3D 엔진으로 시각화된 전체 시스템 데이터 흐름 및 보안 아키텍처>*
+
+![System Monitoring Drawing](./archive/system_monitoring_arch.png)
+*<그림: 인프라 헬스체크 및 보안 자동 복구 메커니즘을 상세 시각화한 모니터링 드로잉>*
+
 * **극강의 운영 및 보안 안정성**: 2단계-인증(2FA OTP)과 IP Whitelist 기반 Rate-Limiting, Cloudflare Proxy를 결속하여 무차별 대입 보안 위협 제거.
 * **100% 무중단 글로벌 서비스 보장**: 실시간 동기화로 깜빡임 없는 주/야간 테마 시스템, `MutationObserver`를 활용한 i18n 실시간 언어 번역 엔진 스크립트를 통해 글로벌 접근성 완벽 부합.
 * **유지보수 비용 격감**: 코드로 하드코딩되던 환경 변수를 동적으로 DB 화하고, 자동 DB 마이그레이션(Auto-Migration) 기능을 포함시켜 개발자의 유지보수 난이도와 투입 시간을 압도적으로 단축시켰습니다.

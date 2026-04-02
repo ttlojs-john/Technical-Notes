@@ -20,9 +20,15 @@
 - 웹훅 실행 시 인가된 관리자 여부를 2중 검증하는 엔진 탑재로 해킹 원천 방지 및 안전한 무중단 복구 인프라 확립.
 - **자동 마이그레이션(Auto-Migration) 도입**: DB 동기화 오류를 방지하기 위해 서버 재시작 시점에 구조 변경분을 스스로 판단하여 추가하는 자동 반영 엔진 가동.
 
+![Infra Monitoring V2 Dashboard](./archive/infra_v2_status.png)
+*<그림: 차세대 모니터링 대시보드 (컨테이너 상태 및 CPU/Mem 실시간 감시)>*
+
 ### 🌍 i18n 글로벌 언어(현지화) 엔진 적용 (03.20~21)
 - `i18n.js`와 `MutationObserver`를 결합하여 화면 새로고침 없이도 즉각 한글-영어 전환(`Toggle`)이 이루어지는 고속의 Incremental DOM 동기화 모듈 개발.
 - 기존 속도를 제약하던 Whisper 413 Audio Error 등을 해결하는 오디오 사전 압축 알고리즘 추가로 AI 프로세싱 및 벌크 일괄 작업 큐 환경(Bulk AI Processing) 구현 완비.
+
+![Premium Admin UI](./archive/premium_admin_ui.png)
+*<그림: 디자인이 고도화된 프리미엄 관리자 인터페이스 및 프로세스 상태 뷰>*
 
 ## 🛠 2. 트러블슈팅 (Troubleshooting)
 
