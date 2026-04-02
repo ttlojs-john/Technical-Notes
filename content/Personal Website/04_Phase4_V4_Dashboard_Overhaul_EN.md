@@ -12,13 +12,13 @@
 - **Granular Service Matrix**: Transitioned away from universal health-checks to microservice-specific isolation. Support boundaries such as CPU tracking targets, L4/L7 polling `HEALTH_PATH`, interval timers, and Automated Reboot permissions are now distinctively configured per container (DB, API, Frontend, Prometheus).
 - **IP Safe-Guarding**: Re-wired SSH threshold protection and login-brute-force rate limits to strictly honor system-wide admin whitelist models.
 
-![Grafana Node Graph Integration](./archive/media__1774815239924.png)
+![Grafana Node Graph Integration](./media__1774815239924.png)
 *<Figure: Service Map Node Graph detailing real-time architectural components>*
 
-![Sparkline Container View](./archive/media__1774815238995.png)
+![Sparkline Container View](./media__1774815238995.png)
 *<Figure: Modernized Container Dashboard featuring real-time HEALTH checks and reboot actions>*
 
-![Service Control Matrix](./archive/media__1774815240250.png)
+![Service Control Matrix](./media__1774815240250.png)
 *<Figure: DevOps Service Monitoring Matrix allowing L4/L7 interval tuning and auto-recovery toggles>*
 
 ### Premium Admin UI/UX Refactoring
@@ -26,7 +26,7 @@
 - **Real-Time Backend Querying**: Phased out limiting frontend-only object filtering for the massive dictionary base; paired frontend search-bars with Postgres `ILIKE` clauses delivering instantaneous CRUD efficiency. 
 - **Premium Design Systems**: Radically purged antiquated inline CSS styles. All subsidiary dashboards are now woven under a continuous, premium Utility-first CSS class umbrella (`.admin-card`, `.v3-tabs`). Subtle glassmorphic depth boundaries and harmonious colorways extensively elevate UX metrics for prolonged oversight workloads.
 
-![Admin Dashboard UI Overhaul](./archive/admin_dashboard_overhaul_20260308.png)
+![Admin Dashboard UI Overhaul](./admin_dashboard_overhaul_20260308.png)
 *<Figure: Radically reorganized Admin Interface leaning onto dynamic component sidebars>*
 
 ## 📌 2. Conclusion & Operational Impact

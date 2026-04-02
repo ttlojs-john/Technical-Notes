@@ -10,7 +10,7 @@
 - **Smart Dictionary**: Rolled out an AI-context-aware dictionary algorithm providing dynamic phrase recommendations linked intimately with users' private glossaries.
 - **Hybrid Multi-tier Caching**: Deployed a dual-level data cache pattern. Level 1 leverages Redis (in-memory) yielding sub-10ms latency for frequent queries. Level 2 relies on efficient disk-persistence caching. Exported `hybrid_cache_hits_total` metrics natively to Prometheus.
 
-![Smart Dictionary & Hybrid Cache System Architecture](./archive/smart_dict_hybrid_cache_1773254591153.png)
+![Smart Dictionary & Hybrid Cache System Architecture](./smart_dict_hybrid_cache_1773254591153.png)
 *<Figure: Newly Deployed Smart Dictionary and Hybrid Cache Architecture>*
 
 ### Smart Quiz Center Revamp
@@ -20,21 +20,21 @@
   - ✏️ Fill-in-the-Blank (Sentence context insertion)
   - 💬 Dialogue Master (Whole-sentence translation multi-choice)
 
-![Quiz UI Dark Mode](./archive/quiz_ui_dark_mode.png)
+![Quiz UI Dark Mode](./quiz_ui_dark_mode.png)
 *<Figure: Smart Quiz Center featuring Glassmorphism UI and 4 Game Modes>*
 
 ### Unified Global Theme Orchestration 
 - Converted isolated theme logic spread across 30+ pages into a strictly supervised `theme.js` module.
 - Leveraged single-source `localStorage` keys guaranteeing zero-flash (FOUC), instantaneous Light/Dark theme switching across all interactive and static HTML resources.
 
-![Unified Theme System Architecture](./archive/unified_theme_system.png)
+![Unified Theme System Architecture](./unified_theme_system.png)
 *<Figure: Centralized Theme Architecture Operating via Single LocalStorage Key>*
 
 ### Enhanced CMS & Telegram Routing
 - Fully decoupled the Telegram scheduling portal into a discrete admin sub-tab, enabling precise notification editing, manual rebroadcast triggers, and visual history logs.
 - Added advanced CSV parsing dynamically matching localized dataset headers to exact PostgreSQL columns.
 
-![Project Enhancement Summary](./archive/project_enhancement_summary_mar14.png)
+![Project Enhancement Summary](./project_enhancement_summary_mar14.png)
 *<Figure: Telegram Notification Management and Quiz UI Selection Screen>*
 
 ## 🛠 2. Logged Troubleshooting

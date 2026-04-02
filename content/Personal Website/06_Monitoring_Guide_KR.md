@@ -12,7 +12,7 @@
 
 ## 📊 2. Grafana (그라파나) 핵심 사용법
 
-![cAdvisor Container Monitoring Dashboard](./archive/cadvisor_monitoring_dashboard_20260308.png)
+![cAdvisor Container Monitoring Dashboard](./cadvisor_monitoring_dashboard_20260308.png)
 *<그림: 도커 컨테이너들의 리소스 사용량을 실시간으로 보여주는 cAdvisor 대시보드 예시>*
 
 ### 1) 접속 경로 및 초기 설정
@@ -31,7 +31,7 @@ Grafana에서 화면을 그리기 위해 데이터 공급처를 연결하는 과
 2. ID 입력창에 **`1860`** (Node Exporter용) 또는 **`14282`** (cAdvisor, 도커 컨테이너용)를 입력 후 **[Load]** 클릭.
 3. 가장 하단 데이터 소스 선택란에서 방금 연결한 **Prometheus**를 선택하고 **[Import]** 수행.
 
-![Grafana Real-time Monitoring Dashboard](./archive/grafana_success.png)
+![Grafana Real-time Monitoring Dashboard](./grafana_success.png)
 *<그림: 템플릿 Import가 완료되어 서버 상태가 실시간으로 표출되는 Grafana 모니터링 화면>*
 
 ---

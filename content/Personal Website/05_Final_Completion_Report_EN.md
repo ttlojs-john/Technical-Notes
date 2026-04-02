@@ -32,10 +32,10 @@ Initially conceived as an enclosed repository for premium personal media, this u
 
 ## 🚀 3. Final Impact & Value Paradigm
 
-![System Architecture V2](./archive/system_architecture_v2.png)
+![System Architecture V2](./system_architecture_v2.png)
 *<Figure: Complete System Data Flow and Security Architecture Visualized with 3D Engine>*
 
-![System Monitoring Drawing](./archive/system_monitoring_arch.png)
+![System Monitoring Drawing](./system_monitoring_arch.png)
 *<Figure: Detailed Visualization of Infrastructure Health Checks and Automated Security Recovery Mechanisms>*
 
 * **Uncompromising Security & Stability**: Blended strictly mandated 2FA (OTP authenticators) with IP Whitelisted Rate-Limiting rules operating behind Cloudflare proxies—effectively neutralizing aggressive brute-force scanning threats natively.

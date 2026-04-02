@@ -12,7 +12,7 @@
 
 ## 📊 2. Grafana Operations
 
-![cAdvisor Container Monitoring Dashboard](./archive/cadvisor_monitoring_dashboard_20260308.png)
+![cAdvisor Container Monitoring Dashboard](./cadvisor_monitoring_dashboard_20260308.png)
 *<Figure: Real-time cAdvisor Dashboard showcasing immediate Docker container resource usage>*
 
 ### 1) Initial Access & Setup
@@ -31,7 +31,7 @@ You can bypass manual layout designing by importing globally recognized communit
 2. To monitor primary server hardware, type **`1860`** (Node Exporter metric template) or **`14282`** (cAdvisor for isolated container tracking) into the ID box and hit **[Load]**.
 3. Under the Data Source dropdown at the bottom, select the **Prometheus** link you created previously and click **[Import]**.
 
-![Grafana Real-time Monitoring Dashboard](./archive/grafana_success.png)
+![Grafana Real-time Monitoring Dashboard](./grafana_success.png)
 *<Figure: Live Grafana Monitoring Console surfacing active Node exporter metrics post-import>*
 
 ---

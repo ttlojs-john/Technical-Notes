@@ -32,10 +32,10 @@
 
 ## 🚀 3. 최종 아키텍처 및 기대 효과 (Final Impact)
 
-![System Architecture V2](./archive/system_architecture_v2.png)
+![System Architecture V2](./system_architecture_v2.png)
 *<그림: 3D 엔진으로 시각화된 전체 시스템 데이터 흐름 및 보안 아키텍처>*
 
-![System Monitoring Drawing](./archive/system_monitoring_arch.png)
+![System Monitoring Drawing](./system_monitoring_arch.png)
 *<그림: 인프라 헬스체크 및 보안 자동 복구 메커니즘을 상세 시각화한 모니터링 드로잉>*
 
 * **극강의 운영 및 보안 안정성**: 2단계-인증(2FA OTP)과 IP Whitelist 기반 Rate-Limiting, Cloudflare Proxy를 결속하여 무차별 대입 보안 위협 제거.

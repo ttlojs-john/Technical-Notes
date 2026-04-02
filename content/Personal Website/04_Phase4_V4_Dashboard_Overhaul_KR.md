@@ -12,13 +12,13 @@
 - **분리형 마이크로서비스 제어 모델**: 서버 전체를 단거리 헬스체크하던 방식에서 벗어나, Backend, Database, Redis, 프론트엔드 등 각 서비스(Container)별로 고유한 CPU/메모리 알람 임계점과 L4/L7 `HEALTH_PATH`, 그리고 에러 허용치 설정 기능 등 **서비스별 독립 제어 매트릭스**를 구성하여 관찰 범위 세분화.
 - **Whitelist 기반 SSH/Brute-force 방어 체계 강화**: 기존 자동 방어 솔루션을 개선하여 인가된 관리자 IP는 스마트하게 제외(Whitelist)하는 구조 구현. 이로 인한 오탐(False-positive) 록아웃 방어 및 안정적 서버 접속 보장.
 
-![Grafana Node Graph Integration](./archive/media__1774815239924.png)
+![Grafana Node Graph Integration](./media__1774815239924.png)
 *<그림: 프론트엔드부터 DB 인프라까지 네트워크 흐름을 시각화한 실시간 서비스 맵>*
 
-![Sparkline Container View](./archive/media__1774815238995.png)
+![Sparkline Container View](./media__1774815238995.png)
 *<그림: 스파크라인 차트, 실시간 가동 상태 패널 및 즉석 재부팅 기능이 포함된 최신식 컨테이너 대시보드>*
 
-![Service Control Matrix](./archive/media__1774815240250.png)
+![Service Control Matrix](./media__1774815240250.png)
 *<그림: 컨테이너별 독립적인 L4/L7 헬스체크, 주기 조절, 자동 복구 설정이 가능한 서비스 제어 매트릭스>*
 
 ### 프리미엄 관리자 환경 UI/UX 리팩토링 (Admin UI Refactoring)
@@ -26,7 +26,7 @@
 - **실시간 백엔드 기반 하이브리드 검색**: 프론트엔드 필터링에 전적으로 의지하던 단어장을 백엔드 `ilike` 데이터베이스 정규식 필터링 시스템과 연계하여 수만 개 어휘에 대한 막힘없는 관리(CRUD) 플로우 이룩.
 - **프리미엄 CSS 디자인 시스템 도달**: 인라인 스타일(inline-style) 전체 폐기. 글래스모피즘(Glassmorphism) 기반 사이드바, 은은한 마이크로 트랜지션 로직, 통일된 컬러 파레트를 `.admin-card`와 같은 Utility 기반 클래스로 통합. 이로써 코드 유지보수성 및 관리자의 장기 체류 피로도를 획기적으로 향상시킴.
 
-![Admin Dashboard UI Overhaul](./archive/admin_dashboard_overhaul_20260308.png)
+![Admin Dashboard UI Overhaul](./admin_dashboard_overhaul_20260308.png)
 *<그림: 탭 기반에서 컴포넌트 사이드바 형으로 대개편된 V4 관리자 메인 인터페이스 UI>*
 
 ## 📌 2. 결론 및 향후 전망
