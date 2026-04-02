@@ -22,10 +22,10 @@
 - Modernized the UI layout utilizing a cohesive sidebar navigation.
 - Elevated login security to enterprise levels by mandating 2FA (Google Authenticator) for administrators.
 
-![Admin Dashboard Interface](./archive/admin_layout.png)
+![Admin Dashboard Interface](./admin_layout.png)
 *<Figure: Admin Dashboard Interface with CMS and Security Stats>*
 
-![2FA Google OTP Setup UI](./archive/2fa_google_otp_setup_20260308.png)
+![2FA Google OTP Setup UI](./2fa_google_otp_setup_20260308.png)
 *<Figure: QR Code-based 2FA Configuration UI for Enhanced Login Security>*
 
 ### German Study Center (YouTube Interactive Interface)
@@ -33,20 +33,20 @@
 - Implemented personalized A-B loop configurations with local storage persistence.
 - Constructed mobile-friendly foundations, including native background playback options.
 
-![Dark/Light Theme Switcher System](./archive/theme_switcher_ui.png)
+![Dark/Light Theme Switcher System](./theme_switcher_ui.png)
 *<Figure: Dark/Light Transition Interface Responsive to System Themes>*
 
-![Study Interface Demo](./archive/study_lookup.png)
+![Study Interface Demo](./study_lookup.png)
 *<Figure: Word Selection and Real-time Translation Popup in German Study Center>*
 
-![Mobile Study & Background Playback](./archive/mobile_optimized_study.png)
+![Mobile Study & Background Playback](./mobile_optimized_study.png)
 *<Figure: Mobile-Optimized Layout and Lock Screen Control UI>*
 
 ### Media Gallery (Masonry Style)
 - Built a premium Masonry layout utilizing CSS Columns.
 - Integrated automated EXIF data parsers for year-based multimedia filtering alongside video hover previews.
 
-![Premium Masonry Gallery Layout](./archive/premium_gallery_masonry.png)
+![Premium Masonry Gallery Layout](./premium_gallery_masonry.png)
 *<Figure: Premium Photo Gallery Applying Masonry Techniques>*
 
 ## 🛠 3. Troubleshooting Log
