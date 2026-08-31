@@ -60,7 +60,7 @@ chmod +x ~/apply_all.sh
 
 구축된 웹 대시보드 화면을 통해 관리자는 아래의 일상 작업을 GUI 상에서 편리하게 수행할 수 있습니다.
 
-![Web Admin Dashboard UI Mockup](./images/web_dashboard.jpg)
+![Web Admin Dashboard UI Mockup](./web_dashboard.jpg)
 
 - **Pod 실시간 감사**: CPU, RAM 메트릭과 파드 상태를 모니터링하고 비정상적인 파드를 원클릭으로 격리/재기동할 수 있습니다.
 - **용어 사전(Glossary) 편집**: 오번역 고유 명사 매핑 데이터를 실시간으로 등록 및 저장합니다.
