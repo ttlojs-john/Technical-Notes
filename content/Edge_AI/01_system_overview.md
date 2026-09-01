@@ -20,7 +20,7 @@
 
 사용자가 텔레그램을 통해 전송한 다양한 미디어(텍스트, 이미지, 음성)를 엣지 환경에 구축된 딥러닝 인공지능 파이프라인을 거쳐 실시간으로 한국어로 번역하고 상황 분석을 수행합니다. 동시에 관리자는 웹 브라우저를 통해 클러스터 리소스 제어, 전문 용어 사전 관리, 실시간 보안 관제를 하나의 통합 대시보드에서 처리할 수 있습니다.
 
-![System Architecture Concept](./system_architecture.jpg)
+![System Architecture Concept](./Edge_AI/system_architecture.jpg)
 
 
 ---
