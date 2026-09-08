@@ -1,6 +1,8 @@
 # ⚙️ 05. 상세 컴포넌트별 동작 및 데이터 흐름도 (Detailed Workflow Diagrams)
 > **Edge AI 텔레그램 멀티모달 번역 및 웹 통합 관리 시스템 가이드**
 
+> 🌐 **Language / 언어 전환**: [English](./05_detailed_workflows_EN.md) | [한국어](./05_detailed_workflows.md)
+
 ---
 
 ## 🔗 문서 이동 (Navigation)
@@ -11,6 +13,7 @@
 - **[05. 상세 컴포넌트 동작 및 데이터 흐름](./05_detailed_workflows.md)**
 - [06. 보안 및 인프라 성능 최적화](./06_security_and_tuning.md)
 - [07. 운영 관리, 검증 테스트 및 배포 가이드](./07_operations_and_deployment.md)
+- [14. eBPF 실리움 & 로컬 AI 방화벽 + 텔레그램 관제](./14_ebpf_cilium_ai_firewall_and_telegram_soc.md)
 
 ---
 
