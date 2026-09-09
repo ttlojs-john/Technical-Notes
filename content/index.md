@@ -31,6 +31,18 @@
 
 ## 📂 기술 문서 카탈로그 (한국어 전용 목록)
 
+### 📁 AI-Governance
+> 기술 구현 및 아키텍처 문서
+
+* [[AI-Governance/AI_Governance_Sandbox_Log|AI Governance & Sandbox Lab Log]]
+  - *Living notes on how I am translating 17 years of infra/operations experience into practical AI guardrails and safe experimentation workflows.*
+
+### 📁 Account Management
+> 기술 구현 및 아키텍처 문서
+
+* [[Account Management/Account Management|Project Completion Report: AD External Account Management Tool Enhancement & Security Hardening 🛠️]]
+  - ***Date:** 2026-01-30*
+
 ### 🤖 엣지 AI & 인클러스터 딥러닝 (Edge AI)
 > K3s 클러스터 기반 멀티모달 딥러닝 파이프라인 및 eBPF 방화벽 SOC 관제
 
@@ -62,8 +74,8 @@
   - *Edge AI 텔레그램 멀티모달 번역 및 웹 통합 관리 시스템 가이드*
 * [[Edge_AI/14_ebpf_cilium_ai_firewall_and_telegram_soc|🛡️ 14. eBPF 실리움(Cilium) & 허블(Hubble) + 로컬 AI 지능형 침입 차단 및 텔레그램 관제 시스템]]
   - *Edge AI 엔터프라이즈 인프라 보안 진단, 6대 방화벽 고도화 및 텔레그램 SOC 관제 구축 완료 보고서*
-* [[Edge_AI/[최종 완료 보고서] eBPF 실리움(Cilium) & 허블(Hubble) + 로컬 AI 지능형 침입 차단 시스템 및 텔레그램 관제 구축|🛡️  eBPF 실리움(Cilium) & 허블(Hubble) + 로컬 AI 지능형 침입 차단 시스템 및 텔레그램 관제 구축]]
-  - *본 문서는 요청하신 **운영 OS 및 웹 애플리케이션 보안 현황 진단**, **eBPF 실리움 & 허블 + 로컬 AI 지능형 침입 차단 방화벽 시스템**, **전체 시스템 In/Out 전방위 통신 노선도**, 그리고...*
+* [[Edge_AI/15_ebpf_cilium_hubble_ai_firewall_and_telegram_soc_report|🛡️ 15. eBPF 실리움(Cilium) & 허블(Hubble) + 로컬 AI 지능형 침입 차단 및 텔레그램 관제 종합 구축 최종 완료 보고서]]
+  - *Edge AI 엔터프라이즈 인프라 보안 진단, 6대 방화벽 고도화 및 텔레그램 SOC 관제 구축 결과 종합 보고서*
 * [[Edge_AI/implementation_plan|[구현 계획] 방화벽 고도화 6대 핵심 기능 및 스마트 국가 통제 시스템 구축]]
   - *eBPF 실리움(Cilium) & 허블(Hubble) 및 로컬 AI 기반 침입 차단 시스템에 **제안 6대 핵심 기능**을 전면 구축하고, 관리자의 중요한 질문인 **"차단 국가에서의 정상 접속 허용 여부(오탐 방지...*
 * [[Edge_AI/walkthrough|🛡️  eBPF 실리움(Cilium) & 허블(Hubble) + 로컬 AI 지능형 침입 차단 시스템 및 텔레그램 관제 구축]]
@@ -77,17 +89,11 @@
 * [[Excel_Analyzer/Project_Completion_Report_KR|📊 프로젝트 완료 보고서: Excel Data Task Analyzer]]
   - *IT 지원 및 티켓 데이터 분석/집계 자동화 데스크톱 솔루션 구축 보고서*
 
-### 🔗 랭체인 & LLM 오케스트레이션 (LangChain)
-> Next.js + FastAPI 기반 멀티모달 AI 에이전트 및 고가용성 폴백 아키텍처
+### 📁 LangChain
+> 기술 구현 및 아키텍처 문서
 
-* [[LangCain/PROJECT_REPORT_KR|📘 LangChain AI Agent - 프로젝트 완료 보고서]]
+* [[LangChain/PROJECT_REPORT_KR|📘 LangChain AI Agent - 프로젝트 완료 보고서]]
   - *Next.js & FastAPI 기반 엔터프라이즈 AI 에이전트 및 멀티모달 폴백 시스템 구축 보고서*
-
-### 🧠 자율형 AI 에이전트 (OpenClaw)
-> 일회용 브라우저 샌드박스 및 인간 참여형(HIL) 제로트러스트 에이전트 시스템
-
-* [[Openclaw/openclaw_Test_KR|🤖 OpenClaw: 자율 AI 에이전트 아키텍처 및 제로 트러스트 보안 체계]]
-  - *일회용 브라우저 샌드박스, 보안 가드레일, 인간 참여형(HIL) 승인 체계를 갖춘 보안 중심 자율 에이전트*
 
 ### 📄 보안 유틸리티: PDF 프로 보안 편집기
 > PyMuPDF 기반 개인정보 영구 파기 마스킹 및 한글 텍스트 박스 편집 데스크톱 앱
@@ -119,17 +125,27 @@
 * [[Self-study German/Project_Completion_Report_KR|🇩🇪 프로젝트 완료 보고서: 독일어 학습 웹 애플리케이션]]
   - *글래스모피즘 UI, Web Speech TTS, 인터랙티브 퀴즈를 결합한 어학 학습 플랫폼*
 
+### 📁 openclaw
+> 기술 구현 및 아키텍처 문서
+
+* [[openclaw/AI_Governance_Sandbox|AI Governance & Sandbox Field Notes]]
+  - *Purpose**: Document how an infrastructure-focused engineer can transition into AI-era DevOps by building repeatable guidelines, safe sandboxes, and concrete evaluation logs.*
+* [[openclaw/openclaw_Test_KR|🤖 OpenClaw: 자율 AI 에이전트 아키텍처 및 제로 트러스트 보안 체계]]
+  - *일회용 브라우저 샌드박스, 보안 가드레일, 인간 참여형(HIL) 승인 체계를 갖춘 보안 중심 자율 에이전트*
+
 ---
 
 ## 🗂️ 프로젝트 폴더 안내 (Folder Directory)
 
+- **AI-Governance/** → 기술 문서
+- **Account Management/** → 기술 문서
 - **Edge_AI/** → K3s 클러스터 기반 멀티모달 딥러닝 파이프라인 및 eBPF 방화벽 SOC 관제
 - **Excel_Analyzer/** → ITSM 티켓 데이터 집계, 작업자별 처리 시간 분석 및 반복 장애 추출 도구
-- **LangCain/** → Next.js + FastAPI 기반 멀티모달 AI 에이전트 및 고가용성 폴백 아키텍처
-- **Openclaw/** → 일회용 브라우저 샌드박스 및 인간 참여형(HIL) 제로트러스트 에이전트 시스템
+- **LangChain/** → 기술 문서
 - **PDF_APPS/** → PyMuPDF 기반 개인정보 영구 파기 마스킹 및 한글 텍스트 박스 편집 데스크톱 앱
 - **Personal Website/** → Quartz 디지털 가든 인프라, Grafana & Prometheus 모니터링 시스템 구축
 - **Self-study German/** → 글래스모피즘 UI, Web Speech TTS, 인터랙티브 퀴즈 기반 어학 학습 시스템
+- **openclaw/** → 기술 문서
 
 <br>
 

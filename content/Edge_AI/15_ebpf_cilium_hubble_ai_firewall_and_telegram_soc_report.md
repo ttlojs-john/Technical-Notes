@@ -1,6 +1,31 @@
-# 🛡️ [최종 완료 보고서] eBPF 실리움(Cilium) & 허블(Hubble) + 로컬 AI 지능형 침입 차단 시스템 및 텔레그램 관제 구축
+# 🛡️ 15. eBPF 실리움(Cilium) & 허블(Hubble) + 로컬 AI 지능형 침입 차단 및 텔레그램 관제 종합 구축 최종 완료 보고서
+> **Edge AI 엔터프라이즈 인프라 보안 진단, 6대 방화벽 고도화 및 텔레그램 SOC 관제 구축 결과 종합 보고서**
 
-본 문서는 요청하신 **운영 OS 및 웹 애플리케이션 보안 현황 진단**, **eBPF 실리움 & 허블 + 로컬 AI 지능형 침입 차단 방화벽 시스템**, **전체 시스템 In/Out 전방위 통신 노선도**, 그리고 **텔레그램 지능형 알림 시스템 (일일 리포트, 웹 로그인, SSH 로그인, AI 자동 차단)** 구축 완료 내역과 검증 결과를 총정리한 종합 보안 프로젝트 결과 보고서입니다.
+> [!TIP]
+> 🌐 **Language / 언어 선택**: **[🇰🇷 한국어 (현재 문서)](./15_ebpf_cilium_hubble_ai_firewall_and_telegram_soc_report.md)** | **[🇺🇸 Switch to English (영문 버전으로 전환)](./15_ebpf_cilium_hubble_ai_firewall_and_telegram_soc_report_EN.md)**
+
+---
+
+## 🔗 문서 이동 (Navigation)
+- [01. 시스템 개요](./01_system_overview.md)
+- [02. 전체 시스템 구성도 및 아키텍처](./02_system_architecture.md)
+- [03. 단계별 초기 구축 및 설치 내역](./03_installation_history.md)
+- [04. 설치 이후 추가 기능 및 업그레이드](./04_upgrades_and_evolution.md)
+- [05. 상세 컴포넌트 동작 및 데이터 흐름](./05_detailed_workflows.md)
+- [06. 보안 및 인프라 성능 최적화](./06_security_and_tuning.md)
+- [07. 운영 관리, 검증 테스트 및 배포 가이드](./07_operations_and_deployment.md)
+- [08. K9s AI 엔진 워크로드 모니터링](./08_k9s_ai_engine_and_workload_monitoring.md)
+- [09. MLOps 멀티 엔진 아키텍처 & 벤치마크](./09_mlops_multi_engine_architecture_and_benchmark.md)
+- [10. 스마트 텍스트 청킹 & 메시지 분할기](./10_smart_text_chunking_and_message_splitter.md)
+- [11. 외부 AI (Gemini) 연동 관리](./11_external_ai_gemini_integration_and_admin_console.md)
+- [12. 호스트 방화벽 & 침입 방지 가이드](./12_host_os_firewall_and_intrusion_prevention_guide.md)
+- [13. 하드웨어 스케일업 & 32C/192GB/GPU 최적화](./13_hardware_scaleup_32core_192gb_gpu_optimization.md)
+- [14. eBPF 실리움 & 로컬 AI 방화벽 + 텔레그램 관제](./14_ebpf_cilium_ai_firewall_and_telegram_soc.md)
+- **[15. eBPF 실리움 종합 구축 최종 완료 보고서](./15_ebpf_cilium_hubble_ai_firewall_and_telegram_soc_report.md)**
+
+---
+
+본 문서는 운영 환경에 대한 **OS 및 웹 애플리케이션 보안 현황 진단**, **eBPF 실리움(Cilium) & 허블(Hubble) + 로컬 AI 지능형 침입 차단 방화벽 시스템**, **전체 시스템 In/Out 전방위 통신 노선도**, 그리고 **텔레그램 지능형 알림 시스템 (일일 리포트, 웹 로그인, SSH 로그인, AI 자동 차단)** 구축 완료 내역과 검증 결과를 총정리한 종합 보안 프로젝트 결과 보고서입니다.
 
 ---
 
@@ -40,7 +65,6 @@
 ### 2.1 트래픽 단계별 상세 흐름
 
 ```mermaid
-
 sequenceDiagram
     autonumber
     actor Attacker as "🚨 외부 공격자 / 클라이언트"

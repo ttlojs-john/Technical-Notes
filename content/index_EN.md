@@ -62,6 +62,8 @@
   - *Edge AI Telegram Multimodal Translation and Web Integrated Management System Guide*
 * [[Edge_AI/14_ebpf_cilium_ai_firewall_and_telegram_soc_EN|🛡️ 14. eBPF Cilium & Hubble + Local AI Intelligent Intrusion Prevention & Telegram SOC System]]
   - *Edge AI Enterprise Infrastructure Security Diagnostics, 6 Core Firewall Enhancements, and Telegram SOC Deployment Report*
+* [[Edge_AI/15_ebpf_cilium_hubble_ai_firewall_and_telegram_soc_report_EN|🛡️ 15. eBPF Cilium & Hubble + Local AI Intrusion Detection and Telegram SOC Final Completion Report]]
+  - *Comprehensive Final Report on Edge AI Enterprise Security Assessment, 6 Core Firewall Enhancements, and Telegram SOC Operations*
 
 ### 📊 Automation: Excel Data Task Analyzer
 > Automated ticketing analysis, resolution metrics calculation, and repetitive issue clustering desktop tool.
@@ -69,17 +71,11 @@
 * [[Excel_Analyzer/Project_Completion_Report_EN|📊 Project Completion Report: Excel Data Task Analyzer]]
   - *IT Support & Service Ticket Automated Processing and Analysis Desktop Application*
 
-### 🔗 LangChain & LLM Orchestration
-> Next.js + FastAPI enterprise AI agent integration, multimodal fallback pipelines, and PM2 production operations.
+### 📁 LangChain
+> Technical Documentation
 
-* [[LangCain/PROJECT_REPORT_EN|📘 LangChain AI Agent - Project Completion Report]]
+* [[LangChain/PROJECT_REPORT_EN|📘 LangChain AI Agent - Project Completion Report]]
   - *Next.js & FastAPI Enterprise AI Agent and Multimodal Fallback System Architecture*
-
-### 🧠 Autonomous AI Agents (OpenClaw)
-> Zero-trust autonomous agent ecosystem with disposable browser sandbox and Human-in-the-Loop governance.
-
-* [[Openclaw/openclaw_Test|🤖 OpenClaw: Autonomous AI Agent Architecture & Security Playbook]]
-  - *Security-First Autonomous Agent with Disposable Browser Sandbox, Guardrails, and Human-in-the-Loop Governance*
 
 ### 📄 Security: PDF Pro Redaction Editor
 > PyMuPDF desktop utility performing true structural PII byte-purging and localized text annotations.
@@ -111,17 +107,25 @@
 * [[Self-study German/Project_Completion_Report_EN|🇩🇪 Project Completion Report: German Learning Web Application]]
   - *Language Learning Platform Integrating Glassmorphism UI, Web Speech TTS, and Interactive Quizzes*
 
+### 📁 openclaw
+> Technical Documentation
+
+* [[openclaw/openclaw_Test|🤖 OpenClaw: Autonomous AI Agent Architecture & Security Playbook]]
+  - *Security-First Autonomous Agent with Disposable Browser Sandbox, Guardrails, and Human-in-the-Loop Governance*
+
 ---
 
 ## 🗂️ Workspace Directory Overview
 
+- **AI-Governance/** → Technical Documentation
+- **Account Management/** → Technical Documentation
 - **Edge_AI/** → On-premise K3s cluster running multimodal AI pipelines and eBPF cyber defense.
 - **Excel_Analyzer/** → Automated ticketing analysis, resolution metrics calculation, and repetitive issue clustering desktop tool.
-- **LangCain/** → Next.js + FastAPI enterprise AI agent integration, multimodal fallback pipelines, and PM2 production operations.
-- **Openclaw/** → Zero-trust autonomous agent ecosystem with disposable browser sandbox and Human-in-the-Loop governance.
+- **LangChain/** → Technical Documentation
 - **PDF_APPS/** → PyMuPDF desktop utility performing true structural PII byte-purging and localized text annotations.
 - **Personal Website/** → chaeyul.uk digital garden architecture, Grafana & Prometheus monitoring, and reverse-proxy hardening.
 - **Self-study German/** → Glassmorphism UI language learning application with Web Speech API integration and static hosting.
+- **openclaw/** → Technical Documentation
 
 <br>
 
