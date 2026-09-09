@@ -76,6 +76,8 @@
   - *Edge AI 엔터프라이즈 인프라 보안 진단, 6대 방화벽 고도화 및 텔레그램 SOC 관제 구축 완료 보고서*
 * [[Edge_AI/15_ebpf_cilium_hubble_ai_firewall_and_telegram_soc_report|🛡️ 15. eBPF 실리움(Cilium) & 허블(Hubble) + 로컬 AI 지능형 침입 차단 및 텔레그램 관제 종합 구축 최종 완료 보고서]]
   - *Edge AI 엔터프라이즈 인프라 보안 진단, 6대 방화벽 고도화 및 텔레그램 SOC 관제 구축 결과 종합 보고서*
+* [[Edge_AI/16_admin_console_mfa_google_otp_authentication|🔐 16. 관리자 웹 콘솔 Google OTP (MFA) 2단계 인증 구축 및 운영 가이드]]
+  - *엔터프라이즈 제로 트러스트 보안을 위한 표준 RFC 6238 TOTP 기반 2단계 다중 인증(MFA) 아키텍처 및 관리자 운영 가이드*
 * [[Edge_AI/implementation_plan|[구현 계획] 방화벽 고도화 6대 핵심 기능 및 스마트 국가 통제 시스템 구축]]
   - *eBPF 실리움(Cilium) & 허블(Hubble) 및 로컬 AI 기반 침입 차단 시스템에 **제안 6대 핵심 기능**을 전면 구축하고, 관리자의 중요한 질문인 **"차단 국가에서의 정상 접속 허용 여부(오탐 방지...*
 * [[Edge_AI/walkthrough|🛡️  eBPF 실리움(Cilium) & 허블(Hubble) + 로컬 AI 지능형 침입 차단 시스템 및 텔레그램 관제 구축]]

@@ -22,6 +22,7 @@
 - [13. Hardware Scale-Up (32C/192GB/GPU)](./13_hardware_scaleup_32core_192gb_gpu_optimization_EN.md)
 - [14. eBPF Cilium & AI Firewall + Telegram SOC](./14_ebpf_cilium_ai_firewall_and_telegram_soc_EN.md)
 - **[15. eBPF Cilium Final Completion Report](./15_ebpf_cilium_hubble_ai_firewall_and_telegram_soc_report_EN.md)**
+- [16. Admin Web Console Google OTP (MFA) Authentication](./16_admin_console_mfa_google_otp_authentication_EN.md)
 
 ---
 

@@ -64,6 +64,8 @@
   - *Edge AI Enterprise Infrastructure Security Diagnostics, 6 Core Firewall Enhancements, and Telegram SOC Deployment Report*
 * [[Edge_AI/15_ebpf_cilium_hubble_ai_firewall_and_telegram_soc_report_EN|🛡️ 15. eBPF Cilium & Hubble + Local AI Intrusion Detection and Telegram SOC Final Completion Report]]
   - *Comprehensive Final Report on Edge AI Enterprise Security Assessment, 6 Core Firewall Enhancements, and Telegram SOC Operations*
+* [[Edge_AI/16_admin_console_mfa_google_otp_authentication_EN|🔐 16. Admin Web Console Google Authenticator (MFA) Two-Factor Authentication Guide]]
+  - *Enterprise Zero-Trust Security Architecture and Operational Guide for RFC 6238 Standard TOTP Multi-Factor Authentication (MFA)*
 
 ### 📊 Automation: Excel Data Task Analyzer
 > Automated ticketing analysis, resolution metrics calculation, and repetitive issue clustering desktop tool.
