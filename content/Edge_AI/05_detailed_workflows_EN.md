@@ -1,7 +1,8 @@
 # ⚙️ 05. Detailed Component Workflows & Data Flow Diagrams
 > **Edge AI Telegram Multimodal Translation and Web Integrated Management System Guide**
 
-> 🌐 **Language / 언어 전환**: [English](./05_detailed_workflows_EN.md) | [한국어](./05_detailed_workflows.md)
+> [!TIP]
+> 🌐 **Language Selector**: **[🇰🇷 한국어 버전으로 전환 (Switch to Korean)](./05_detailed_workflows.md)** | **[🇺🇸 English (Current Document)](./05_detailed_workflows_EN.md)**
 
 ---
 
@@ -11,8 +12,14 @@
 - [03. Installation History](./03_installation_history_EN.md)
 - [04. Upgrades & Evolution](./04_upgrades_and_evolution_EN.md)
 - **[05. Detailed Workflows](./05_detailed_workflows_EN.md)**
-- [06. Security & Infrastructure Tuning](./06_security_and_tuning_EN.md)
-- [07. Operations & Deployment Guide](./07_operations_and_deployment_EN.md)
+- [06. Security & Tuning](./06_security_and_tuning_EN.md)
+- [07. Operations & Deployment](./07_operations_and_deployment_EN.md)
+- [08. K9s AI Engine Monitoring](./08_k9s_ai_engine_and_workload_monitoring_EN.md)
+- [09. MLOps Multi-Engine Benchmark](./09_mlops_multi_engine_architecture_and_benchmark_EN.md)
+- [10. Smart Text Chunking & Splitter](./10_smart_text_chunking_and_message_splitter_EN.md)
+- [11. External AI (Gemini) Integration](./11_external_ai_gemini_integration_and_admin_console_EN.md)
+- [12. Host OS Firewall & IPS](./12_host_os_firewall_and_intrusion_prevention_guide_EN.md)
+- [13. Hardware Scale-Up (32C/192GB/GPU)](./13_hardware_scaleup_32core_192gb_gpu_optimization_EN.md)
 - [14. eBPF Cilium & AI Firewall + Telegram SOC](./14_ebpf_cilium_ai_firewall_and_telegram_soc_EN.md)
 
 ---
@@ -22,13 +29,14 @@
 User payloads delivered through the messaging gateway route dynamically based on mime-type into modular processing pipelines within `edge-ai-engine`:
 
 ```mermaid
+
 sequenceDiagram
     autonumber
-    actor User as 📱 Telegram User
-    participant Bot as 🤖 telegram-bot Pod
-    participant Engine as 🧠 edge-ai-engine Pod
-    participant Storage as 💾 Shared Storage (hostPath)
-    participant Cloud as ☁️ OpenAI (GPT-4o-mini)
+    actor User as "📱 Telegram User"
+    participant Bot as "🤖 telegram-bot Pod"
+    participant Engine as "🧠 edge-ai-engine Pod"
+    participant Storage as "💾 Shared Storage (hostPath)"
+    participant Cloud as "☁️ OpenAI (GPT-4o-mini)"
 
     User->>Bot: Dispatches Text / Image / Audio
     Bot->>Bot: Evaluate User Session & Mode (RapidOCR vs VLM)
@@ -74,6 +82,7 @@ sequenceDiagram
 Controls and metrics collected by the web admin backend traverse in-cluster RBAC boundaries to interact directly with the Kubernetes API server:
 
 ```mermaid
+
 flowchart TD
     subgraph Browser ["💻 Web Admin Dashboard GUI"]
         UI_K9s["☸️ K9s Cluster Tab"]
@@ -102,11 +111,11 @@ flowchart TD
         Pod_Dash["📊 Pod: web-dashboard-xxxx"]
     end
 
-    UI_K9s -->|GET /api/v1/k8s/pods| K8sClient
-    UI_Logs -->|GET /api/v1/k8s/pods/{name}/logs| K8sClient
-    UI_Action -->|POST /api/v1/k8s/pods/{name}/restart| K8sClient
-    UI_Glossary <-->|GET / POST / DELETE /api/v1/glossary| GlossaryMgr
-    UI_Tokens -->|GET /api/v1/tokens/audit| TokenViewer
+    UI_K9s -->|"GET /api/v1/k8s/pods"| K8sClient
+    UI_Logs -->|"GET /api/v1/k8s/pods/{name}/logs"| K8sClient
+    UI_Action -->|"POST /api/v1/k8s/pods/{name}/restart"| K8sClient
+    UI_Glossary <-->|"GET / POST / DELETE /api/v1/glossary"| GlossaryMgr
+    UI_Tokens -->|"GET /api/v1/tokens/audit"| TokenViewer
 
     K8sClient --- SA
     SA --- CRB
@@ -125,6 +134,7 @@ flowchart TD
 Eliminates race conditions between multi-replica inference pods:
 
 ```mermaid
+
 flowchart LR
     subgraph Pods ["Edge AI Engine Multi-Pods (replicas: 2)"]
         Pod1["Pod 1<br/>(API Worker 1)"]
@@ -140,8 +150,8 @@ flowchart LR
         DGUI["🪙 Token Audit Tab"]
     end
 
-    Pod1 -->|1. File Lock / Append| File
-    Pod2 -->|1. File Lock / Append| File
+    Pod1 -->|"1. File Lock / Append"| File
+    Pod2 -->|"1. File Lock / Append"| File
     File -.->|2. Real-time Read| DBB
     DBB -.->|3. Render Charts & Logs| DGUI
 ```

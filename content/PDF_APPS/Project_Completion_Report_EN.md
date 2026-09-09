@@ -1,34 +1,95 @@
-# 📄 Project Completion Report (PDF Pro Editor)
+# 📄 Project Completion Report: PDF Pro Security Editor
+> **Desktop Utility for Permanent PII Redaction, Text Injection, and Secure PDF Manipulation**
 
-> 🇰🇷 [한국어 버전](./Project_Completion_Report_KR)
+> [!TIP]
+> 🌐 **Language Selector**: **[🇰🇷 한국어 버전으로 전환 (Switch to Korean)](./Project_Completion_Report_KR.md)** | **[🇺🇸 English (Current Document)](./Project_Completion_Report_EN.md)**
 
-### 1. Project Overview
-This project aimed to develop a **Desktop Application (PDF Pro Editor)** that empowers users to securely edit PDF documents containing sensitive information. It goes beyond simple visual overlays by providing true 'Secure Masking' (redaction) which permanently deletes text from the data structure, alongside a custom 'Text Box' tool, maximizing both privacy protection and workflow efficiency. Daily updates and task logs have been heavily focused on troubleshooting these core features.
+---
 
-### 2. Architecture
-* **Frontend (UI Context):** Built with `Python Tkinter` and `ttk` to deliver a cohesive, native Windows GUI. A robust Canvas widget handles PDF view rendering, dynamic zoom scaling, scroll integration, and mouse drag coordinate tracking.
-* **Backend (PDF Engine):** Driven by the fast and reliable `PyMuPDF (fitz)` library. It handles everything from PDF pixmap generation to page manipulation (insert/delete) and the application of redaction annotations.
-* **Image Processing:** Leveraged the `Pillow (PIL)` library to bridge PyMuPDF and Tkinter, converting raw pixel data (Pixmaps) into `ImageTk` objects compatible with the Canvas.
+## 🔗 Navigation
+- [PDF 프로 편집기 완료 보고서 (KR)](./Project_Completion_Report_KR.md)
+- **[PDF Pro Editor Completion Report (EN)](./Project_Completion_Report_EN.md)**
 
-### 3. AI Utilization Strategy
-* **Intelligent Code Assistant:** Generative AI was utilized for rapid prototyping, especially when designing the complex coordinate mapping matrix and dynamic zoom behaviors within the Tkinter Canvas.
-* **API Troubleshooting:** Used AI pair-programming to quickly dissect PyMuPDF documentation, discovering and implementing the optimal method for permanent text deletion (`add_redact_annot` paired with `apply_redactions`).
+---
 
-### 4. Troubleshooting & Technical Decisions
-#### Daily Tasks and Key Issue Resolutions
-* **Issue 1: Security Risk with Masked Text**
-  * **Context:** Initially, masking simply drew a colored rectangle over the text. However, the underlying text could still be highlighted, copied, and leaked.
-  * **Decision/Fix:** Refactored the masking mode to use standard PDF redaction methods. By calling `add_redact_annot()` followed immediately by `apply_redactions()` on save, the text is not just hidden—it is physically purged from the document structure, ensuring absolute security.
-* **Issue 2: Coordinate Misalignment on Zoom**
-  * **Context:** Zooming in or out caused the user's mouse drag box to scale incorrectly when applied to the actual PDF layer.
-  * **Decision/Fix:** Introduced dynamic scaling factors (`img_scale_x`, `img_scale_y`) that calculate the ratio between the actual PDF bounds and the rendered pixel dimensions. This maps canvas UI coordinates to raw PDF point coordinates perfectly.
-* **Issue 3: Korean Font Corruption in PDFs**
-  * **Context:** Text added via the Text Box tool rendered English fine, but Korean characters appeared corrupted upon saving.
-  * **Decision/Fix:** Implemented a system check for the local Windows font `malgun.ttf` (Malgun Gothic) and explicitly passed its path to the `insert_textbox()` function (`fontname="malgun"`). This completely resolved all CJK encoding and rendering errors.
+## 1. Project Overview
 
-### 5. Deployment & Future Tasks
-* **Deployment:** Currently functions as a standalone Python script (`PDF_APPS_1.py`). For final deployment, the application will be bundled into a portable executable (.exe) using `PyInstaller`, requiring no local Python installation for end-users.
-* **Future Works:**
-  * **Advanced State Management:** Adding 'Redo' functionality to complement the existing 'Undo' feature.
-  * **Multi-Tab Interface:** Allowing users to open and edit multiple PDF files simultaneously in tabbed views.
-  * **Auto-Redaction (AI Enhancement):** Implementing RegEx/AI-based text scanning to automatically detect and suggest redactions for PII (Personally Identifiable Information) like Social Security Numbers and phone numbers.
+This project engineered a lightweight, secure **desktop application (PDF Pro Editor)** empowering users to redact sensitive personally identifiable information (PII) and insert localized text boxes into PDF documents.
+
+Unlike primitive cosmetic masking tools that merely overlay black rectangles over text, this solution enforces **true structural redaction** by purging underlying character stream bytes within the PDF DOM structure, guaranteeing zero possibility of data extraction or copy-paste leaks.
+
+---
+
+## 2. System Architecture
+
+```mermaid
+
+graph TD
+    User([👤 Operator / Document Editor])
+
+    subgraph DesktopApp ["PDF Pro Editor (Desktop Native)"]
+        subgraph UI_Layer ["GUI Frontend (Tkinter & Canvas)"]
+            Canvas["🎨 Interactive Canvas<br/>(Zoom, Pan, Mouse Drag BBox)"]
+            Toolbar["🛠️ Action Toolbar<br/>(Redact, Text, Zoom, Page Nav)"]
+        end
+
+        subgraph Engine_Layer ["Core Processing Pipeline"]
+            CoordMapper["📐 Coordinate Transform<br/>(Canvas Screen Pix ➔ PDF Points)"]
+            FontEngine["🔤 Font Engine<br/>(Malgun Gothic TTF Resolver)"]
+            PDFBackend["📑 PyMuPDF (fitz) Core Engine<br/>• Pixmap Rendering (ImageTk)<br/>• add_redact_annot & apply_redactions<br/>• insert_textbox"]
+        end
+    end
+
+    SourcePDF[("📄 Source Raw PDF")]
+    ExportPDF[("🔒 Sanitized Secure PDF")]
+
+    User <-->|"Mouse / Keyboard Events"| Toolbar
+    User <-->|"Drag BBox & Annotate"| Canvas
+    Canvas --> CoordMapper
+    CoordMapper --> PDFBackend
+    Toolbar --> PDFBackend
+    FontEngine --> PDFBackend
+    SourcePDF --> PDFBackend
+    PDFBackend --> Canvas
+    PDFBackend --> ExportPDF
+```
+
+| Layer | Technology | Responsibilities & Architectural Profile |
+| :--- | :--- | :--- |
+| **Desktop GUI** | Python Tkinter & ttk | Lightweight native desktop shell with low memory footprint and fluid zoom/pan |
+| **PDF Core Backend** | `PyMuPDF (fitz)` | High-throughput page rendering to Pixmap, true cryptographic redaction, and font synthesis |
+| **Image Bridge** | `Pillow (PIL)` | Real-time byte buffer transformation from fitz Pixmaps into Tkinter-compatible images |
+| **Typography Resolver** | System TTF Engine | Enforces system font bindings (`malgun.ttf`) preventing Korean character corruption |
+
+---
+
+## 3. AI-Assisted Engineering
+
+* **2D Canvas to PDF Point Transformation**: Generative AI co-pilot accelerated the formulation of dynamic scaling matrices (`img_scale_x`, `img_scale_y`) that map screen pixel drag events accurately back to native PDF vector points across zoom ratios.
+* **Cryptographic Redaction Mechanics**: Clarified structural behavioral nuances between superficial annotation layers and destructive byte purging routines (`add_redact_annot` followed by mandatory `apply_redactions`).
+
+---
+
+## 4. Key Troubleshooting & Technical Decisions
+
+### 🚨 Issue 1: Superficial Masking Vulnerability
+* **Incident**: Early prototypes only painted black rectangles over target regions, allowing users to highlight and copy the underlying sensitive text.
+* **Remediation**: Transitioned to PyMuPDF's low-level `apply_redactions()` pipeline, permanently excising underlying font vectors from the binary stream.
+
+### 🚨 Issue 2: Coordinate Drift Under Zoom Scaling
+* **Incident**: Modifying canvas zoom ratios caused redaction bounding boxes to shift offset from the intended text.
+* **Remediation**: Implemented dynamic dimensional ratio scaling, multiplying screen coordinates by reciprocal zoom factors prior to committing annotations.
+
+### 🚨 Issue 3: CJK Character Encoding Corruption (Mojibake)
+* **Incident**: Text box injections corrupted Korean characters into replacement question marks.
+* **Remediation**: Dynamically resolved system font paths (`malgun.ttf`) and injected explicit `fontname="malgun"` properties into the text writer.
+
+---
+
+## 5. Deployment & Future Roadmap
+
+* **Packaging**: Standalone zero-dependency executable (`.exe`) compiled via `PyInstaller`.
+* **Upcoming Scope**:
+  1. Multi-tier Undo/Redo historical event stack.
+  2. Tabbed workspace for concurrent document comparison.
+  3. AI-driven automated PII entity recognition (detecting social security numbers, credit cards, and addresses).

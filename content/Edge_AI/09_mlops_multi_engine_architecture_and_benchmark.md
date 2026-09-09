@@ -1,7 +1,8 @@
 # 🚀 09. MLOps 파이프라인 및 멀티 AI 엔진 도입 아키텍처 & 성능 벤치마크 (MLOps Multi-Engine Architecture & Benchmark)
 > **Edge AI 텔레그램 멀티모달 번역 및 웹 통합 관리 시스템 가이드**
 
-> 🌐 **Language / 언어 전환**: [English](./09_mlops_multi_engine_architecture_and_benchmark_EN.md) | [한국어](./09_mlops_multi_engine_architecture_and_benchmark.md)
+> [!TIP]
+> 🌐 **Language / 언어 선택**: **[🇰🇷 한국어 (현재 문서)](./09_mlops_multi_engine_architecture_and_benchmark.md)** | **[🇺🇸 Switch to English (영문 버전으로 전환)](./09_mlops_multi_engine_architecture_and_benchmark_EN.md)**
 
 ---
 
@@ -14,8 +15,11 @@
 - [06. 보안 및 인프라 성능 최적화](./06_security_and_tuning.md)
 - [07. 운영 관리, 검증 테스트 및 배포 가이드](./07_operations_and_deployment.md)
 - [08. K9s AI 엔진 워크로드 모니터링](./08_k9s_ai_engine_and_workload_monitoring.md)
-- **[09. MLOps 파이프라인 및 멀티 AI 엔진 도입 아키텍처 & 성능 벤치마크](./09_mlops_multi_engine_architecture_and_benchmark.md)**
+- **[09. MLOps 멀티 엔진 아키텍처 & 벤치마크](./09_mlops_multi_engine_architecture_and_benchmark.md)**
 - [10. 스마트 텍스트 청킹 & 메시지 분할기](./10_smart_text_chunking_and_message_splitter.md)
+- [11. 외부 AI (Gemini) 연동 관리](./11_external_ai_gemini_integration_and_admin_console.md)
+- [12. 호스트 방화벽 & 침입 방지 가이드](./12_host_os_firewall_and_intrusion_prevention_guide.md)
+- [13. 하드웨어 스케일업 & 32C/192GB/GPU 최적화](./13_hardware_scaleup_32core_192gb_gpu_optimization.md)
 - [14. eBPF 실리움 & 로컬 AI 방화벽 + 텔레그램 관제](./14_ebpf_cilium_ai_firewall_and_telegram_soc.md)
 
 ---
@@ -26,7 +30,7 @@
 
 이를 해결하기 위해 **K3s 쿠버네티스 기반 경량 MLOps 오케스트레이션 및 독립 멀티 AI 엔진 파이프라인**을 구축하여 작업별 격리, 비동기 큐잉, 독립 오토스케일링을 실현합니다.
 
-![MLOps Multi-Engine Architecture & Performance Dashboard](./images/mlops_performance_comparison.jpg)
+![MLOps Multi-Engine Architecture & Performance Dashboard](/images/mlops_performance_comparison.jpg)
 
 ---
 
@@ -39,8 +43,8 @@
 
 ```mermaid
 flowchart LR
-    Client[Telegram Bot] --> SinglePod[edge-ai-engine Pod<br/>(OCR + NMT + TTS + VLM 통합)]
-    SinglePod --> Out[동기식 순차 응답]
+    Client["Telegram Bot"] --> SinglePod["edge-ai-engine Pod<br/>(OCR + NMT + TTS + VLM 통합)"]
+    SinglePod --> Out["동기식 순차 응답"]
 ```
 
 ---
@@ -51,6 +55,7 @@ flowchart LR
 - **Fault Isolation & Independent Scaling**: OCR 파드만 부하에 따라 Scale 1 ➔ Scale 3으로 독립 확장.
 
 ```mermaid
+
 flowchart TD
     subgraph Client ["Client Interface"]
         TB[Telegram Bot Pod]
@@ -59,19 +64,19 @@ flowchart TD
 
     subgraph MLOps_Core ["MLOps Orchestrator"]
         DISPATCH[AI Task Dispatcher]
-        QUEUE[(Async Task Queue / Redis)]
+        QUEUE["(Async Task Queue / Redis)"]
     end
 
     subgraph Dedicated_Engines ["Dedicated Micro-AI Pods (Independent Scaling)"]
-        OCR[⚡ OCR Pod: RapidOCR / ONNX]
-        NMT[⚡ NMT Pod: CTranslate2 INT8]
-        VLM[⚡ VLM Pod: Vision-Language]
-        TTS[⚡ TTS Pod: Neural Synthesizer]
+        OCR["⚡ OCR Pod: RapidOCR / ONNX"]
+        NMT["⚡ NMT Pod: CTranslate2 INT8"]
+        VLM["⚡ VLM Pod: Vision-Language"]
+        TTS["⚡ TTS Pod: Neural Synthesizer"]
     end
 
     subgraph Storage ["Model Registry & Storage"]
-        REGISTRY[(Shared Model Storage)]
-        PG[(PostgreSQL State / Audit)]
+        REGISTRY["(Shared Model Storage)"]
+        PG["(PostgreSQL State / Audit)"]
     end
 
     TB --> DISPATCH
@@ -181,7 +186,7 @@ MLOps 파이프라인 및 멀티 AI 엔진 마이크로서비스(MSA)로 전환�
 
 운영 서버의 총 **64GB 고용량 메모리**를 바탕으로, 클러스터의 모든 파드 CPU/RAM 사용량을 실시간으로 감시하고 MLOps 파이프라인의 핵심 파라미터를 웹에서 동적으로 제어할 수 있도록 구현되었습니다.
 
-![MLOps & 64GB Resource Control Console](./images/dashboard_mlops_config.jpg)
+![MLOps & 64GB Resource Control Console](/images/dashboard_mlops_config.jpg)
 
 ### 6.1 64GB 메모리 풀(Pool) 파드별 정밀 분배 설계
 

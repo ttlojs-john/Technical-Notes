@@ -1,112 +1,133 @@
-# OpenClaw Architecture (Updated 2026.02.18)
+# 🤖 OpenClaw: Autonomous AI Agent Architecture & Security Playbook
+> **Security-First Autonomous Agent with Disposable Browser Sandbox, Guardrails, and Human-in-the-Loop Governance**
 
-## 📌 Project Overview
-**OpenClaw** is a secure AI agent designed for high-stakes environments.
-Unlike typical AI wrappers, it prioritizes **security, isolation, and observability**.
-This system now includes a **Disposable Browser Sandbox**, **Code Execution Environment**, and **Human-in-the-Loop Approval**.
-
-## 🏗️ Core Components
-
-### 1. `guardrails-proxy` (Security Gateway)
-*   **Role**: Handles ALL communication with external LLMs (OpenAI, Gemini).
-*   **Security Features**:
-    *   **PII Filtering**: Masks emails, phones, and API keys.
-    *   **Command Blocking**: Rejects dangerous commands (`rm -rf`, `sudo`).
-    *   **Flexible Policy**: "Filter-first" approach. If injection is detected, it sanitizes input, **Tags** the trace as `security_threat` in, scores it 0.0 in Langfuse, and triggers an alert.
-*   **Observability**: Integrated with Langfuse for full trace logging and threat tagging.
-
-### 2. `openclaw-agent` (Brain & Code Sandbox)
-*   **Role**: Autonomous problem solver.
-*   **Capabilities**:
-    *   **Code Execution Sandbox**: Runs Python code in a restricted `/app/workspace` volume for data analysis and file generation (PDF, Charts).
-    *   **Autonomy**: Can plan multi-step tasks (Search -> Code -> Python -> File).
-    *   **Tool Usage**: Emits `TOOL:PYTHON`, `TOOL:BROWSE` protocols.
-
-### 3. `telegram-gateway` (Interfaces & Controller)
-*   **Role**: The bridge between the user and the secure agent.
-*   **Functionality**:
-    *   **HTML Sanitizer**: Uses `readability` + `html2text` to strip malicious JS/Tags from web content *before* LLM processing.
-    *   **Human-in-the-Loop (HIL)**: Intercepts dangerous tools (EMAIL, DELETE) and requires User Approval via Telegram Buttons (Approve/Deny).
-    *   **File Delivery**: Automatically detects generated files in workspace and sends them to the user.
-
-### 4. `browser-sandbox` (Disposable Browser)
-*   **Role**: Dockerized Chrome/Browserless instance.
-*   **Functionality**:
-    *   **Isolation**: Executes all web navigation. Malicious sites cannot touch the Host or Agent container.
-    *   **Disposable**: Sessions are ephemeral.
-
-### 5. `openclaw-db` & `langfuse-server` (Observability)
-*   **Role**: Self-hosted trace storage and analytics dashboard.
-
-## 🔄 Data Flow (Example: "Analyze & Report")
-
-1.  **User (Telegram)**: *"Analyze Samsung Stock and enable email alerts."*
-2.  **Gateway**:
-    *   Sanitizes input.
-    *   Forwards to **Agent**.
-3.  **Agent**: Decides to use Python.
-    *   Emits `TOOL:PYTHON:<code>`.
-4.  **Agent (Sandbox)**: Executes code, generates `report.pdf`.
-5.  **Agent**: Decides to send email.
-    *   Emits `TOOL:EMAIL:me@example.com`.
-6.  **Gateway (HIL)**:
-    *   ⚠️ **PAUSE**: Detects sensitive tool `EMAIL`.
-    *   Sends **[Approve] / [Deny]** buttons to User.
-7.  **User**: Clicks **[Approve]**.
-8.  **Gateway**: Executes email, sends `report.pdf` to Telegram, and resumes Agent loop.
-
-## 🔒 Security Principles
-*   **Zero-Trust**: Agent assumes all external input is untrusted (`<<<EXTERNAL_DATA>>>`).
-*   **Input Sanitization**: Raw HTML is never fed to LLM; only sanitized Markdown.
-*   **Threat Tagging**: Injections are tagged in Langfuse (`security_threat`) for immediate auditing.
-*   **Isolation**:
-    *   Browsing -> `browser-sandbox` container.
-    *   Code -> `openclaw-agent` workspace volume.
-
-## 🚀 Deployment
-Use `docker-compose up --build -d` to launch the full stack.
-Configure via `.env` file (see `.env.example`).
-
-## 6. Automation & Scheduling (New)
-The system now supports persistent, recurring tasks via the `telegram-gateway`.
-
-### Architecture
-- **JobQueue**: Integrated into the Telegram Bot (via `python-telegram-bot`). It manages schedule persistence (in-memory or file-based).
-- **TOOL:SCHEDULE**: The agent uses this tool to register a new job in the `JobQueue`.
-- **Execution Flow**:
-  1. User asks: "Remind me daily at 9am".
-  2. Agent calls: `TOOL:SCHEDULE:09:00:Remind User`.
-  3. Gateway registers job.
-  4. At 09:00, Gateway triggers `process_agent_task` with the stored instruction.
-
-### Data Flow (Scheduled)
-`Timer (09:00)` -> `Gateway JobQueue` -> `Agent API` -> `Tool Execution` -> `Gateway` -> `User`
+> [!TIP]
+> 🌐 **Language Selector**: **[🇰🇷 한국어 버전으로 전환 (Switch to Korean)](./openclaw_Test_KR.md)** | **[🇺🇸 English (Current Document)](./openclaw_Test.md)**
 
 ---
 
-## 📜 Architecture Evolution Log
+## 🔗 Navigation
+- **[OpenClaw Architecture & Security (EN)](./openclaw_Test.md)**
+- [OpenClaw 아키텍처 및 보안 체계 (KR)](./openclaw_Test_KR.md)
 
-- **2026-02-09**: Initial Deploy (Gemini/GPT-4).
-- **2026-02-14**: "Vibe Coding" Refactor & Langfuse Observability.
-- **2026-02-18**: Security Hardening (Sandbox, Guardrails Filter) & **Scheduler Integration**.
-*   **Added**: `browser-sandbox` (Disposable Browserless/Chrome) for isolated web browsing.
-*   **Added**: Code Execution Sandbox in `openclaw-agent` (runs Python in `/app/workspace`).
-*   **Enhanced**: `telegram-gateway` with HTML Sanitizer (Readability+html2text) and HIL Approval Buttons.
-*   **Modified**: `guardrails-proxy` policy to "Filter & Tag" strategy with Langfuse Alerting.
+---
 
-### [2026-02-17] Telegram Integration Release (v1.0)
-*   **Added**: `telegram-gateway` service.
-    *   Features: Re-Act Loop, JobQueue (Daily Briefing), User Message History.
-*   **Added**: `openclaw-agent` Tool Protocol (`TOOL:WEATHER`, `TOOL:SEARCH`).
-*   **Removed**: Direct User Frontend (Shifted entirely to Telegram Bot).
+## 📌 Project Overview
+**OpenClaw** is a secure AI agent platform architected for high-stakes operational environments.
+Unlike naive LLM wrappers, it enforces strict **zero-trust isolation, continuous observability, and multi-tier approval gates**.
+The architecture integrates a **Disposable Browser Sandbox**, an **Isolated Code Execution Volume**, and **Human-in-the-Loop (HIL) Telegram authorization**.
 
-### [2026-02-16] Observability Integration
-*   **Fixed**: `langfuse-server` & `db` container connectivity and schema migration.
-*   **Modified**: `guardrails-proxy` to inject Langfuse Traces for every LLM call.
+---
 
-### [2026-02-09] GPT-4 Integration
-*   **Modified**: Backend configuration to support GPT-4 API calls.
+## 🏗️ System Architecture Blueprint
 
-### [2026-02-08] Initial Deployment (Legacy)
-*   **Created**: Basic FastAPI Backend + React Frontend (Now deprecated).
-*   **Created**: Docker Compose baseline.
+```mermaid
+
+graph TD
+    User([📱 Telegram Admin User])
+
+    subgraph TelegramGateway ["Telegram Gateway & Controller"]
+        BotHandler["Telegram Event Gateway"]
+        HTMLSanitizer["HTML Sanitizer<br/>(readability + html2text)"]
+        HILGuard["⚠️ HIL Approval Gate<br/>(Approve / Deny Buttons)"]
+    end
+
+    subgraph Guardrails ["Security & Governance Proxy"]
+        PIIFilter["PII & Key Redactor<br/>(Masks Email/Phone/Keys)"]
+        CommandFilter["Dangerous Command Rejector<br/>(Blocks `rm -rf`, `sudo`)"]
+        ThreatScorer["Langfuse Threat Tagger<br/>(Score 0.0 on Injection)"]
+    end
+
+    subgraph AgentSandbox ["OpenClaw Agent Core"]
+        Brain["🧠 Agent Planner & ReAct Loop"]
+        CodeVol["📦 /app/workspace<br/>(Restricted Python Execution)"]
+    end
+
+    subgraph DisposableBrowser ["Disposable Browser Sandbox"]
+        HeadlessChrome["🌐 Ephemeral Browserless Chrome<br/>(Isolated Container)"]
+    end
+
+    subgraph ExternalLLM ["External Cloud LLMs"]
+        LLMs["OpenAI / Anthropic / Gemini"]
+    end
+
+    subgraph Observability ["Telemetry & Logging"]
+        LangfuseDB[("📊 Langfuse Tracing DB")]
+    end
+
+    User <-->|"Commands & Inline Buttons"| BotHandler
+    BotHandler --> HTMLSanitizer
+    HTMLSanitizer --> Brain
+    Brain --> Guardrails
+    Guardrails --> LLMs
+    Guardrails -.-> LangfuseDB
+
+    Brain -->|"TOOL:PYTHON"| CodeVol
+    Brain -->|"TOOL:BROWSE"| HeadlessChrome
+    Brain -->|"TOOL:SENSITIVE (e.g. EMAIL)"| HILGuard
+
+    HILGuard -->|"Send Approval Modal"| User
+```
+
+---
+
+## 🧩 Core Architectural Components
+
+### 1. `guardrails-proxy` (Security Gateway)
+* **Role**: Mediates ALL inbound and outbound communications with external LLM APIs (OpenAI, Gemini, Anthropic).
+* **Security Guardrails**:
+  * **PII Redaction**: Strips emails, phone numbers, and enterprise API keys prior to external transmission.
+  * **Command Whitelisting**: Strictly rejects dangerous shell patterns (`rm -rf`, `sudo`, `dd`).
+  * **Zero-Trust Filtering**: Sanitizes prompt injection payloads, flags traces as `security_threat` with `0.0` safety scores, and triggers real-time alerts.
+* **Observability**: Direct telemetry ingestion into Langfuse for end-to-end token and audit traceability.
+
+### 2. `openclaw-agent` (Autonomous Brain & Sandbox)
+* **Role**: Autonomous reasoning engine and task solver.
+* **Capabilities**:
+  * **Execution Sandbox**: Executes Python pipelines inside an ephemeral `/app/workspace` mount for data processing and PDF/chart generation.
+  * **ReAct Planner**: Formulates multi-step execution plans (`Search` ➔ `Code` ➔ `Python` ➔ `Artifact Deliver`).
+
+### 3. `telegram-gateway` (Human-in-the-Loop Controller)
+* **Role**: The operational interface connecting administrators to the autonomous agent.
+* **Functionality**:
+  * **HTML Pre-Sanitizer**: Uses `readability` + `html2text` to strip malicious JavaScript and hidden tags from untrusted web scrapes before passing them to the LLM.
+  * **Human-in-the-Loop (HIL)**: Automatically pauses execution when high-risk actions (`EMAIL`, `DELETE`, `DB_WRITE`) are requested, requiring explicit admin button confirmation.
+
+### 4. `browser-sandbox` (Disposable Containerized Browser)
+* **Role**: Isolated headless Chromium/Browserless instance.
+* **Security Profile**: Ephemeral browser sessions run in zero-permission Docker containers. Malicious web payloads cannot touch the host server or agent workspace.
+
+---
+
+## 🔄 End-to-End Workflow: "Analyze & Report"
+
+```mermaid
+
+sequenceDiagram
+    autonumber
+    actor User as "📱 Telegram User"
+    participant Gateway as "🚪 Telegram Gateway"
+    participant Agent as "🧠 OpenClaw Agent"
+    participant Sandbox as "📦 Python Sandbox"
+    participant HIL as "⚠️ HIL Gate"
+    participant Browser as "🌐 Browser Sandbox"
+
+    User->>Gateway: "Analyze Samsung Stock & Email Summary Report"
+    Gateway->>Gateway: Sanitize Input & Check Session
+    Gateway->>Agent: Forward Cleaned Intent
+    Agent->>Browser: TOOL:BROWSE (Fetch Financial Telemetry)
+    Browser-->>Agent: Raw DOM ➔ Sanitized Markdown
+    Agent->>Sandbox: TOOL:PYTHON (Compute Stats & Generate report.pdf)
+    Sandbox-->>Agent: Output file saved to /app/workspace
+    Agent->>HIL: TOOL:EMAIL:exec@domain.com
+    HIL-->>User: ⚠️ Sensitive Action: Approve Email Dispatch? [Approve] [Deny]
+    User->>HIL: Clicks [Approve]
+    HIL->>Agent: Resume Execution Loop
+    Agent->>User: 📧 Email Sent & 📄 report.pdf Delivered to Chat
+```
+
+---
+
+## 🔒 Security Principles
+1. **Zero-Trust External Ingestion**: All external web data is tagged with `<<<EXTERNAL_DATA>>>` delimiters and stripped of raw executable tags.
+2. **Deterministic Permissions**: Agents cannot self-authorize irreversible side-effects without explicit administrator sign-off.

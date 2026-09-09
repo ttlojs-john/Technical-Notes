@@ -1,8 +1,16 @@
-# Project Completion Report: German Learning Web Application
+# 🇩🇪 Project Completion Report: German Learning Web Application
+> **Language Learning Platform Integrating Glassmorphism UI, Web Speech TTS, and Interactive Quizzes**
 
-> 🇰🇷 [한국어 버전](./Project_Completion_Report_KR)
+> [!TIP]
+> 🌐 **Language Selector**: **[🇰🇷 한국어 버전으로 전환 (Switch to Korean)](./Project_Completion_Report_KR.md)** | **[🇺🇸 English (Current Document)](./Project_Completion_Report_EN.md)**
 
-## 1. Project Overview and Architecture
+---
+
+## 🔗 Navigation
+- [독일어 학습 웹앱 완료 보고서 (KR)](./Project_Completion_Report_KR.md)
+- **[German Learning Web App Completion Report (EN)](./Project_Completion_Report_EN.md)**
+
+---
 **Project Goal**: To develop a premium German language learning web application integrated with a modern Glassmorphism UI and Web Text-to-Speech (TTS) capabilities.
 **Core Components**:
 - **Central Hub (`index.html`)**: The main entry point linking all learning modules via a card-based layout.

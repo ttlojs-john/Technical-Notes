@@ -1,9 +1,14 @@
 # 📘 LangChain AI Agent - 프로젝트 완료 보고서
+> **Next.js & FastAPI 기반 엔터프라이즈 AI 에이전트 및 멀티모달 폴백 시스템 구축 보고서**
 
-> 🇺🇸 [English Version](./PROJECT_REPORT_EN)
+> [!TIP]
+> 🌐 **Language / 언어 선택**: **[🇰🇷 한국어 (현재 문서)](./PROJECT_REPORT_KR.md)** | **[🇺🇸 Switch to English (영문 버전 읽기)](./PROJECT_REPORT_EN.md)**
 
-## 1. 프로젝트 개요
-본 프로젝트는 **Next.js** (프론트엔드)와 **FastAPI** (백엔드)를 사용하여 구축된 현대적이고 고성능인 AI 웹 애플리케이션입니다. **LangChain**을 활용하여 고급 AI 모델(OpenAI GPT-4o, Google Gemini)과의 상호작용을 조율하며, **보안**, **안정성**, **확장성**을 최우선으로 고려하였습니다.
+---
+
+## 🔗 문서 이동 (Navigation)
+- **[LangChain AI Agent 완료 보고서 (KR)](./PROJECT_REPORT_KR.md)**
+- [LangChain AI Agent Completion Report (EN)](./PROJECT_REPORT_EN.md)
 
 ---
 

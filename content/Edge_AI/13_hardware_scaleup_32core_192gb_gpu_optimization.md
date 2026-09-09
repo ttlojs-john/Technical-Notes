@@ -1,7 +1,8 @@
 # 🚀 13. 하드웨어 스케일업 및 가용화 가이드 (32 vCPU / 192GB RAM / NVIDIA Quadro P620 GPU)
 > **Edge AI 텔레그램 멀티모달 번역 및 웹 통합 관리 시스템 가이드**
 
-> 🌐 **Language / 언어 전환**: [English](./13_hardware_scaleup_32core_192gb_gpu_optimization_EN.md) | [한국어](./13_hardware_scaleup_32core_192gb_gpu_optimization.md)
+> [!TIP]
+> 🌐 **Language / 언어 선택**: **[🇰🇷 한국어 (현재 문서)](./13_hardware_scaleup_32core_192gb_gpu_optimization.md)** | **[🇺🇸 Switch to English (영문 버전으로 전환)](./13_hardware_scaleup_32core_192gb_gpu_optimization_EN.md)**
 
 ---
 
@@ -34,6 +35,7 @@ Edge AI 시스템의 동시 다발적 텔레그램 이미지 OCR 판독, 신경�
 | **그래픽 카드** | 내장 가상 VGA | **NVIDIA Quadro P620 (GP107GL)** | **신규 탑재** | Pascal 아키텍처, 512 CUDA Cores, 2GB GDDR5 비전/번역 전용 가속 |
 
 ```mermaid
+
 graph TB
     subgraph Host ["Host OS & Hypervisor (VMware DirectPath I/O)"]
         CPU["Intel Xeon E5-2620 v4<br/>(32 Cores, NUMA 0-31)"]

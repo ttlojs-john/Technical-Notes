@@ -1,7 +1,8 @@
 # 🚀 04. 설치 이후 추가 기능 및 시스템 업그레이드 내역 (Post-Setup Upgrades & Evolution)
 > **Edge AI 텔레그램 멀티모달 번역 및 웹 통합 관리 시스템 가이드**
 
-> 🌐 **Language / 언어 전환**: [English](./04_upgrades_and_evolution_EN.md) | [한국어](./04_upgrades_and_evolution.md)
+> [!TIP]
+> 🌐 **Language / 언어 선택**: **[🇰🇷 한국어 (현재 문서)](./04_upgrades_and_evolution.md)** | **[🇺🇸 Switch to English (영문 버전으로 전환)](./04_upgrades_and_evolution_EN.md)**
 
 ---
 
@@ -13,6 +14,12 @@
 - [05. 상세 컴포넌트 동작 및 데이터 흐름](./05_detailed_workflows.md)
 - [06. 보안 및 인프라 성능 최적화](./06_security_and_tuning.md)
 - [07. 운영 관리, 검증 테스트 및 배포 가이드](./07_operations_and_deployment.md)
+- [08. K9s AI 엔진 워크로드 모니터링](./08_k9s_ai_engine_and_workload_monitoring.md)
+- [09. MLOps 멀티 엔진 아키텍처 & 벤치마크](./09_mlops_multi_engine_architecture_and_benchmark.md)
+- [10. 스마트 텍스트 청킹 & 메시지 분할기](./10_smart_text_chunking_and_message_splitter.md)
+- [11. 외부 AI (Gemini) 연동 관리](./11_external_ai_gemini_integration_and_admin_console.md)
+- [12. 호스트 방화벽 & 침입 방지 가이드](./12_host_os_firewall_and_intrusion_prevention_guide.md)
+- [13. 하드웨어 스케일업 & 32C/192GB/GPU 최적화](./13_hardware_scaleup_32core_192gb_gpu_optimization.md)
 - [14. eBPF 실리움 & 로컬 AI 방화벽 + 텔레그램 관제](./14_ebpf_cilium_ai_firewall_and_telegram_soc.md)
 
 ---
@@ -22,17 +29,26 @@
 초기 배포 이후, 추론 정확도 개선, 오프라인 독립성 확보, 성능 최적화 및 보안 강화를 위해 총 8차례의 메이저 기능 업그레이드가 단계적으로 진행되었습니다.
 
 ```mermaid
-timeline
-    title 🚀 Edge AI 텔레그램 시스템 업그레이드 진화 과정
-    초기 배포 : K3s 클러스터 기반 기본 3종 마이크로서비스 구축
-    업그레이드 1 : RapidOCR (ONNX Runtime) & CTranslate2 고속 딥러닝 엔진 도입
-    업그레이드 2 : Multi-Modal VLM One-Shot (GPT-4o-mini) 및 모드 선택기 탑재
-    업그레이드 3 : Edge-TTS / gTTS 실시간 음성 합성 및 오디오 피드백 연동
-    업그레이드 4 : token_audit_logs.json 원자적 HostPath 영속 스토리지 구축
-    업그레이드 5 : In-Cluster K9s 웹 콘솔 & 커스텀 용어 사전(Glossary) 편집기
-    업그레이드 6 : 16 vCPU & 60GB RAM OS 커널/메모리 파라미터 최적화
-    업그레이드 7 : Fail2ban SSH 보안 포트 방어 & 직접 IP 스캐너 차단 방화벽
-    업그레이드 8 : apply_all.sh 원클릭 CI/CD 자동 빌드 및 롤아웃 파이프라인
+flowchart TD
+    subgraph Timeline ["🚀 Edge AI 텔레그램 시스템 업그레이드 진화 과정"]
+        Step0["<b>초기 배포</b><br/>K3s 클러스터 기반 기본 3종 마이크로서비스 구축"]
+        Step1["<b>업그레이드 1</b><br/>RapidOCR (ONNX Runtime) & CTranslate2 고속 딥러닝 엔진 도입"]
+        Step0 --> Step1
+        Step2["<b>업그레이드 2</b><br/>Multi-Modal VLM One-Shot (GPT-4o-mini) 및 모드 선택기 탑재"]
+        Step1 --> Step2
+        Step3["<b>업그레이드 3</b><br/>Edge-TTS / gTTS 실시간 음성 합성 및 오디오 피드백 연동"]
+        Step2 --> Step3
+        Step4["<b>업그레이드 4</b><br/>token_audit_logs.json 원자적 HostPath 영속 스토리지 구축"]
+        Step3 --> Step4
+        Step5["<b>업그레이드 5</b><br/>In-Cluster K9s 웹 콘솔 & 커스텀 용어 사전(Glossary) 편집기"]
+        Step4 --> Step5
+        Step6["<b>업그레이드 6</b><br/>16 vCPU & 60GB RAM OS 커널/메모리 파라미터 최적화"]
+        Step5 --> Step6
+        Step7["<b>업그레이드 7</b><br/>Fail2ban SSH 보안 포트 방어 & 직접 IP 스캐너 차단 방화벽"]
+        Step6 --> Step7
+        Step8["<b>업그레이드 8</b><br/>apply_all.sh 원클릭 CI/CD 자동 빌드 및 롤아웃 파이프라인"]
+        Step7 --> Step8
+    end
 ```
 
 ---

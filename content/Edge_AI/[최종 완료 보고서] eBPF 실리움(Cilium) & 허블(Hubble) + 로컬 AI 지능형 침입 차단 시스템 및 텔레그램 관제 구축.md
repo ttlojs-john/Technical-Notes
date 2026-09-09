@@ -6,19 +6,19 @@
 
 ## 📸 엔터프라이즈 사이버 보안 관제 비주얼 갤러리
 
-![eBPF 실리움 & 허블 전체 인프라 In/Out 통신 노선도](./images/ebpf_network_topology_map_1788804828681.jpg)
+![eBPF 실리움 & 허블 전체 인프라 In/Out 통신 노선도](/images/ebpf_network_topology_map_1788804828681.jpg)
 *▲ [그림 1] eBPF Cilium & Hubble 기반 전체 시스템 In/Out 통신 노선도 및 심층 패킷 검사(DPI) 아키텍처*
 
-![사이버 보안 관제센터(SOC) 대시보드 및 글로벌 위협 지도](./images/ai_soc_firewall_dashboard_1788804851116.jpg)
+![사이버 보안 관제센터(SOC) 대시보드 및 글로벌 위협 지도](/images/ai_soc_firewall_dashboard_1788804851116.jpg)
 *▲ [그림 2] 실시간 글로벌 사이버 위협 지도(Dark Map), 공격 인터셉트 레이저 궤적 및 AI 자동 차단 관제 센터*
 
-![스마트폰 텔레그램 실시간 지능형 보안 알림](./images/telegram_alert_bot_flow_1788804871538.jpg)
+![스마트폰 텔레그램 실시간 지능형 보안 알림](/images/telegram_alert_bot_flow_1788804871538.jpg)
 *▲ [그림 3] 일일 침입 차단 요약 리포트, SSH 로그인 감지 및 로컬 AI 자동 차단(Auto-Ban) 모바일 텔레그램 푸시 알림*
 
-![스마트 국가별 대역 적응형 통제 & AI 허니팟 & eBPF XDP 레이트 리미팅](./images/smart_geo_honeypot_defense_1788810158844.jpg)
+![스마트 국가별 대역 적응형 통제 & AI 허니팟 & eBPF XDP 레이트 리미팅](/images/smart_geo_honeypot_defense_1788810158844.jpg)
 *▲ [그림 4] 스마트 국가 통제(정상 접속 통과 & 공격 징후 가중 격리), AI 허니팟 유인 트랩 및 커널 XDP 레이트 리미터 인포그래픽*
 
-![Cilium Tetragon 런타임 제로트러스트 & 모바일 텔레그램 원격 제어](./images/tetragon_runtime_zero_trust_1788810174656.jpg)
+![Cilium Tetragon 런타임 제로트러스트 & 모바일 텔레그램 원격 제어](/images/tetragon_runtime_zero_trust_1788810174656.jpg)
 *▲ [그림 5] Cilium Tetragon 커널 런타임 추적(`execve`, 파일 변조 감시) 및 스마트폰 텔레그램 양방향 원격 방화벽 제어 아키텍처*
 
 ---
@@ -40,15 +40,16 @@
 ### 2.1 트래픽 단계별 상세 흐름
 
 ```mermaid
+
 sequenceDiagram
     autonumber
-    actor Attacker as 🚨 외부 공격자 / 클라이언트
-    participant Ingress as 🔀 Traefik Ingress (80/443)
-    participant eBPF as 🛡️ eBPF Cilium/Hubble L3-L7
-    participant AI as 🧠 Local AI Engine (점수화)
-    participant WebDash as 📦 Web-Dashboard Pods
-    participant AuthLog as 📜 Host /var/log/auth.log
-    participant Telegram as 📱 Telegram Bot API
+    actor Attacker as "🚨 외부 공격자 / 클라이언트"
+    participant Ingress as "🔀 Traefik Ingress (80/443)"
+    participant eBPF as "🛡️ eBPF Cilium/Hubble L3-L7"
+    participant AI as "🧠 Local AI Engine (점수화)"
+    participant WebDash as "📦 Web-Dashboard Pods"
+    participant AuthLog as "📜 Host /var/log/auth.log"
+    participant Telegram as "📱 Telegram Bot API"
 
     rect rgb(20, 30, 45)
         Note over Attacker, WebDash: [1단계: INBOUND 수신 트래픽 노선]
@@ -123,18 +124,18 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    Inbound[🌐 외부 접속 유입] --> WhiteCheck{화이트리스트 등록 IP인가?}
-    WhiteCheck -- 예 --> AllowWhite[🟢 최우선 즉시 통과 (BYPASS)]
-    WhiteCheck -- 아니오 --> GeoCheck{지정 통제 국가 대역인가?<br/>예: CN, RU, KP}
+    Inbound["🌐 외부 접속 유입"] --> WhiteCheck{"화이트리스트 등록 IP인가?"}
+    WhiteCheck -->|"예"| AllowWhite["🟢 최우선 즉시 통과 (BYPASS)"]
+    WhiteCheck -->|"아니오"| GeoCheck{"지정 통제 국가 대역인가?<br/>예: CN, RU, KP"}
     
-    GeoCheck -- 아니오 --> NormalFlow[🟢 일반 패킷 필터링 후 통과]
-    GeoCheck -- 예 --> ModeCheck{동작 모드 판정}
+    GeoCheck -->|"아니오"| NormalFlow["🟢 일반 패킷 필터링 후 통과"]
+    GeoCheck -->|"예"| ModeCheck{"동작 모드 판정"}
     
-    ModeCheck -- full_block (전면 차단) --> FullDrop[🚫 해당 국가 IP 일괄 차단 (DROP)]
-    ModeCheck -- smart_inspect (스마트 적응형 감시) --> AnomalyCheck{이상/공격 징후 포착 여부<br/>로그인 실패 / 허니팟 접근 / 포트 스캔}
+    ModeCheck -->|"full_block (전면 차단)"| FullDrop["🚫 해당 국가 IP 일괄 차단 (DROP)"]
+    ModeCheck -->|"smart_inspect (스마트 적응형 감시)"| AnomalyCheck{"이상/공격 징후 포착 여부<br/>로그인 실패 / 허니팟 접근 / 포트 스캔"}
     
-    AnomalyCheck -- 없음 (일반 정상 접속) --> PassSafe[🟢 정상 접속 안전 허용 (ALLOW)]
-    AnomalyCheck -- 있음 (공격 징후 포착) --> ThreatBan[🚨 국가 위험 가중치 1.75배 적용<br/>위협 점수 85~99점 임계치 도달<br/>eBPF 커널 즉시 영구 차단 (AUTO-BAN)]
+    AnomalyCheck -->|"없음 (일반 정상 접속)"| PassSafe["🟢 정상 접속 안전 허용 (ALLOW)"]
+    AnomalyCheck -->|"있음 (공격 징후 포착)"| ThreatBan["🚨 국가 위험 가중치 1.75배 적용<br/>위협 점수 85~99점 임계치 도달<br/>eBPF 커널 즉시 영구 차단 (AUTO-BAN)"]
 ```
 
   - **작동 원리 (Adaptive Inspection)**:

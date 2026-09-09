@@ -1,7 +1,8 @@
 # 🛡️ 14. eBPF Cilium & Hubble + Local AI Intelligent Intrusion Prevention & Telegram SOC System
 > **Edge AI Enterprise Infrastructure Security Diagnostics, 6 Core Firewall Enhancements, and Telegram SOC Deployment Report**
 
-> 🌐 **Language / 언어 전환**: [English](./14_ebpf_cilium_ai_firewall_and_telegram_soc_EN.md) | [한국어](./14_ebpf_cilium_ai_firewall_and_telegram_soc.md)
+> [!TIP]
+> 🌐 **Language Selector**: **[🇰🇷 한국어 버전으로 전환 (Switch to Korean)](./14_ebpf_cilium_ai_firewall_and_telegram_soc.md)** | **[🇺🇸 English (Current Document)](./14_ebpf_cilium_ai_firewall_and_telegram_soc_EN.md)**
 
 ---
 
@@ -11,13 +12,13 @@
 - [03. Installation History](./03_installation_history_EN.md)
 - [04. Upgrades & Evolution](./04_upgrades_and_evolution_EN.md)
 - [05. Detailed Workflows](./05_detailed_workflows_EN.md)
-- [06. Security & Infrastructure Tuning](./06_security_and_tuning_EN.md)
-- [07. Operations & Deployment Guide](./07_operations_and_deployment_EN.md)
-- [08. K9s AI Engine Workload Monitoring](./08_k9s_ai_engine_and_workload_monitoring_EN.md)
-- [09. MLOps Multi-Engine Architecture & Benchmark](./09_mlops_multi_engine_architecture_and_benchmark_EN.md)
+- [06. Security & Tuning](./06_security_and_tuning_EN.md)
+- [07. Operations & Deployment](./07_operations_and_deployment_EN.md)
+- [08. K9s AI Engine Monitoring](./08_k9s_ai_engine_and_workload_monitoring_EN.md)
+- [09. MLOps Multi-Engine Benchmark](./09_mlops_multi_engine_architecture_and_benchmark_EN.md)
 - [10. Smart Text Chunking & Splitter](./10_smart_text_chunking_and_message_splitter_EN.md)
 - [11. External AI (Gemini) Integration](./11_external_ai_gemini_integration_and_admin_console_EN.md)
-- [12. Host OS Firewall & IPS Guide](./12_host_os_firewall_and_intrusion_prevention_guide_EN.md)
+- [12. Host OS Firewall & IPS](./12_host_os_firewall_and_intrusion_prevention_guide_EN.md)
 - [13. Hardware Scale-Up (32C/192GB/GPU)](./13_hardware_scaleup_32core_192gb_gpu_optimization_EN.md)
 - **[14. eBPF Cilium & AI Firewall + Telegram SOC](./14_ebpf_cilium_ai_firewall_and_telegram_soc_EN.md)**
 
@@ -25,19 +26,19 @@
 
 ## 📸 Enterprise Cyber Security Operations Visual Gallery
 
-![eBPF Cilium & Hubble Infrastructure In/Out Network Topology](./images/ebpf_network_topology_map_1788804828681.jpg)
+![eBPF Cilium & Hubble Infrastructure In/Out Network Topology](/images/ebpf_network_topology_map_1788804828681.jpg)
 *▲ [Figure 1] eBPF Cilium & Hubble In/Out Network Topology Map & Deep Packet Inspection (DPI) Architecture*
 
-![Cyber Security Operations Center (SOC) Dashboard & Global Threat Map](./images/ai_soc_firewall_dashboard_1788804851116.jpg)
+![Cyber Security Operations Center (SOC) Dashboard & Global Threat Map](/images/ai_soc_firewall_dashboard_1788804851116.jpg)
 *▲ [Figure 2] Real-time Global Threat Map (Dark Mode), Laser Intercept Vectors, and AI Automated IP Banning Dashboard*
 
-![Smartphone Telegram Real-time Intelligent Security Alerts](./images/telegram_alert_bot_flow_1788804871538.jpg)
+![Smartphone Telegram Real-time Intelligent Security Alerts](/images/telegram_alert_bot_flow_1788804871538.jpg)
 *▲ [Figure 3] Daily Defense Summary Reports, SSH Login Audit, and Local AI Auto-Ban Mobile Push Notifications*
 
-![Adaptive Geo-Inspection, AI HoneyPot, and Kernel XDP Rate Limiting](./images/smart_geo_honeypot_defense_1788810158844.jpg)
+![Adaptive Geo-Inspection, AI HoneyPot, and Kernel XDP Rate Limiting](/images/smart_geo_honeypot_defense_1788810158844.jpg)
 *▲ [Figure 4] Adaptive Geo-Control (Safe Traffic Allowed & Anomaly Weighted Drop), Decoy HoneyPot, and eBPF XDP Rate Limiter*
 
-![Cilium Tetragon Runtime Zero-Trust & Telegram Remote Firewall Control](./images/tetragon_runtime_zero_trust_1788810174656.jpg)
+![Cilium Tetragon Runtime Zero-Trust & Telegram Remote Firewall Control](/images/tetragon_runtime_zero_trust_1788810174656.jpg)
 *▲ [Figure 5] Cilium Tetragon Kernel Runtime Tracing (`execve`, File Integrity Monitoring) and Bidirectional Telegram Remote Management*
 
 ---
@@ -61,15 +62,16 @@ A comprehensive audit was performed across host and container layers on Ubuntu 2
 Inbound client requests, host-level SSH attempts, and outbound pod communications are strictly managed across three distinct enforcement planes:
 
 ```mermaid
+
 sequenceDiagram
     autonumber
-    actor Attacker as 🚨 External Client / Threat Actor
-    participant Ingress as 🔀 Traefik Ingress (80/443)
-    participant eBPF as 🛡️ eBPF Cilium/Hubble L3-L7
-    participant AI as 🧠 Local AI Engine (Scoring)
-    participant WebDash as 📦 Web-Dashboard Pods
-    participant AuthLog as 📜 Host /var/log/auth.log
-    participant Telegram as 📱 Telegram Bot API
+    actor Attacker as "🚨 External Client / Threat Actor"
+    participant Ingress as "🔀 Traefik Ingress (80/443)"
+    participant eBPF as "🛡️ eBPF Cilium/Hubble L3-L7"
+    participant AI as "🧠 Local AI Engine (Scoring)"
+    participant WebDash as "📦 Web-Dashboard Pods"
+    participant AuthLog as "📜 Host /var/log/auth.log"
+    participant Telegram as "📱 Telegram Bot API"
 
     rect rgb(20, 30, 45)
         Note over Attacker, WebDash: [Phase 1: Inbound Packet Inspection]
@@ -118,18 +120,18 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    Inbound[🌐 Inbound Connection] --> WhiteCheck{Is IP in Whitelist?}
-    WhiteCheck -- Yes --> AllowWhite[🟢 Bypass Immediately (ALLOW)]
-    WhiteCheck -- No --> GeoCheck{Origin in Monitored Country?<br/>e.g., CN, RU, KP}
+    Inbound["🌐 Inbound Connection"] --> WhiteCheck{"Is IP in Whitelist?"}
+    WhiteCheck -->|"Yes"| AllowWhite["🟢 Bypass Immediately (ALLOW)"]
+    WhiteCheck -->|"No"| GeoCheck{"Origin in Monitored Country?<br/>e.g., CN, RU, KP"}
     
-    GeoCheck -- No --> NormalFlow[🟢 Standard Packet Filter (PASS)]
-    GeoCheck -- Yes --> ModeCheck{Evaluate Active Policy Mode}
+    GeoCheck -->|"No"| NormalFlow["🟢 Standard Packet Filter (PASS)"]
+    GeoCheck -->|"Yes"| ModeCheck{"Evaluate Active Policy Mode"}
     
-    ModeCheck -- full_block --> FullDrop[🚫 Drop Entire Subnet (HARD DROP)]
-    ModeCheck -- smart_inspect --> AnomalyCheck{Anomaly / Attack Detected?<br/>Auth Failure / HoneyPot / Port Scan}
+    ModeCheck -->|"full_block"| FullDrop["🚫 Drop Entire Subnet (HARD DROP)"]
+    ModeCheck -->|"smart_inspect"| AnomalyCheck{"Anomaly / Attack Detected?<br/>Auth Failure / HoneyPot / Port Scan"}
     
-    AnomalyCheck -- None (Normal Browsing) --> PassSafe[🟢 Allow Safe Browsing (PERMIT)]
-    AnomalyCheck -- Present (Malicious Indicator) --> ThreatBan[🚨 Apply 1.75x Risk Multiplier<br/>Threat Score 85~99 Reached<br/>Instant Kernel Auto-Ban (DROP)]
+    AnomalyCheck -->|"None (Normal Browsing)"| PassSafe["🟢 Allow Safe Browsing (PERMIT)"]
+    AnomalyCheck -->|"Present (Malicious Indicator)"| ThreatBan["🚨 Apply 1.75x Risk Multiplier<br/>Threat Score 85~99 Reached<br/>Instant Kernel Auto-Ban (DROP)"]
 ```
 
 ---

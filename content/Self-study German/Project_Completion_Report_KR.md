@@ -1,8 +1,16 @@
-# 프로젝트 완료 보고서: 독일어 학습 웹 애플리케이션
+# 🇩🇪 프로젝트 완료 보고서: 독일어 학습 웹 애플리케이션
+> **글래스모피즘 UI, Web Speech TTS, 인터랙티브 퀴즈를 결합한 어학 학습 플랫폼**
 
-> 🇺🇸 [English Version](./Project_Completion_Report_EN)
+> [!TIP]
+> 🌐 **Language / 언어 선택**: **[🇰🇷 한국어 (현재 문서)](./Project_Completion_Report_KR.md)** | **[🇺🇸 Switch to English (영문 버전 읽기)](./Project_Completion_Report_EN.md)**
 
-## 1. 프로젝트 개요 및 아키텍처
+---
+
+## 🔗 문서 이동 (Navigation)
+- **[독일어 학습 웹앱 완료 보고서 (KR)](./Project_Completion_Report_KR.md)**
+- [German Learning Web App Completion Report (EN)](./Project_Completion_Report_EN.md)
+
+---
 **프로젝트 목표**: 현대적인 글래스모피즘(Glassmorphism) UI와 웹 음성 합성(TTS) 기능을 통합한 프리미엄 독일어 학습 웹 애플리케이션 개발.
 **주요 구성 요소**:
 - **루트 허브 (`index.html`)**: 전체 학습 모듈을 시각적으로 탐색할 수 있는 중앙 진입점(카드 레이아웃).

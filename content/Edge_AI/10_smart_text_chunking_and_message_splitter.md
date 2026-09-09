@@ -1,7 +1,8 @@
 # 📄 10. 초장문 텍스트 스마트 청킹 및 텔레그램 4,096자 자동 분할 발송 가이드 (Smart Text Chunking & Message Splitter)
 > **Edge AI 텔레그램 멀티모달 번역 및 웹 통합 관리 시스템 가이드**
 
-> 🌐 **Language / 언어 전환**: [English](./10_smart_text_chunking_and_message_splitter_EN.md) | [한국어](./10_smart_text_chunking_and_message_splitter.md)
+> [!TIP]
+> 🌐 **Language / 언어 선택**: **[🇰🇷 한국어 (현재 문서)](./10_smart_text_chunking_and_message_splitter.md)** | **[🇺🇸 Switch to English (영문 버전으로 전환)](./10_smart_text_chunking_and_message_splitter_EN.md)**
 
 ---
 
@@ -17,6 +18,8 @@
 - [09. MLOps 멀티 엔진 아키텍처 & 벤치마크](./09_mlops_multi_engine_architecture_and_benchmark.md)
 - **[10. 스마트 텍스트 청킹 & 메시지 분할기](./10_smart_text_chunking_and_message_splitter.md)**
 - [11. 외부 AI (Gemini) 연동 관리](./11_external_ai_gemini_integration_and_admin_console.md)
+- [12. 호스트 방화벽 & 침입 방지 가이드](./12_host_os_firewall_and_intrusion_prevention_guide.md)
+- [13. 하드웨어 스케일업 & 32C/192GB/GPU 최적화](./13_hardware_scaleup_32core_192gb_gpu_optimization.md)
 - [14. eBPF 실리움 & 로컬 AI 방화벽 + 텔레그램 관제](./14_ebpf_cilium_ai_firewall_and_telegram_soc.md)
 
 ---
@@ -31,7 +34,7 @@
 2. **NMT 번역 엔진의 단일 요청 버퍼 한계**:
    - 수천 자의 텍스트가 줄바꿈 없이 한 번에 들어올 경우 토크나이저 메모리 버퍼 오버플로우가 발생할 수 있습니다.
 
-![Smart Text Chunking and Telegram Message Splitter](./images/smart_chunking_and_splitter.jpg)
+![Smart Text Chunking and Telegram Message Splitter](/images/smart_chunking_and_splitter.jpg)
 
 ---
 
@@ -39,14 +42,14 @@
 
 ```mermaid
 flowchart TD
-    User[사용자: 5,000자 이상의 초장문 전송] --> Bot[Telegram Bot]
-    Bot --> InChunker[Input Smart Chunker<br/>800자 단위 문단/문장 분할]
-    InChunker --> Engine[Edge AI Engine<br/>CTranslate2 INT8 Batch NMT]
-    Engine --> Cache[(60GB RAM Cache)]
-    Engine --> Merger[Translated Text Assembler]
-    Merger --> OutSplitter{총 메시지 길이 > 3,800자?}
-    OutSplitter -->|Yes| MultiMsg[📄 [파트 1/N] (원본 수정)<br/>📄 [파트 2/N] (연속 발송)<br/>📄 [파트 3/N] (연속 발송)]
-    OutSplitter -->|No| SingleMsg[📄 단일 메시지 즉시 전송]
+    User["사용자: 5,000자 이상의 초장문 전송"] --> Bot["Telegram Bot"]
+    Bot --> InChunker["Input Smart Chunker<br/>800자 단위 문단/문장 분할"]
+    InChunker --> Engine["Edge AI Engine<br/>CTranslate2 INT8 Batch NMT"]
+    Engine --> Cache[("60GB RAM Cache")]
+    Engine --> Merger["Translated Text Assembler"]
+    Merger --> OutSplitter{"총 메시지 길이 > 3,800자?"}
+    OutSplitter -->|Yes| MultiMsg["📄 [파트 1/N] (원본 수정)<br/>📄 [파트 2/N] (연속 발송)<br/>📄 [파트 3/N] (연속 발송)"]
+    OutSplitter -->|No| SingleMsg["📄 단일 메시지 즉시 전송"]
 ```
 
 ---

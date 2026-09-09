@@ -1,7 +1,8 @@
 # ⚙️ 07. 운영 관리, 검증 테스트 및 배포 가이드 (Operations & Deployment Guide)
 > **Edge AI 텔레그램 멀티모달 번역 및 웹 통합 관리 시스템 가이드**
 
-> 🌐 **Language / 언어 전환**: [English](./07_operations_and_deployment_EN.md) | [한국어](./07_operations_and_deployment.md)
+> [!TIP]
+> 🌐 **Language / 언어 선택**: **[🇰🇷 한국어 (현재 문서)](./07_operations_and_deployment.md)** | **[🇺🇸 Switch to English (영문 버전으로 전환)](./07_operations_and_deployment_EN.md)**
 
 ---
 
@@ -13,6 +14,12 @@
 - [05. 상세 컴포넌트 동작 및 데이터 흐름](./05_detailed_workflows.md)
 - [06. 보안 및 인프라 성능 최적화](./06_security_and_tuning.md)
 - **[07. 운영 관리, 검증 테스트 및 배포 가이드](./07_operations_and_deployment.md)**
+- [08. K9s AI 엔진 워크로드 모니터링](./08_k9s_ai_engine_and_workload_monitoring.md)
+- [09. MLOps 멀티 엔진 아키텍처 & 벤치마크](./09_mlops_multi_engine_architecture_and_benchmark.md)
+- [10. 스마트 텍스트 청킹 & 메시지 분할기](./10_smart_text_chunking_and_message_splitter.md)
+- [11. 외부 AI (Gemini) 연동 관리](./11_external_ai_gemini_integration_and_admin_console.md)
+- [12. 호스트 방화벽 & 침입 방지 가이드](./12_host_os_firewall_and_intrusion_prevention_guide.md)
+- [13. 하드웨어 스케일업 & 32C/192GB/GPU 최적화](./13_hardware_scaleup_32core_192gb_gpu_optimization.md)
 - [14. eBPF 실리움 & 로컬 AI 방화벽 + 텔레그램 관제](./14_ebpf_cilium_ai_firewall_and_telegram_soc.md)
 
 ---
@@ -63,7 +70,7 @@ chmod +x ~/apply_all.sh
 
 구축된 웹 대시보드 화면을 통해 관리자는 아래의 일상 작업을 GUI 상에서 편리하게 수행할 수 있습니다.
 
-![Web Admin Dashboard UI Mockup](./images/web_dashboard.jpg)
+![Web Admin Dashboard UI Mockup](/images/web_dashboard.jpg)
 
 - **Pod 실시간 감사**: CPU, RAM 메트릭과 파드 상태를 모니터링하고 비정상적인 파드를 원클릭으로 격리/재기동할 수 있습니다.
 - **용어 사전(Glossary) 편집**: 오번역 고유 명사 매핑 데이터를 실시간으로 등록 및 저장합니다.

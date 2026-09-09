@@ -1,7 +1,8 @@
 # 🛡️ 12. 호스트 OS 침입 차단 방화벽(UFW) 및 SSH 무차별 대입 공격 실시간 관제 시스템 가이드 (Host OS Firewall & Intrusion Prevention)
 > **Edge AI 텔레그램 멀티모달 번역 및 웹 통합 관리 시스템 가이드**
 
-> 🌐 **Language / 언어 전환**: [English](./12_host_os_firewall_and_intrusion_prevention_guide_EN.md) | [한국어](./12_host_os_firewall_and_intrusion_prevention_guide.md)
+> [!TIP]
+> 🌐 **Language / 언어 선택**: **[🇰🇷 한국어 (현재 문서)](./12_host_os_firewall_and_intrusion_prevention_guide.md)** | **[🇺🇸 Switch to English (영문 버전으로 전환)](./12_host_os_firewall_and_intrusion_prevention_guide_EN.md)**
 
 ---
 
@@ -46,6 +47,7 @@
 ## 2. 전체 보안 관제 아키텍처 (Architecture & Threat Pipeline)
 
 ```mermaid
+
 flowchart TD
     subgraph ExternalAttackers["🌐 외부 위협 유입 (External Threat Actors)"]
         Scanner["🔍 비인가 포트 스캔 봇<br/>(Port Probing: 22, 25, 8083, 8443)"]
@@ -79,14 +81,14 @@ flowchart TD
         BanAction["원클릭 영구 차단 / 차단 해제"]
     end
 
-    Scanner -->|L4 비인가 패킷 유입| Netfilter
-    Netfilter -->|DROP 패킷 기록| UFWLog
-    BruteForce -->|SSH 연결 시도| SSHD
-    SSHD -->|인증 실패 기록| AuthLog
-    WebAttacker -->|HTTP 요청| SecurityAPI
+    Scanner -->|"L4 비인가 패킷 유입"| Netfilter
+    Netfilter -->|"DROP 패킷 기록"| UFWLog
+    BruteForce -->|"SSH 연결 시도"| SSHD
+    SSHD -->|"인증 실패 기록"| AuthLog
+    WebAttacker -->|"HTTP 요청"| SecurityAPI
 
-    UFWLog -->|HostPath 볼륨| UFWMount
-    AuthLog -->|HostPath 볼륨| AuthMount
+    UFWLog -->|"HostPath 볼륨"| UFWMount
+    AuthLog -->|"HostPath 볼륨"| AuthMount
 
     UFWMount --> UFWThread
     AuthMount --> SSHThread
@@ -102,7 +104,7 @@ flowchart TD
     FrontendUI --> KPICards
     FrontendUI --> RealtimeTable
     RealtimeTable --> BanAction
-    BanAction -->|POST /api/security/ban| SecurityAPI
+    BanAction -->|"POST /api/security/ban"| SecurityAPI
 ```
 
 ---

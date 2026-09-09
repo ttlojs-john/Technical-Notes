@@ -1,7 +1,8 @@
 # 🤖 11. 외부 AI API(Google Gemini) 연동 및 관리자 콘솔 구축 가이드 (External Gemini AI & Admin Console)
 > **Edge AI 텔레그램 멀티모달 번역 및 웹 통합 관리 시스템 가이드**
 
-> 🌐 **Language / 언어 전환**: [English](./11_external_ai_gemini_integration_and_admin_console_EN.md) | [한국어](./11_external_ai_gemini_integration_and_admin_console.md)
+> [!TIP]
+> 🌐 **Language / 언어 선택**: **[🇰🇷 한국어 (현재 문서)](./11_external_ai_gemini_integration_and_admin_console.md)** | **[🇺🇸 Switch to English (영문 버전으로 전환)](./11_external_ai_gemini_integration_and_admin_console_EN.md)**
 
 ---
 
@@ -18,6 +19,7 @@
 - [10. 스마트 텍스트 청킹 & 메시지 분할기](./10_smart_text_chunking_and_message_splitter.md)
 - **[11. 외부 AI (Gemini) 연동 관리](./11_external_ai_gemini_integration_and_admin_console.md)**
 - [12. 호스트 방화벽 & 침입 방지 가이드](./12_host_os_firewall_and_intrusion_prevention_guide.md)
+- [13. 하드웨어 스케일업 & 32C/192GB/GPU 최적화](./13_hardware_scaleup_32core_192gb_gpu_optimization.md)
 - [14. eBPF 실리움 & 로컬 AI 방화벽 + 텔레그램 관제](./14_ebpf_cilium_ai_firewall_and_telegram_soc.md)
 
 ---
@@ -40,6 +42,7 @@
 ## 2. 전체 아키텍처 및 상호 연동 흐름도 (Architecture & Workflow)
 
 ```mermaid
+
 flowchart TD
     subgraph AdminLayer["💻 관리자 제어 레이어 (Web Admin Dashboard)"]
         AdminBrowser["관리자 웹 브라우저 (포트 80)"]
@@ -66,19 +69,19 @@ flowchart TD
     AdminBrowser --> NavTab
     NavTab --> ConfigForm
     NavTab --> TestBench
-    ConfigForm -->|REST API 저장| DashboardPod
-    DashboardPod -->|실시간 동기화| ConfigFile
-    TestBench -->|실시간 테스트 호출| DashboardPod
-    DashboardPod -->|HTTPS REST| GeminiAPI
+    ConfigForm -->|"REST API 저장"| DashboardPod
+    DashboardPod -->|"실시간 동기화"| ConfigFile
+    TestBench -->|"실시간 테스트 호출"| DashboardPod
+    DashboardPod -->|"HTTPS REST"| GeminiAPI
 
     ConfigFile -.->|HostPath 자동 마운트| EnginePod
-    EnginePod -->|이미지/텍스트 요청 수신| ConfigFile
-    EnginePod -->|외부 AI 활성화 시| GeminiAPI
+    EnginePod -->|"이미지/텍스트 요청 수신"| ConfigFile
+    EnginePod -->|"외부 AI 활성화 시"| GeminiAPI
     GeminiAPI -.->|장애 / 타임아웃 발생 시| LocalEngine
-    EnginePod -->|토큰 사용량 누적 기록| TokenLogFile
+    EnginePod -->|"토큰 사용량 누적 기록"| TokenLogFile
 ```
 
-![Google Gemini AI Admin Console and API Integration Dashboard](./images/gemini_admin_console.jpg)
+![Google Gemini AI Admin Console and API Integration Dashboard](/images/gemini_admin_console.jpg)
 
 ---
 
@@ -450,16 +453,17 @@ volumes:
 ### 10.2 해결 아키텍처 및 개선 구현
 
 ```mermaid
+
 flowchart TD
     UserInput([사용자 입력: 사진 / 서류 / 한국어 텍스트]) --> CheckInput{입력 유형 판별}
     
-    CheckInput -->|사진 / 서류 이미지| AutoOCR[RapidOCR 온디맨드 실시간 텍스트 추출]
+    CheckInput -->|"사진 / 서류 이미지"| AutoOCR[RapidOCR 온디맨드 실시간 텍스트 추출]
     AutoOCR --> GermanExtract[실제 독일어 텍스트 추출 완료]
     
-    CheckInput -->|한국어 텍스트| AutoTrans[translate_korean_to_german_formal<br/>독일어 비즈니스 정중체 자동 번역]
+    CheckInput -->|"한국어 텍스트"| AutoTrans[translate_korean_to_german_formal<br/>독일어 비즈니스 정중체 자동 번역]
     AutoTrans --> GermanResult[정밀 독일어 번역문 생성<br/>예: Vielen Dank / Hallo guten Morgen.]
     
-    CheckInput -->|독일어 텍스트| GermanDirect[독일어 원문 즉시 사용]
+    CheckInput -->|"독일어 텍스트"| GermanDirect[독일어 원문 즉시 사용]
     
     GermanExtract --> TTS[Edge AI Engine /api/v1/tts<br/>German Neural Speech Synthesizer]
     GermanResult --> TTS

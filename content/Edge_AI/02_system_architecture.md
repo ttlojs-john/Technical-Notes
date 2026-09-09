@@ -1,7 +1,8 @@
 # 🧠 02. 전체 시스템 구성도 및 아키텍처 (System Architecture & Drawings)
 > **Edge AI 텔레그램 멀티모달 번역 및 웹 통합 관리 시스템 가이드**
 
-> 🌐 **Language / 언어 전환**: [English](./02_system_architecture_EN.md) | [한국어](./02_system_architecture.md)
+> [!TIP]
+> 🌐 **Language / 언어 선택**: **[🇰🇷 한국어 (현재 문서)](./02_system_architecture.md)** | **[🇺🇸 Switch to English (영문 버전으로 전환)](./02_system_architecture_EN.md)**
 
 ---
 
@@ -13,6 +14,12 @@
 - [05. 상세 컴포넌트 동작 및 데이터 흐름](./05_detailed_workflows.md)
 - [06. 보안 및 인프라 성능 최적화](./06_security_and_tuning.md)
 - [07. 운영 관리, 검증 테스트 및 배포 가이드](./07_operations_and_deployment.md)
+- [08. K9s AI 엔진 워크로드 모니터링](./08_k9s_ai_engine_and_workload_monitoring.md)
+- [09. MLOps 멀티 엔진 아키텍처 & 벤치마크](./09_mlops_multi_engine_architecture_and_benchmark.md)
+- [10. 스마트 텍스트 청킹 & 메시지 분할기](./10_smart_text_chunking_and_message_splitter.md)
+- [11. 외부 AI (Gemini) 연동 관리](./11_external_ai_gemini_integration_and_admin_console.md)
+- [12. 호스트 방화벽 & 침입 방지 가이드](./12_host_os_firewall_and_intrusion_prevention_guide.md)
+- [13. 하드웨어 스케일업 & 32C/192GB/GPU 최적화](./13_hardware_scaleup_32core_192gb_gpu_optimization.md)
 - [14. eBPF 실리움 & 로컬 AI 방화벽 + 텔레그램 관제](./14_ebpf_cilium_ai_firewall_and_telegram_soc.md)
 
 ---
@@ -22,6 +29,7 @@
 본 시스템은 마이크로서비스 아키텍처(MSA) 구조로 설계되었으며, 모든 핵심 애플리케이션은 **K3s 쿠버네티스** 상에 배포되어 서로 유기적으로 연동됩니다.
 
 ```mermaid
+
 graph TD
     %% 외부 사용자 및 클라이언트 영역
     subgraph "External Clients / End Users"
@@ -35,19 +43,19 @@ graph TD
         TelegramAPI[Telegram Bot Cloud Gateway]
     end
 
-    User <-->|Text / Image / Voice / Inline Buttons| TelegramAPI
+    User <-->|"Text / Image / Voice / Inline Buttons"| TelegramAPI
 
     %% Edge Node K3s Cluster
     subgraph "Ubuntu 26 Edge Server (16 vCPU, 60GB RAM - K3s Cluster)"
         
         %% 네트워크 인프라 레이어
         subgraph "Ingress & Edge Security Layer"
-            Ingress[Traefik / Nginx Ingress Controller (Port 80)]
-            SecModule[Direct IP Blocker & Web Banwall]
-            Fail2ban[Fail2ban Host Protection (SSH: <SSH_PORT_REDACTED>)]
+            Ingress["Traefik / Nginx Ingress Controller (Port 80)"]
+            SecModule["Direct IP Blocker & Web Banwall"]
+            Fail2ban["Fail2ban Host Protection (SSH: SSH_PORT_REDACTED)"]
         end
 
-        Admin <-->|HTTPS / HTTP Port 80| Ingress
+        Admin <-->|"HTTPS / HTTP Port 80"| Ingress
         Attacker -.->|Direct IP / Brute-force Attack| SecModule
         Attacker -.->|SSH Port Attack| Fail2ban
 
@@ -61,10 +69,10 @@ graph TD
             WebDashboard["📊 web-dashboard (FastAPI + Modern UI)<br/>- K9s Web Terminal & Pod Manager<br/>- Glossary Custom Dictionary<br/>- Realtime Telemetry & Security Audit"]
         end
 
-        TelegramAPI <-->|Long-polling Async Stream| BotService
+        TelegramAPI <-->|"Long-polling Async Stream"| BotService
         Ingress --> WebDashboard
-        BotService -->|HTTP REST: /api/v1/process| AIEngine1
-        BotService -->|HTTP REST: /api/v1/process| AIEngine2
+        BotService -->|"HTTP REST: /api/v1/process"| AIEngine1
+        BotService -->|"HTTP REST: /api/v1/process"| AIEngine2
 
         %% AI 엔진 내부 컴포넌트
         subgraph "Edge AI Processing Core"
@@ -75,11 +83,16 @@ graph TD
             VLM["👁️ Direct VLM Parser<br/>(GPT-4o-mini Vision Hybrid)"]
         end
 
-        AIEngine1 & AIEngine2 --- RapidOCR
-        AIEngine1 & AIEngine2 --- NMT
-        AIEngine1 & AIEngine2 --- STT
-        AIEngine1 & AIEngine2 --- TTS
-        AIEngine1 & AIEngine2 --- VLM
+        AIEngine1 --- RapidOCR
+        AIEngine2 --- RapidOCR
+        AIEngine1 --- NMT
+        AIEngine2 --- NMT
+        AIEngine1 --- STT
+        AIEngine2 --- STT
+        AIEngine1 --- TTS
+        AIEngine2 --- TTS
+        AIEngine1 --- VLM
+        AIEngine2 --- VLM
 
         %% 스토리지 및 영속화 레이어
         subgraph "Shared Persistent Storage (hostPath & Memory)"
@@ -90,22 +103,23 @@ graph TD
             SharedMemory["⚡ /dev/shm (8GB RAM Cache)"]
         end
 
-        AIEngine1 & AIEngine2 <-->|Atomic Append/Read| TokenAudit
-        AIEngine1 & AIEngine2 <-->|Dictionary Lookup| GlossaryDB
-        WebDashboard <-->|Read/Write GUI| GlossaryDB
-        WebDashboard <-->|Audit Aggregation| TokenAudit
-        WebDashboard <-->|Auth & JWT| UserDB
-        WebDashboard <-->|SSH Scan Inspection| AuthLog
-        AIEngine1 & AIEngine2 --- SharedMemory
+        AIEngine1 & AIEngine2 <-->|"Atomic Append/Read"| TokenAudit
+        AIEngine1 & AIEngine2 <-->|"Dictionary Lookup"| GlossaryDB
+        WebDashboard <-->|"Read/Write GUI"| GlossaryDB
+        WebDashboard <-->|"Audit Aggregation"| TokenAudit
+        WebDashboard <-->|"Auth & JWT"| UserDB
+        WebDashboard <-->|"SSH Scan Inspection"| AuthLog
+        AIEngine1 --- SharedMemory
+        AIEngine2 --- SharedMemory
 
         %% K8s API 연동
         K8sAPI[("☸️ Kubernetes API Server<br/>(RBAC: ClusterRole)")]
-        WebDashboard <-->|In-Cluster Pod Exec/Logs/Scale| K8sAPI
+        WebDashboard <-->|"In-Cluster Pod Exec/Logs/Scale"| K8sAPI
     end
 
     %% 외부 클라우드 AI API
     subgraph "External Cloud AI (Hybrid Fallback)"
-        OpenAI[OpenAI API (GPT-4o-mini / GPT-4o)]
+        OpenAI["OpenAI API (GPT-4o-mini / GPT-4o)"]
     end
     VLM -.->|Optional Hybrid Routing| OpenAI
 ```

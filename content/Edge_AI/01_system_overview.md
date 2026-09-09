@@ -1,7 +1,8 @@
 # 🤖 01. 시스템 개요 (System Overview)
 > **Edge AI 텔레그램 멀티모달 번역 및 웹 통합 관리 시스템 가이드**
 
-> 🌐 **Language / 언어 전환**: [English](./01_system_overview_EN.md) | [한국어](./01_system_overview.md)
+> [!TIP]
+> 🌐 **Language / 언어 선택**: **[🇰🇷 한국어 (현재 문서)](./01_system_overview.md)** | **[🇺🇸 Switch to English (영문 버전으로 전환)](./01_system_overview_EN.md)**
 
 ---
 
@@ -13,6 +14,12 @@
 - [05. 상세 컴포넌트 동작 및 데이터 흐름](./05_detailed_workflows.md)
 - [06. 보안 및 인프라 성능 최적화](./06_security_and_tuning.md)
 - [07. 운영 관리, 검증 테스트 및 배포 가이드](./07_operations_and_deployment.md)
+- [08. K9s AI 엔진 워크로드 모니터링](./08_k9s_ai_engine_and_workload_monitoring.md)
+- [09. MLOps 멀티 엔진 아키텍처 & 벤치마크](./09_mlops_multi_engine_architecture_and_benchmark.md)
+- [10. 스마트 텍스트 청킹 & 메시지 분할기](./10_smart_text_chunking_and_message_splitter.md)
+- [11. 외부 AI (Gemini) 연동 관리](./11_external_ai_gemini_integration_and_admin_console.md)
+- [12. 호스트 방화벽 & 침입 방지 가이드](./12_host_os_firewall_and_intrusion_prevention_guide.md)
+- [13. 하드웨어 스케일업 & 32C/192GB/GPU 최적화](./13_hardware_scaleup_32core_192gb_gpu_optimization.md)
 - [14. eBPF 실리움 & 로컬 AI 방화벽 + 텔레그램 관제](./14_ebpf_cilium_ai_firewall_and_telegram_soc.md)
 
 ---
@@ -23,7 +30,7 @@
 
 사용자가 텔레그램을 통해 전송한 다양한 미디어(텍스트, 이미지, 음성)를 엣지 환경에 구축된 딥러닝 인공지능 파이프라인을 거쳐 실시간으로 한국어로 번역하고 상황 분석을 수행합니다. 동시에 관리자는 웹 브라우저를 통해 클러스터 리소스 제어, 전문 용어 사전 관리, 실시간 보안 관제를 하나의 통합 대시보드에서 처리할 수 있습니다.
 
-![System Architecture Concept](./images/system_architecture.jpg)
+![System Architecture Concept](/images/system_architecture.jpg)
 
 ---
 

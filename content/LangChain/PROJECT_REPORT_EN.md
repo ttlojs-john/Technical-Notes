@@ -1,9 +1,14 @@
-# 📘 LangChain AI Agent – Project Completion Report
+# 📘 LangChain AI Agent - Project Completion Report
+> **Next.js & FastAPI Enterprise AI Agent and Multimodal Fallback System Architecture**
 
-> 🇰🇷 [한국어 버전](./PROJECT_REPORT_KR)
+> [!TIP]
+> 🌐 **Language Selector**: **[🇰🇷 한국어 버전으로 전환 (Switch to Korean)](./PROJECT_REPORT_KR.md)** | **[🇺🇸 English (Current Document)](./PROJECT_REPORT_EN.md)**
 
-## 1. Project Overview
-This project is a modern, high-performance AI Web Application built using **Next.js** (Frontend) and **FastAPI** (Backend). It leverages **LangChain** to orchestrate interactions with advanced AI models (OpenAI GPT-4o, Google Gemini) while prioritizing **security**, **robustness**, and **scalability**.
+---
+
+## 🔗 Navigation
+- [LangChain AI Agent 완료 보고서 (KR)](./PROJECT_REPORT_KR.md)
+- **[LangChain AI Agent Completion Report (EN)](./PROJECT_REPORT_EN.md)**
 
 ---
 
@@ -59,7 +64,7 @@ This project adheres to strict security standards to protect user data and syste
 
 ### 🛡️ 3. Environment Security
 - **Secret Management**: API Keys (`OPENAI_API_KEY`, `GOOGLE_API_KEY`) and `SECRET_KEY` are isolated in a `.env` file.
-- **Deployment Safety**:
+- **Deployment Safety**: 
   - The deployment script (`pack_v2.ps1`) **excludes** `.env` files from the artifact to prevent accidental key leakage.
   - The server-side script (`update_env.sh`) allows secure injection of keys directly on the production environment.
 
@@ -283,7 +288,7 @@ DATABASE_URL=postgresql://postgres:postgres@localhost:5432/postgres
 - **Handler Setup**:
   ```python
   from langfuse.callback import CallbackHandler
-
+  
   # Disable stateful client to prevent input overwrite
   trace = langfuse.trace(name=..., input=...)
   handler = CallbackHandler(stateful_client=trace)
