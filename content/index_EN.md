@@ -66,6 +66,10 @@
   - *Comprehensive Final Report on Edge AI Enterprise Security Assessment, 6 Core Firewall Enhancements, and Telegram SOC Operations*
 * [[Edge_AI/16_admin_console_mfa_google_otp_authentication_EN|🔐 16. Admin Web Console Google Authenticator (MFA) Two-Factor Authentication Guide]]
   - *Enterprise Zero-Trust Security Architecture and Operational Guide for RFC 6238 Standard TOTP Multi-Factor Authentication (MFA)*
+* [[Edge_AI/17_os_vulnerability_analysis_and_remediation_EN|🛡️ 17. Comprehensive OS & Container Vulnerability Analysis & One-Click Automated Remediation Guide]]
+  - *Host OS 10-Point Security Audit 100% (Grade A+) Achievement, Kubernetes Workload CVE Deduplication & One-Click Automated Remediation Pipeline*
+* [[Edge_AI/18_telegram_message_interaction_and_agent_control_EN|📱 18. Telegram Message Interaction & Real-Time Agent Control Engine Development Guide]]
+  - *Interactive Inline Keyboard Mobile One-Click Control, Web Dashboard Real-Time Execution Terminal Streaming, and Direct Delivery Engine for Detailed Task Completion Reports*
 
 ### 📊 Automation: Excel Data Task Analyzer
 > Automated ticketing analysis, resolution metrics calculation, and repetitive issue clustering desktop tool.

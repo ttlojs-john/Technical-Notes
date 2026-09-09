@@ -78,10 +78,10 @@
   - *Edge AI 엔터프라이즈 인프라 보안 진단, 6대 방화벽 고도화 및 텔레그램 SOC 관제 구축 결과 종합 보고서*
 * [[Edge_AI/16_admin_console_mfa_google_otp_authentication|🔐 16. 관리자 웹 콘솔 Google OTP (MFA) 2단계 인증 구축 및 운영 가이드]]
   - *엔터프라이즈 제로 트러스트 보안을 위한 표준 RFC 6238 TOTP 기반 2단계 다중 인증(MFA) 아키텍처 및 관리자 운영 가이드*
-* [[Edge_AI/implementation_plan|[구현 계획] 방화벽 고도화 6대 핵심 기능 및 스마트 국가 통제 시스템 구축]]
-  - *eBPF 실리움(Cilium) & 허블(Hubble) 및 로컬 AI 기반 침입 차단 시스템에 **제안 6대 핵심 기능**을 전면 구축하고, 관리자의 중요한 질문인 **"차단 국가에서의 정상 접속 허용 여부(오탐 방지...*
-* [[Edge_AI/walkthrough|🛡️  eBPF 실리움(Cilium) & 허블(Hubble) + 로컬 AI 지능형 침입 차단 시스템 및 텔레그램 관제 구축]]
-  - *본 문서는 요청하신 **운영 OS 및 웹 애플리케이션 보안 현황 진단**, **eBPF 실리움 & 허블 + 로컬 AI 지능형 침입 차단 방화벽 시스템**, **전체 시스템 In/Out 전방위 통신 노선도**, 그리고...*
+* [[Edge_AI/17_OS_취약점_분석_및_조치|🛡️ 17. OS 및 컨테이너 취약점 정밀 분석 및 원클릭 자동 조치 시스템 구축 가이드 (OS & Container Vulnerability Analysis & Automated Remediation)]]
+  - *호스트 OS 10대 보안 감사 100점(A+) 달성, 쿠버네티스 워크로드 CVE 단일화 및 원클릭 자동 조치 파이프라인*
+* [[Edge_AI/18_텔레그램_메세지_인터랙션_개발|📱 18. 텔레그램 메세지 인터랙션 및 실시간 작업 관제 엔진 개발 가이드 (Telegram Message Interaction & Realtime Agent Control)]]
+  - *대화형 인라인 키보드 모바일 원클릭 제어, 웹 대시보드 실시간 실행 터미널 스트리밍 및 상세 작업 보고서 직통 발송 체계*
 
 ### 📊 업무 자동화: 엑셀 데이터 분석기
 > ITSM 티켓 데이터 집계, 작업자별 처리 시간 분석 및 반복 장애 추출 도구

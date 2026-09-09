@@ -23,6 +23,8 @@
 - [14. eBPF Cilium & AI Firewall + Telegram SOC](./14_ebpf_cilium_ai_firewall_and_telegram_soc_EN.md)
 - [15. eBPF Cilium Final Completion Report](./15_ebpf_cilium_hubble_ai_firewall_and_telegram_soc_report_EN.md)
 - **[16. Admin Web Console Google OTP (MFA) Authentication](./16_admin_console_mfa_google_otp_authentication_EN.md)**
+- [17. OS & Container Vulnerability Analysis & Remediation](./17_os_vulnerability_analysis_and_remediation_EN.md)
+- [18. Telegram Message Interaction & Real-time Agent Control](./18_telegram_message_interaction_and_agent_control_EN.md)
 
 ---
 

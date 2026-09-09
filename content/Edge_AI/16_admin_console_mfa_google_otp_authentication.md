@@ -23,6 +23,8 @@
 - [14. eBPF 실리움 & 로컬 AI 방화벽 + 텔레그램 관제](./14_ebpf_cilium_ai_firewall_and_telegram_soc.md)
 - [15. eBPF 실리움 종합 구축 최종 완료 보고서](./15_ebpf_cilium_hubble_ai_firewall_and_telegram_soc_report.md)
 - **[16. 관리자 웹 콘솔 Google OTP (MFA) 2단계 인증](./16_admin_console_mfa_google_otp_authentication.md)**
+- [17. OS 및 컨테이너 취약점 분석 및 원클릭 자동 조치](./17_OS_취약점_분석_및_조치.md)
+- [18. 텔레그램 메세지 인터랙션 및 실시간 작업 관제](./18_텔레그램_메세지_인터랙션_개발.md)
 
 ---
 

@@ -56,7 +56,12 @@ def scan_repository():
         if not folder_path.is_dir() or item in EXCLUDE_DIRS or item.startswith('.'):
             continue
             
-        md_files = [f for f in folder_path.glob("*.md") if not f.name.endswith(".metadata.json")]
+        md_files = [
+            f for f in folder_path.glob("*.md") 
+            if not f.name.endswith(".metadata.json") 
+            and not f.name.lower().startswith("implementation_plan") 
+            and not f.name.lower().startswith("walkthrough")
+        ]
         if not md_files:
             continue
             
