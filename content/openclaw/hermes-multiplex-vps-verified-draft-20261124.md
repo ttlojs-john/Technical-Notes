@@ -66,7 +66,7 @@ flowchart LR
 
 - **검증 완료:** 한 게이트웨이의 세 프로필 서비스(PID 1881 확인), GitHub SSH 키 인증 및 `main` 푸시, 이전 커밋의 Quartz 빌드·GitHub Pages 배포 작업 성공.
 - **검증되지 않음:** 세 Slack 봇 사이의 자동 순차 핸드오프/맥락 전달 완료. 호출 실패·OpenRouter 무료 모델 일일 한도(HTTP 429)가 관찰됐으므로 프로필별 접속 상태를 연쇄 성공으로 간주하지 않는다.
-- **공개 전환의 별도 확인 항목:** 이번 커밋의 Actions 배포 성공, 실제 글 URL 응답, 인덱스 링크. 위의 기존 Actions 성공 결과를 이번 공개 전환의 성공으로 대체하지 않는다.
+- **공개 전환 확인:** [커밋 `dc13203`](https://github.com/ttlojs-john/Technical-Notes/commit/dc1320367c48662d3c1814e3cd04271eac6f98ca)의 [Actions 실행 #45492202029](https://github.com/ttlojs-john/Technical-Notes/actions/runs/45492202029)에서 `build`와 `deploy`가 성공했다. [공개 포스트](https://doc.chaeyul.uk/openclaw/hermes-multiplex-vps-verified-draft-20261124)가 열리고 메인 인덱스에 이 글의 링크가 나타나는 것도 확인했다. 다른 미승인 초안 링크는 인덱스에 포함되지 않았다.
 
 ## 참고
 
