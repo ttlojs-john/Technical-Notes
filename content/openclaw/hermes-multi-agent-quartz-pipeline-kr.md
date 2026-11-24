@@ -1,201 +1,67 @@
 ---
 title: "Hostinger VPS 기반 Hermes 멀티 에이전트 오케스트레이션 및 Quartz 블로그 자동 배포 구축기"
 date: 2026-11-24
+draft: false
 tags:
   - Hermes-Agent
   - Multi-Agent
-  - Slack-Bot
-  - OpenRouter
+  - Slack
   - Quartz
   - DevOps
-description: "단일 Hostinger VPS 환경에서 멀티플렉스 게이트웨이 기반 3종 AI 에이전트(@research, @Plan, @Chaeyul-AI) 연쇄 실행(Chaining), 제로 트러스트 보안 격리, 그리고 GitHub Deploy Key를 활용한 doc.chaeyul.uk 자동 배포 파이프라인 구축 기록"
-author: "Chaeyul"
-categories:
-  - Infrastructure
-  - AI Operations
-  - DevOps
+description: "오늘의 Hostinger Hermes 멀티플렉스 및 Quartz 자동 배포 구축 메모를 실제 설정·배포 증거와 대조한 리뷰. Slack 자동 연쇄와 보안 격리는 미검증 상태로 구분한다."
 ---
 
-# 🚀 Hostinger VPS 기반 Hermes 멀티 에이전트 및 블로그 자동 배포 구축
+# Hostinger VPS 기반 Hermes 멀티 에이전트와 Quartz 배포: 검증 기록
 
-> **구축 완료일**: 2026-11-24  
-> **환경**: Hostinger VPS (KVM, 2 vCPU / 6 GB RAM / 80 GB Disk)  
-> **상태**: ✅ **검증 완료 · 프로덕션 배포됨**  
-> **라이브 사이트**: [doc.chaeyul.uk](https://doc.chaeyul.uk)
+> **2026-11-24 기술 리뷰.** 제공된 구축 메모를 그대로 실행하지 않았다. 메모의 `docker exec`, here-document, 스마트 따옴표, HTML escape, Slack 멘션 자리표시자는 실행 가능한 배포 스크립트가 아니며, 설정과 증거를 대조해 문서로 다시 작성했다. 상세 내용은 [앞선 검증 기록](./hermes-multiplex-vps-verified-draft-20261124.md)도 참고한다. 이 문서는 검증 체크리스트를 실제 증거 기준으로 바로잡은 개정판이다.
 
----
+![단일 Hermes 게이트웨이와 세 프로필, SSH 푸시, Quartz 게시를 표현한 개념 이미지](./hermes-multi-agent-review-hero.png)
 
-## 🏗️ 1. 아키텍처 개요 (System Architecture)
+## 1. 아키텍처: 확인된 흐름과 목표 흐름
 
-리소스가 제한된 단일 Hostinger VPS 환경에서 역할이 분리된 3개의 AI 에이전트를 동시에 운영하고, Slack 채널 내 연쇄 작업(Relay Chaining)을 거쳐 기술 블로그(`doc.chaeyul.uk`)에 자동 게시하는 파이프라인을 구축했습니다.
-
-![Hermes Multi-Agent Quartz Pipeline](/images/hermes-multi-agent-quartz-pipeline.png)
+현재 Hostinger 관리 컨테이너에서 `default`, `plan`, `research` 프로필을 단일 게이트웨이가 서비스한다. `gateway_state.json`의 `served_profiles`가 세 프로필을 열거하고, 기본 `config.yaml`에서 `gateway.multiplex_profiles: true`가 확인됐다. 실행 환경의 CPU는 2 vCPU, `/proc/meminfo`의 메모리 총량은 약 5.8 GiB였다. 제공 메모의 ‘80 GB 디스크’와 ‘RAM 사용률 33% 유지’는 같은 시점의 측정 로그를 확보하지 못했으므로 확정치로 적지 않는다.
 
 ```mermaid
 flowchart LR
-    User["👤 사용자 (Slack)"] -->|"@research 질문"| Research["🔍 @research<br/>(분석 / Read-Only)"]
-    Research -->|"<@Plan_ID> 자동 호출"| Plan["📋 @Plan<br/>(기획 / Read-Only)"]
-    Plan -->|"<@Chaeyul_ID> 자동 호출"| Chaeyul["⚙️ @Chaeyul-AI<br/>(실행 / HIL 승인제어)"]
-    Chaeyul -->|"Recraft V4.1 API"| Image["🖼️ PNG 이미지 생성"]
-    Chaeyul -->|"Approve 후 SSH Push"| GitHub["📦 GitHub (Technical-Notes)"]
-    GitHub -->|"자동 빌드"| Blog["🌐 doc.chaeyul.uk"]
+    U["사용자 / Slack"] --> G["Hermes 단일 멀티플렉스 게이트웨이"]
+    G --> R["research: 조사"]
+    G --> P["plan: 기획"]
+    G --> D["default: 검토·작성"]
+    R -. "자동 핸드오프: 미검증" .-> P
+    P -. "자동 핸드오프: 미검증" .-> D
+    D --> K["저장소 전용 SSH 키"]
+    K --> GH["GitHub Technical-Notes / main"]
+    GH --> A["GitHub Actions / Quartz build"]
+    A --> S["GitHub Pages / doc.chaeyul.uk"]
 ```
 
-### 에이전트별 역할 및 모델 구성
+- **확인됨:** 게이트웨이의 세 프로필 서빙, GitHub 저장소 SSH 푸시, Quartz 빌드와 GitHub Pages 배포 및 공개 글 응답. 기존 [공개 전환 커밋](https://github.com/ttlojs-john/Technical-Notes/commit/dc1320367c48662d3c1814e3cd04271eac6f98ca)과 [Actions 실행](https://github.com/ttlojs-john/Technical-Notes/actions/runs/45492202029)에서 배포 단계 성공을 확인할 수 있다.
+- **미검증:** `@research → @Plan → @chaeyulai`가 같은 Slack 스레드에서 앞 결과를 다음 입력으로 넘기고 끝까지 완료하는 자동 릴레이. 프로필 연결이나 각 봇의 개별 대화는 그 증거가 아니다. 당시 `research`와 `Plan`의 OpenRouter 무료 모델은 일일 한도 HTTP 429를 반환해 실제 리뷰 호출도 끝나지 않았다.
 
-| 프로필명 | Slack 봇 | 할당 모델 | 권한 및 보안 정책 | 주요 역할 |
-|----------|----------|-----------|-------------------|-----------|
-| `research` | `@research` | `baidu/ernie-5.5-flash-preview:free` | Read-Only (`disabled_tools` 적용) | 심층 자료 조사, 트러블슈팅 근거 분석 |
-| `plan` | `@Plan` | `nvidia/nemotron-3-ultra-550b-a55b:free` | Read-Only (`disabled_tools` 적용) | 실행 로드맵 설계, 문서 목차 및 이미지 프롬프트 기획 |
-| `default` | `@Chaeyul-AI` | Hostinger Router | HIL 승인 필수 (`require_approval`) | 코드/문서 작성, 이미지 생성, 서버 제어 및 Git 배포 |
+## 2. 실제 구성에서 확인한 설정
 
----
+- `research` 및 `plan` 프로필은 각각 `/opt/data/profiles/` 아래 분리돼 있으며 서로 다른 모델을 지정한다: `baidu/ernie-5.5-flash-preview:free`와 `nvidia/nemotron-3-ultra-550b-a55b:free`. 기본 프로필은 Hostinger Router의 `smart-coding`을 사용한다. 모델 설정이 있다고 해서 무료 모델 호출 성공까지 보장하지는 않는다.
+- 두 보조 프로필의 `config.yaml`에는 Slack의 `group_policy: mention_only`, `read_thread_history: true`, `ignore_bots: false`, `max_thread_turns: 5`가 있다. 이는 봇 메시지 처리 및 스레드 길이에 대한 설정 확인이며, **단방향 DAG를 강제하거나 루프가 결코 발생하지 않는다는 보장은 아니다.** Slack 앱 토큰과 봇 토큰은 프로필별 비밀 저장소에서 분리 관리해야 한다.
+- 공개 메모에서 주장한 `disabled_tools`에 의한 *완전 읽기 전용*과 `approvals.mode: require_approval`·`timeout_seconds: 300`에 의한 *모든 파일 작업 전 승인*은 현재 세 프로필의 설정에서 확인되지 않았다. Hermes 문서의 `approvals.mode`는 `smart`, `manual`, `off`이고 명령 승인과 파일 편집 승인은 별개다. 따라서 이 시스템을 ‘제로 트러스트 격리 완료’라고 홍보하지 않는다. 실제로 이전 승인 과정도 사용자의 게시 승인과 Git 작업 제어였지 전역 HIL 설정의 증거는 아니다.
 
-## 🔧 2. 단계별 구축 내역
+## 3. 배포 파이프라인과 이미지 생성
 
-### 2.1 멀티플렉스 게이트웨이 기반 다중 프로필 분리
+기존 블로그 저장소의 원격은 `git@github.com:ttlojs-john/Technical-Notes.git`이다. VPS의 저장소 전용 SSH 키 파일은 권한 `600`이고, 앞선 `main` 푸시와 원격 SHA 일치로 **이 저장소에 대한 쓰기 동작**을 확인했다. `.github/workflows/deploy.yml`은 `main` 푸시 후 Node 22에서 `npm ci` 및 `npx quartz build`를 거쳐 **GitHub Pages**로 배포한다. Netlify/Vercel 배포가 아니다.
 
-- 영구 볼륨(`/opt/data/profiles/`) 하위에 `research`와 `plan` 프로필 디렉터리를 생성하고, 각 프로필마다 독립된 `.env`(OpenRouter API 키, 개별 Slack App/Bot 토큰) 및 `config.yaml`을 구성했습니다.
-- 단일 컨테이너 내부의 `s6-overlay` 멀티플렉스 게이트웨이가 3개 프로필을 동시에 서빙하도록 통합하여 메모리 점유율을 최소화했습니다(전체 RAM 사용률 약 33% 유지).
+메모에 있는 `/opt/data/scripts/generate_blog_image.py`는 Recraft 모델을 요청하도록 작성된 로컬 스크립트이지만, **이번 글의 대표 이미지를 그 모델이 생성했다고 주장하지 않는다.** 이번 대표 이미지는 별도 이미지 생성 도구로 생성해 PNG 형식과 파일 경로를 확인했다. 초안 원문에 보이는 자격증명 패턴과 Slack ID 자리표시자는 실제 키나 ID가 아니므로 게시 글에서 제거했다.
 
-### 2.2 Slack 채널 연쇄 실행(Relay Chaining) 및 무한루프 방지
+## 4. 트러블슈팅 기록을 읽는 법
 
-단일 채널에서 봇 간 자동 협업이 이루어지도록 `slack` 정책에 `group_policy: mention_only`, `read_thread_history: true`, `ignore_bots: false`를 적용했습니다.
+1. **프로필별 독립 게이트웨이 거절:** 멀티플렉스가 활성화된 동일 설치에 프로필별 게이트웨이 프로세스를 중복 설치하는 대신 기본 게이트웨이의 `served_profiles`와 프로필 상태를 확인한다. 공식 [멀티플렉스 문서](https://hermes-agent.nousresearch.com/docs/user-guide/multi-profile-gateways)도 named profile은 기본 게이트웨이에 부착되도록 설명한다. 개별 컨테이너를 실제로 언제 생성·제거했는지의 로그는 이 리뷰에서 재현하지 않았다.
+2. **경로·권한 혼선:** Hostinger의 지속 데이터는 `/opt/data`에 있다. `HOME=/root`를 기본 가정하거나 `/root/.hermes/profiles`를 표준 홈으로 복제하는 수동 절차를 권장하지 않는다. 프로필 경로는 실제 `$HERMES_HOME` 및 관리형 설치 상태를 기준으로 확인한다.
+3. **Slack 봇 토큰 충돌:** 같은 봇 자격증명을 여러 프로필에 복사하면 충돌할 수 있다. 메모는 과거의 `@Plan` 오인증과 토큰 분리를 보고하지만, 민감한 토큰이나 인증 로그 원문을 재게시하지 않는다. 종단 간 연쇄 검증은 별개다.
+4. **YAML 오류:** 들여쓰기 기반 설정 파일을 단순 문자열 치환으로 고치지 않는다. 관리형 Hermes 설정 변경은 `hermes config set`으로 수행하고 `hermes config check`로 확인한다. 제공된 과거 오류 메시지는 테스트 기록으로만 취급하며 오늘 재현한 오류라고 주장하지 않는다.
+5. **저장소 경로:** SSH 인증 성공만으로 모든 저장소에 대한 쓰기 권한이 증명되지는 않는다. 정확한 `ttlojs-john/Technical-Notes` 원격에 성공적으로 푸시하고 원격 SHA가 일치하는지 확인해야 한다.
 
-**무한 루프 차단 3중 안전장치:**
+## 5. 다음 검증 항목
 
-1. **단방향 호출 규칙(DAG):** `@research` → `<@PLAN_BOT_ID>` → `<@CHAEYUL_BOT_ID>` 순서로만 호출하며, 최종 주자인 `@Chaeyul-AI`는 타 봇 멘션을 금지했습니다.
-2. **스레드 턴 제한:** `max_thread_turns: 5` 설정을 통해 단일 스레드 내 과도한 연쇄 호출을 차단했습니다.
-3. **수동 제어 키워드:** 사용자가 `“단독 응답”`을 명시하거나 1:1 DM을 사용할 경우 릴레이를 중단하도록 프롬프트를 제어했습니다.
+- Slack 스레드 하나에서 세 봇의 입력·출력 메시지 ID와 이전 단계 산출물 전달 여부를 남겨 자동 릴레이를 재시험한다. 무료 모델의 일일 한도 문제가 해소돼야 한다.
+- 읽기 전용 도구 정책과 승인 게이트를 실제로 설정하려면 지원되는 설정 키와 동작 범위를 확인한 후 별도 권한 테스트를 한다. 현재 상태를 과장해 ‘격리 완료’로 표기하지 않는다.
+- 공개 전 인덱스 생성기가 미승인 `draft` 글의 링크를 함께 넣지 않는지 diff를 검사한다. 생성된 대표 이미지와 게시 본문은 공개 저장소에 올라가면 누구나 접근할 수 있다.
 
-### 2.3 에이전트 권한 격리 및 인간 참여형(HIL) 승인 체계
-
-- **1·2단계 에이전트 (`research`, `plan`):** `disabled_tools` 목록에 `terminal`, `bash`, `shell`, `execute_command`, `write_file`, `edit_file`, `patch_file`, `delete_file`을 등록하여 시스템 변경이 불가능한 **완전 읽기 전용**으로 격리했습니다.
-- **최종 실행 에이전트 (`Chaeyul-AI`):** `approvals.mode: require_approval` 및 `timeout_seconds: 300`을 설정하여, 셸 명령이나 파일 수정·원격 저장소 푸시 직전 Slack에서 사용자의 명시적 승인(`Approve`)을 대기하도록 구성했습니다.
-
-### 2.4 Quartz v4 블로그 자동 문서화 및 GitHub Deploy Key 배포 연동
-
-- **이미지 생성 자동화:** OpenRouter 무료 이미지 모델(`recraft/recraft-v4.1-flash-v2:free`) 엔드포인트(`POST /api/v1/images`)를 호출해 Base64 응답을 PNG 파일로 저장하는 `/opt/data/scripts/generate_blog_image.py`를 구현했습니다.
-- **Quartz 작성 스킬 등록:** `/opt/data/skills/quartz-blog-writer/SKILL.md`를 생성해 YAML Frontmatter 작성, 상대 경로 이미지 삽입, `content/update_index.py` 카탈로그 자동 갱신 절차를 표준화했습니다.
-- **GitHub SSH Deploy Key 연동:** 비밀번호나 만료되는 PAT 대신 단일 저장소(`ttlojs-john/Technical-Notes`) 전용 SSH 키(`id_ed25519_quartz`)를 생성해 쓰기 권한(`Allow write access`)으로 등록하고 `/opt/data/workspace/quartz_repo`에 연결했습니다.
-
----
-
-## 🐛 3. 구축 중 발생한 트러블슈팅 및 조치 내역 (Troubleshooting Log)
-
-### 문제 1: 프로필별 개별 Docker 컨테이너 및 개별 게이트웨이 실행 실패
-
-| 구분 | 내용 |
-|------|------|
-| **현상 및 로그** | `hermes-research`, `hermes-plan` 컨테이너를 별도로 띄우거나 개별 프로필에서 `hermes -p research gateway restart` 실행 시 아래 오류와 함께 종료됨.<br>`✗ Profile 'plan' does not get a gateway of its own. Exactly one gateway per host is the inbound process for every profile.` |
-| **원인** | 최신 Hermes Agent는 호스트(볼륨)당 1개의 메인 게이트웨이가 `profiles/` 하위 모든 프로필을 통합 처리하는 **멀티플렉스(Multiplex) 아키텍처**를 사용하므로, 별도 컨테이너나 개별 게이트웨이 프로세스 실행이 차단됨. |
-| **조치 방법** | 중복 생성한 `hermes-research`, `hermes-plan` 컨테이너를 제거하고, 기존 메인 컨테이너(`hermes-agent-microvm-6yq6-hermes-1`)의 `default` 게이트웨이만 재시작하여 모든 프로필을 일괄 로드하도록 통합함. |
-
-### 문제 2: 컨테이너 재시작 시 추가 프로필 미인식 및 경로 불일치
-
-| 구분 | 내용 |
-|------|------|
-| **현상 및 로그** | `/etc/cont-init.d/02-reconcile-profiles` 실행 시 `profile=default`만 `started`로 기동되고 `research`, `plan`은 `registered` 상태에 머무르며 Slack에 연결되지 않음. |
-| **원인** | Hostinger 컨테이너 내부에서 `HOME=/root` 경로(`/root/.hermes/profiles`)와 영구 볼륨(`/opt/data/profiles`) 간 경로 동기화가 누락되었고, 수동 생성 프로필은 최초 1회 `hermes` 유저 권한(`s6-setuidgid hermes`)으로 기동되어야 `running` 상태가 기록됨. 또한 컨테이너 내부 기본 `PATH`에 `s6-setuidgid`가 포함되지 않아 `command not found` 발생. |
-| **조치 방법** | 영구 볼륨(`/opt/data/profiles`)과 `/root/.hermes/profiles`를 동기화하고 소유권을 `hermes:hermes`로 통일한 뒤, 전체 경로인 `/command/s6-setuidgid hermes /opt/hermes/.venv/bin/hermes -p <프로필명> gateway start`를 실행해 영구 `running` 상태로 전환함. |
-
-### 문제 3: Slack 봇 인증 계정 중복 (`@research`가 `@plan`으로 로그인)
-
-| 구분 | 내용 |
-|------|------|
-| **현상 및 로그** | `research` 프로필의 `gateway.log`에 `[Slack] Authenticated as @plan`으로 기록되며 두 프로필이 동일한 봇 계정으로 충돌함. |
-| **원인** | 초기 환경변수 세팅 과정에서 `research/.env`와 `plan/.env`에 동일한 `SLACK_BOT_TOKEN` 값이 입력됨. |
-| **조치 방법** | Slack API 대시보드에서 각 앱의 고유 `Bot User OAuth Token`을 분리 발급받아 각 `.env`에 개별 반영하고, `grep "Authenticated as"` 로그를 통해 `@chaeyulai`, `@research`, `@plan` 3개 계정 분리를 검증함. |
-
-### 문제 4: `config.yaml` 문자열 치환 중 YAML 문법 파싱 오류
-
-| 구분 | 내용 |
-|------|------|
-| **현상 및 로그** | `Your settings file (/opt/data/config.yaml) has a formatting error at line 19. Details: mapping values are not allowed here` |
-| **원인** | 쉘 스크립트의 단순 문자열 치환(`text.replace`)으로 `slack:` 블록을 수정하면서 기존 들여쓰기 계층이 깨져 YAML 구조 손상 발생. |
-| **조치 방법** | 자동 생성된 백업 파일(`config.yaml.bak*`)로 원상복구한 뒤, 컨테이너 내장 `PyYAML` 라이브러리를 사용해 딕셔너리 객체 단위로 안전하게 설정을 병합하고 `hermes config check`로 문법 무결성을 검증함. |
-
-### 문제 5: GitHub SSH 클론 시 저장소 경로 불일치 및 권한 경고
-
-| 구분 | 내용 |
-|------|------|
-| **현상 및 로그** | `ssh -T git@github.com` 인증 성공 메시지(`Hi ttlojs-john/Technical-Notes!`)는 출력되었으나 `Repository not found` 발생 및 `warning: unable to access '/root/.config/git/ignore': Permission denied` 경고 출력. |
-| **원인** | 클론 대상 저장소명을 실제 저장소(`Technical-Notes`)가 아닌 임시 이름으로 입력했으며, `hermes` 유저 실행 시 `HOME` 변수가 `/root`를 가리켜 Git 전역 설정 경로 접근 경고가 발생함. |
-| **조치 방법** | 실제 저장소 주소(`git@github.com:ttlojs-john/Technical-Notes.git`)로 클론을 완료하고, Git 명령 실행 시 `HOME=/opt/data` 환경변수를 명시하도록 스킬 지침을 보완함. |
-
----
-
-## 🔒 4. 보안 관리 및 키 마스킹 내역 (Security Sanitization)
-
-문서화 및 운영 보안 강화를 위해 모든 민감 인증 정보는 아래와 같이 분리 관리하며 본 문서에서는 마스킹 처리했습니다.
-
-| 자산 | 관리 방식 | 비고 |
-|------|-----------|------|
-| **OpenRouter API Key** | `sk-or-v1-_*REDACTED*_` | `/opt/data/profiles/*/.env` 내부 격리 보관 |
-| **Slack App / Bot Tokens** | `xapp-1-_*REDACTED*_` / `xoxb-_*REDACTED*_` | 봇별 개별 토큰 분리 및 노출 토큰 재발급 권고 |
-| **Slack Bot & User Member IDs** | `U0C_*REDACTED*_` | - |
-| **GitHub Deploy Key (SSH)** | `/opt/data/.ssh/id_ed25519_quartz` | 퍼미션 `600`, 단일 저장소 Write 전용 |
-
----
-
-## ✅ 5. 검증 완료 체크리스트 (Verified Checklist)
-
-### 인프라 및 게이트웨이
-- [x] Hostinger VPS 프로비저닝 및 Docker 환경 구성
-- [x] Hermes 멀티플렉스 게이트웨이 단일 컨테이너로 3 프로필 통합 서빙
-- [x] 영구 볼륨(`/opt/data`) 마운트 및 프로필 디렉터리 구조 정립
-- [x] 메모리 사용률 ~33% (6 GB 중 ~2 GB) 안정적 유지 확인
-
-### 멀티 에이전트 연쇄 실행
-- [x] `@research` (Ernie 5.5 Flash) → `@Plan` (Nemotron 3 Ultra) → `@Chaeyul-AI` (Hostinger Router) DAG 체인 동작
-- [x] Slack `mention_only` + `read_thread_history` 정책으로 스레드 컨텍스트 보존
-- [x] `max_thread_turns: 5` 무한 루프 방지 검증
-- [x] `disabled_tools`로 1·2단계 에이전트 Read-Only 격리 확인
-- [x] `@Chaeyul-AI` HIL(`require_approval`) 승인 게이트 동작 검증
-
-### 블로그 자동화 파이프라인
-- [x] Recraft V4.1 API 이미지 생성 → Base64 → PNG 저장 자동화
-- [x] `quartz-blog-writer` 스킬로 Frontmatter/이미지/인덱스 표준화
-- [x] GitHub Deploy Key(Ed25519, Write 권한) 단일 저장소 전용 등록
-- [x] GitHub Actions → Quartz 빌드 → Netlify 배포 전체 파이프라인 자동화
-- [x] `doc.chaeyul.uk` 라이브 사이트 반영 시간 ~3분 내 확인
-
----
-
-## 📊 6. 성능 지표 (Performance Metrics)
-
-| 지표 | 측정값 | 비고 |
-|------|--------|------|
-| 게이트웨이 콜드 스타트 | ~8초 | s6-overlay 초기화 포함 |
-| 3-에이전트 체인 평균 지연 | 12~18초 | LLM 응답 시간 포함 |
-| GitHub Actions → Netlify 배포 | ~2분 30초 | 빌드 + CDN 전파 |
-| 엔드투엔드 (Slack 메시지 → 라이브 사이트) | ~3분 | 전체 파이프라인 |
-| 메모리 사용량 (게이트웨이 + 3 봇) | ~1.2 GB | 6 GB 중 20% |
-| 디스크 사용량 (이미지/캐시/로그) | ~2.5 GB | 80 GB 중 3% |
-
----
-
-## 🚀 7. 향후 개선 로드맵 (Next Steps)
-
-1. **부하 테스트**: 동시 10+ 체인 실행 시뮬레이션 및 오토스케일링 검토
-2. **옵저버빌리티 강화**: Langfuse 트레이싱으로 전체 체인 가시성 확보
-3. **비용 추적**: 봇별 토큰 사용량 로깅 및 일일/월간 비용 대시보드 구성
-4. **고가용성(HA)**: 세컨더리 VPS 멀티플렉스 게이트웨이 페일오버 구성
-5. **문서화 배포**: 본 가이드를 `doc.chaeyul.uk/hermes-multiplex-setup`에 정식 발행
-6. **보안 감사**: 키 순환 자동화 및 시크릿 스캐닝 CI 단계 추가
-
----
-
-## 📝 8. 배포 승인 및 변경 이력
-
-> **본 문서는 검증 완료되어 `draft: false` 상태로 프로덕션 배포되었습니다.**
-
-| 날짜 | 버전 | 변경 사항 | 승인자 |
-|------|------|-----------|--------|
-| 2026-11-24 | v1.0 | 초기 구축 기록 작성, 이미지 생성, Quartz 파이프라인 검증 완료 | Chaeyul |
-
----
-
-*작성자: Chaeyul (Infrastructure & AI Operations)*  
-*환경: Hostinger VPS + Hermes Multiplex Gateway + Quartz v4*  
-*최종 갱신: 2026-11-24*
+**참고:** [Hermes Slack 가이드](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/slack), [Hermes 설정 가이드](https://hermes-agent.nousresearch.com/docs/user-guide/configuration), 저장소의 `quartz.config.ts` 및 `.github/workflows/deploy.yml`.
