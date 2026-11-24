@@ -132,6 +132,8 @@
 
 * [[openclaw/AI_Governance_Sandbox|AI Governance & Sandbox Field Notes]]
   - *Purpose**: Document how an infrastructure-focused engineer can transition into AI-era DevOps by building repeatable guidelines, safe sandboxes, and concrete evaluation logs.*
+* [[openclaw/hermes-multiplex-vps-verified-draft-20261124|Hostinger VPS의 Hermes 멀티플렉스 게이트웨이 테스트]]
+  - *멀티플렉스 3프로필, GitHub Deploy Key 푸시와 Pages 배포 검증 기록; 봇 자동 연쇄는 미검증*
 * [[openclaw/openclaw_Test_KR|🤖 OpenClaw: 자율 AI 에이전트 아키텍처 및 제로 트러스트 보안 체계]]
   - *일회용 브라우저 샌드박스, 보안 가드레일, 인간 참여형(HIL) 승인 체계를 갖춘 보안 중심 자율 에이전트*
 

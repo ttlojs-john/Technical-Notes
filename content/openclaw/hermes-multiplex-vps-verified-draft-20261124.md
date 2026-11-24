@@ -1,19 +1,18 @@
 ---
 title: "Hostinger VPS Hermes 멀티플렉스 게이트웨이와 Slack 3봇·Quartz 배포 테스트"
 date: 2026-11-24
-draft: true
 tags:
   - Hermes
   - Slack
   - Hostinger
   - Quartz
   - GitHub-Pages
-description: "Hostinger VPS에서 확인한 Hermes 3프로필 멀티플렉스 게이트웨이, Slack 봇 연계, Deploy Key와 Quartz 배포 경로의 검증 기록."
+description: "Hostinger VPS에서 확인한 Hermes 3프로필 멀티플렉스 게이트웨이, SSH Deploy Key의 실제 푸시, Quartz GitHub Pages 배포 결과와 Slack 봇 연쇄 검증 범위."
 ---
 
 # Hostinger VPS의 Hermes 멀티플렉스 게이트웨이 테스트
 
-> **상태: 비공개 초안.** 이 글은 확인된 구성과 아직 검증하지 못한 단계를 구분한다. `draft: true`인 동안 Quartz의 `RemoveDrafts` 필터가 공개 페이지에서 제외한다. GitHub 저장소에 푸시할 경우 **저장소 접근 권한은 별개**이므로, 비공개 자료는 저장소의 공개 여부도 확인해야 한다.
+> **상태: 정식 공개.** 게이트웨이·GitHub 푸시·Pages 배포는 실측 결과에 따라 갱신했다. Slack 봇 간 자동 핸드오프는 종단 간 증거가 없어 완료로 표시하지 않는다.
 
 ![Hostinger VPS의 단일 Hermes 게이트웨이에서 세 봇과 Quartz 배포 경로가 연결되는 개념도](./hermes-multiplex-quartz-hero.png)
 
@@ -27,8 +26,8 @@ flowchart LR
   G --> R["research 프로필"]
   G --> P["plan 프로필"]
   G --> D["default 프로필"]
-  R -. "산출물 전달: 별도 검증 필요" .-> P
-  P -. "검토 요청: 별도 검증 필요" .-> D
+  R -. "산출물 전달: 종단 간 미검증" .-> P
+  P -. "검토 요청: 종단 간 미검증" .-> D
   D --> K["SSH Deploy Key"]
   K --> GH["GitHub Technical-Notes / main"]
   GH --> A["Actions: Quartz build"]
@@ -57,17 +56,17 @@ flowchart LR
 
 ## 4. GitHub Deploy Key → Quartz 배포 경로
 
-저장소 원격은 `git@github.com:ttlojs-john/Technical-Notes.git`이다. VPS의 SSH 설정에서 GitHub 접속용 키 경로는 `/opt/data/.ssh/id_ed25519_quartz`로 해석됐다. `ssh -T -o BatchMode=yes -o StrictHostKeyChecking=yes git@github.com` 호출은 `Hi ttlojs-john/Technical-Notes! You've successfully authenticated`를 반환했다. 이는 **저장소 연결용 키 인증 성공**의 증거이며, 쓰기 권한이나 이번 초안의 푸시·실제 배포 성공 증거는 아니다.
+저장소 원격은 `git@github.com:ttlojs-john/Technical-Notes.git`이다. VPS의 SSH 설정에서 GitHub 접속용 키 경로는 `/opt/data/.ssh/id_ed25519_quartz`로 해석됐다. `ssh -T -o BatchMode=yes -o StrictHostKeyChecking=yes git@github.com` 호출은 `Hi ttlojs-john/Technical-Notes! You've successfully authenticated`를 반환했다. 이어 이 원격에 포스트와 이미지를 포함한 [커밋 `001ebbf`](https://github.com/ttlojs-john/Technical-Notes/commit/001ebbf58e6c84be3f762ab2a318cff943a9de18)를 `main`으로 푸시하고 `git ls-remote`로 원격 SHA 일치를 확인했다. **이 저장소에 대한 키의 푸시 권한이 실증됐다.**
 
-저장소의 `.github/workflows/deploy.yml`은 `main` 푸시 때 Node 22에서 `npm ci`, `npx quartz build`를 실행한 다음 `actions/upload-pages-artifact@v3` 및 `actions/deploy-pages@v4`로 **GitHub Pages**를 배포하도록 구성되어 있다. Netlify/Vercel 경로가 아니다. Quartz의 `baseUrl`은 `doc.chaeyul.uk`이다. 배포 성공 여부는 승인 후 푸시된 커밋의 Actions 실행 결과와 사이트에서 별도로 확인해야 한다.
+저장소의 `.github/workflows/deploy.yml`은 `main` 푸시 때 Node 22에서 `npm ci`, `npx quartz build`를 실행한 다음 `actions/upload-pages-artifact@v3` 및 `actions/deploy-pages@v4`로 **GitHub Pages**를 배포하도록 구성되어 있다. Netlify/Vercel 경로가 아니다. Quartz의 `baseUrl`은 `doc.chaeyul.uk`이다. 위 커밋에 대한 [Actions 실행 #45491089433](https://github.com/ttlojs-john/Technical-Notes/actions/runs/45491089433)의 `build`와 `deploy` 작업은 모두 `success`로 완료됐다. 당시 글은 `draft: true`여서 **워크플로 성공이 그 시점에 글 페이지 공개를 의미하지는 않는다**. 공개 전환 커밋의 Pages 배포와 URL은 별도로 확인한다.
 
-## 5. 비공개 초안과 승인 경계
+## 5. 공개 전환과 검증 범위
 
-현재 저장소의 `quartz.config.ts`에는 `Plugin.RemoveDrafts()`가 활성화돼 있고, 필터는 frontmatter의 `draft: true`를 공개 빌드 대상에서 제외한다. 따라서 **이 포스트의 페이지 공개 여부**와 **초안 파일을 GitHub 저장소에 올리는 행위**를 구분해야 한다. `content/update_index.py`는 카테고리의 Markdown을 스캔할 때 `draft` 여부를 검사하지 않는다. 초안 상태에서 이를 그대로 실행해 인덱스를 배포하면 제목 또는 링크가 공개 카탈로그에 나타날 수 있어, 이 글은 인덱스 갱신 대상으로 넣지 않는다.
+이 글의 `draft: true`를 제거해 Quartz의 `Plugin.RemoveDrafts()` 필터 대상에서 벗어나게 했다. 공개 저장소의 원본과 대표 이미지는 이전 초안 커밋 때부터 접근 가능했다. 카탈로그 갱신을 위해 `content/update_index.py`를 실행했지만, 스크립트가 **다른 미승인 초안의 `draft` 여부를 검사하지 않아** 생성된 인덱스에 그 초안들의 링크도 함께 들어갔다. 생성 결과를 검토한 후 인덱스를 원상 복구하고, 이번에 승인된 글의 링크만 공개 인덱스에 추가한다. 스크립트의 초안 필터 개선은 별도 작업으로 남긴다.
 
-- 확인됨: 게이트웨이 1개/PID 1881/3개 프로필, SSH 키 인증, Quartz 배포 워크플로의 구성, draft 필터.
-- 미확인: 자동 3봇 연쇄의 종단 간 완료, Deploy Key 쓰기 권한, 이 글에 대한 GitHub Actions 실행·공개 URL.
-- 승인 전: 커밋·푸시 및 공개 전환 없음. 승인 후에도 `draft: true` 유지 여부, 저장소 공개 범위, 인덱스 노출 방지를 먼저 결정한다.
+- **검증 완료:** 한 게이트웨이의 세 프로필 서비스(PID 1881 확인), GitHub SSH 키 인증 및 `main` 푸시, 이전 커밋의 Quartz 빌드·GitHub Pages 배포 작업 성공.
+- **검증되지 않음:** 세 Slack 봇 사이의 자동 순차 핸드오프/맥락 전달 완료. 호출 실패·OpenRouter 무료 모델 일일 한도(HTTP 429)가 관찰됐으므로 프로필별 접속 상태를 연쇄 성공으로 간주하지 않는다.
+- **공개 전환의 별도 확인 항목:** 이번 커밋의 Actions 배포 성공, 실제 글 URL 응답, 인덱스 링크. 위의 기존 Actions 성공 결과를 이번 공개 전환의 성공으로 대체하지 않는다.
 
 ## 참고
 
