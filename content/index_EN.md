@@ -77,6 +77,12 @@
 * [[Excel_Analyzer/Project_Completion_Report_EN|📊 Project Completion Report: Excel Data Task Analyzer]]
   - *IT Support & Service Ticket Automated Processing and Analysis Desktop Application*
 
+### 🔗 LangChain & LLM Orchestration
+> Next.js + FastAPI enterprise AI agent integration, multimodal fallback pipelines, and PM2 production operations.
+
+* [[LangCain/PROJECT_REPORT_EN|📘 LangChain AI Agent - Project Completion Report]]
+  - *Next.js & FastAPI Enterprise AI Agent and Multimodal Fallback System Architecture*
+
 ### 📁 LangChain
 > Technical Documentation
 
@@ -127,6 +133,7 @@
 - **Account Management/** → Technical Documentation
 - **Edge_AI/** → On-premise K3s cluster running multimodal AI pipelines and eBPF cyber defense.
 - **Excel_Analyzer/** → Automated ticketing analysis, resolution metrics calculation, and repetitive issue clustering desktop tool.
+- **LangCain/** → Next.js + FastAPI enterprise AI agent integration, multimodal fallback pipelines, and PM2 production operations.
 - **LangChain/** → Technical Documentation
 - **PDF_APPS/** → PyMuPDF desktop utility performing true structural PII byte-purging and localized text annotations.
 - **Personal Website/** → chaeyul.uk digital garden architecture, Grafana & Prometheus monitoring, and reverse-proxy hardening.

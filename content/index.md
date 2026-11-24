@@ -86,10 +86,16 @@
 ### 📊 업무 자동화: 엑셀 데이터 분석기
 > ITSM 티켓 데이터 집계, 작업자별 처리 시간 분석 및 반복 장애 추출 도구
 
-* [[Excel_Analyzer/project_completion_report|📊 프로젝트 완료 보고서: Excel Data Task Analyzer]]
-  - *IT 지원 및 티켓 데이터 분석/집계 자동화 데스크톱 솔루션 구축 보고서*
 * [[Excel_Analyzer/Project_Completion_Report_KR|📊 프로젝트 완료 보고서: Excel Data Task Analyzer]]
   - *IT 지원 및 티켓 데이터 분석/집계 자동화 데스크톱 솔루션 구축 보고서*
+* [[Excel_Analyzer/project_completion_report|📊 프로젝트 완료 보고서: Excel Data Task Analyzer]]
+  - *IT 지원 및 티켓 데이터 분석/집계 자동화 데스크톱 솔루션 구축 보고서*
+
+### 🔗 랭체인 & LLM 오케스트레이션 (LangChain)
+> Next.js + FastAPI 기반 멀티모달 AI 에이전트 및 고가용성 폴백 아키텍처
+
+* [[LangCain/PROJECT_REPORT_KR|📘 LangChain AI Agent - 프로젝트 완료 보고서]]
+  - *Next.js & FastAPI 기반 엔터프라이즈 AI 에이전트 및 멀티모달 폴백 시스템 구축 보고서*
 
 ### 📁 LangChain
 > 기술 구현 및 아키텍처 문서
@@ -132,8 +138,12 @@
 
 * [[openclaw/AI_Governance_Sandbox|AI Governance & Sandbox Field Notes]]
   - *Purpose**: Document how an infrastructure-focused engineer can transition into AI-era DevOps by building repeatable guidelines, safe sandboxes, and concrete evaluation logs.*
+* [[openclaw/hermes-multi-agent-quartz-pipeline-kr|🚀 Hostinger VPS 기반 Hermes 멀티 에이전트 및 블로그 자동 배포 구축]]
+  - *---*
 * [[openclaw/hermes-multiplex-vps-verified-draft-20261124|Hostinger VPS의 Hermes 멀티플렉스 게이트웨이 테스트]]
-  - *멀티플렉스 3프로필, GitHub Deploy Key 푸시와 Pages 배포 검증 기록; 봇 자동 연쇄는 미검증*
+  - *---*
+* [[openclaw/hermes_multi_agent_quartz_pipeline|🚀 Hostinger VPS 기반 Hermes 멀티 에이전트 및 블로그 자동 배포 구축기]]
+  - *---*
 * [[openclaw/openclaw_Test_KR|🤖 OpenClaw: 자율 AI 에이전트 아키텍처 및 제로 트러스트 보안 체계]]
   - *일회용 브라우저 샌드박스, 보안 가드레일, 인간 참여형(HIL) 승인 체계를 갖춘 보안 중심 자율 에이전트*
 
@@ -145,6 +155,7 @@
 - **Account Management/** → 기술 문서
 - **Edge_AI/** → K3s 클러스터 기반 멀티모달 딥러닝 파이프라인 및 eBPF 방화벽 SOC 관제
 - **Excel_Analyzer/** → ITSM 티켓 데이터 집계, 작업자별 처리 시간 분석 및 반복 장애 추출 도구
+- **LangCain/** → Next.js + FastAPI 기반 멀티모달 AI 에이전트 및 고가용성 폴백 아키텍처
 - **LangChain/** → 기술 문서
 - **PDF_APPS/** → PyMuPDF 기반 개인정보 영구 파기 마스킹 및 한글 텍스트 박스 편집 데스크톱 앱
 - **Personal Website/** → Quartz 디지털 가든 인프라, Grafana & Prometheus 모니터링 시스템 구축
