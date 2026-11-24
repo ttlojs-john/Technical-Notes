@@ -138,9 +138,11 @@
 
 * [[openclaw/AI_Governance_Sandbox|AI Governance & Sandbox Field Notes]]
   - *Purpose**: Document how an infrastructure-focused engineer can transition into AI-era DevOps by building repeatable guidelines, safe sandboxes, and concrete evaluation logs.*
-* [[openclaw/hermes-multi-agent-quartz-pipeline-kr|🚀 Hostinger VPS 기반 Hermes 멀티 에이전트 및 블로그 자동 배포 구축]]
+* [[openclaw/hermes-hostinger-multi-agent-review-20261124|Hostinger VPS의 Hermes 멀티 에이전트와 Quartz 배포: 구축 메모 리뷰]]
   - *---*
-* [[openclaw/hermes-multiplex-vps-verified-draft-20261124|Hostinger VPS의 Hermes 멀티플렉스 게이트웨이 테스트]]
+* [[openclaw/hermes-multi-agent-quartz-pipeline-kr|🤖 Hostinger VPS 기반 Hermes 멀티 에이전트 오케스트레이션 및 Quartz 블로그 자동 배포 구축기]]
+  - *---*
+* [[openclaw/hermes-multiplex-vps-verified-draft-20261124|🤖 02. Hermes 멀티플렉스 게이트웨이·Slack·Quartz 배포 테스트]]
   - *---*
 * [[openclaw/hermes_multi_agent_quartz_pipeline|🚀 Hostinger VPS 기반 Hermes 멀티 에이전트 및 블로그 자동 배포 구축기]]
   - *---*
